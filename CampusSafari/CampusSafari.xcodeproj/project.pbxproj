@@ -15,6 +15,7 @@
 		297781DE23712DDE00C71D87 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 297781DC23712DDE00C71D87 /* LaunchScreen.storyboard */; };
 		297781E923712DDE00C71D87 /* CampusSafariTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297781E823712DDE00C71D87 /* CampusSafariTests.swift */; };
 		297781F423712DDE00C71D87 /* CampusSafariUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297781F323712DDE00C71D87 /* CampusSafariUITests.swift */; };
+		297F423C2375EF9F005513D0 /* Wildlife.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297F423B2375EF9F005513D0 /* Wildlife.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		297781EF23712DDE00C71D87 /* CampusSafariUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CampusSafariUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		297781F323712DDE00C71D87 /* CampusSafariUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampusSafariUITests.swift; sourceTree = "<group>"; };
 		297781F523712DDE00C71D87 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		297F423B2375EF9F005513D0 /* Wildlife.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wildlife.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				297781D123712DDD00C71D87 /* AppDelegate.swift */,
 				297781D323712DDD00C71D87 /* SceneDelegate.swift */,
 				297781D523712DDD00C71D87 /* ViewController.swift */,
+				297F423B2375EF9F005513D0 /* Wildlife.swift */,
 				297781D723712DDD00C71D87 /* Main.storyboard */,
 				297781DA23712DDE00C71D87 /* Assets.xcassets */,
 				297781DC23712DDE00C71D87 /* LaunchScreen.storyboard */,
@@ -260,6 +263,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				297781D623712DDD00C71D87 /* ViewController.swift in Sources */,
+				297F423C2375EF9F005513D0 /* Wildlife.swift in Sources */,
 				297781D223712DDD00C71D87 /* AppDelegate.swift in Sources */,
 				297781D423712DDD00C71D87 /* SceneDelegate.swift in Sources */,
 			);
