@@ -17,6 +17,13 @@ class ViewController: UIViewController {
     
     //MARK: Fields
     @IBOutlet weak var mapView: MKMapView!
+    var wildlifes: [Wildlife] =
+        [Wildlife(title: "Albino Squirrel", locationName: "DramaTech", level: "Level 10", coordinate: CLLocationCoordinate2D(latitude: 33.7753, longitude: -84.3989)),
+        Wildlife(title: "Magnolia Tree", locationName: "Mickey Mouse Clock", level: "Level 1", coordinate: CLLocationCoordinate2D(latitude: 33.7737, longitude: -84.3956)),
+        Wildlife(title: "Sideways the Dog", locationName: "Uncle Heinie Way", level: "Level 7", coordinate: CLLocationCoordinate2D(latitude: 33.7724, longitude: -84.3948)),
+        Wildlife(title: "Tabby Cat", locationName: "Brittain Dining Hall", level: "Level 2", coordinate: CLLocationCoordinate2D(latitude: 33.7727, longitude: -84.3914)),
+        Wildlife(title: "Monarch Butterfly", locationName: "Boggs Building", level: "Level 4", coordinate: CLLocationCoordinate2D(latitude: 33.7758, longitude: -84.4001))]
+   
     
     
     //MARK: Methods
@@ -27,9 +34,11 @@ class ViewController: UIViewController {
         centerMapOnLocation(location: initialLocation)
         mapView.setCameraBoundary(MKMapView.CameraBoundary(coordinateRegion: coordBoundary), animated: true)
         
-        //Make an annotation
-        let albinoSquirrel = Wildlife(title: "Albino Squirrel", locationName: "DramaTech", level: "Level 100", coordinate: CLLocationCoordinate2D(latitude: 33.7753, longitude: -84.3989))
-        mapView.addAnnotation(albinoSquirrel)
+        //Annotate map with array of wildlife pins
+        for w in wildlifes {
+            mapView.addAnnotation(w)
+        }
+        
         
         mapView.delegate = self;
     }
