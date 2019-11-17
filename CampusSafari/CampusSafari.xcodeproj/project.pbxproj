@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		002BAF502381E82200206406 /* WildlifeMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002BAF4F2381E82200206406 /* WildlifeMarkerView.swift */; };
 		297781D223712DDD00C71D87 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297781D123712DDD00C71D87 /* AppDelegate.swift */; };
 		297781D423712DDD00C71D87 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297781D323712DDD00C71D87 /* SceneDelegate.swift */; };
 		297781D623712DDD00C71D87 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297781D523712DDD00C71D87 /* ViewController.swift */; };
@@ -36,6 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		002BAF4E2381DCA600206406 /* CULC.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = CULC.gpx; path = ../../../Downloads/CULC.gpx; sourceTree = "<group>"; };
+		002BAF4F2381E82200206406 /* WildlifeMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WildlifeMarkerView.swift; sourceTree = "<group>"; };
 		297781CE23712DDD00C71D87 /* CampusSafari.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CampusSafari.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		297781D123712DDD00C71D87 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		297781D323712DDD00C71D87 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +84,7 @@
 		297781C523712DDD00C71D87 = {
 			isa = PBXGroup;
 			children = (
+				002BAF4E2381DCA600206406 /* CULC.gpx */,
 				297781D023712DDD00C71D87 /* CampusSafari */,
 				297781E723712DDE00C71D87 /* CampusSafariTests */,
 				297781F223712DDE00C71D87 /* CampusSafariUITests */,
@@ -109,6 +113,7 @@
 				297781DA23712DDE00C71D87 /* Assets.xcassets */,
 				297781DC23712DDE00C71D87 /* LaunchScreen.storyboard */,
 				297781DF23712DDE00C71D87 /* Info.plist */,
+				002BAF4F2381E82200206406 /* WildlifeMarkerView.swift */,
 			);
 			path = CampusSafari;
 			sourceTree = "<group>";
@@ -263,6 +268,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				297781D623712DDD00C71D87 /* ViewController.swift in Sources */,
+				002BAF502381E82200206406 /* WildlifeMarkerView.swift in Sources */,
 				297F423C2375EF9F005513D0 /* Wildlife.swift in Sources */,
 				297781D223712DDD00C71D87 /* AppDelegate.swift in Sources */,
 				297781D423712DDD00C71D87 /* SceneDelegate.swift in Sources */,
