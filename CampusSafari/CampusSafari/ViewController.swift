@@ -43,7 +43,6 @@ class ViewController: UIViewController {
         mapView.delegate = self;
     }
     
-    
     //MARK: Helper Methods
     func centerMapOnLocation(location: CLLocation) {
         let coordinateRegion = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
