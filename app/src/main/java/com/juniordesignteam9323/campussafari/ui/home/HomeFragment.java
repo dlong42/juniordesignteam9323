@@ -12,6 +12,7 @@ import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.juniordesignteam9323.campussafari.R;
 
@@ -42,6 +43,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onMapReady(GoogleMap mMap) {
                 googleMap = mMap;
+                googleMap.setLatLngBoundsForCameraTarget(new LatLngBounds(new LatLng(33.7677, -84.4062), new LatLng(33.7814, -84.3906)));
 
                 // For showing a move to my location button
                 googleMap.setMyLocationEnabled(true);
