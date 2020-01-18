@@ -13,4 +13,8 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
+
+    <string name="title_location_permission">Enable Location Services</string>
+    <string name="text_location_permission">Please allow us to use your location to play the game. If you do not allow us, the app crashes.</string>
+    <string name="ok">Ok</string>
 </resources>
