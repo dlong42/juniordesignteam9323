@@ -43,7 +43,11 @@ public class HomeFragment extends Fragment {
             @Override
             public void onMapReady(GoogleMap mMap) {
                 googleMap = mMap;
-                googleMap.setLatLngBoundsForCameraTarget(new LatLngBounds(new LatLng(33.7677, -84.4062), new LatLng(33.7814, -84.3906)));
+
+                //confine map and set zoom
+                googleMap.setLatLngBoundsForCameraTarget(new LatLngBounds(new LatLng(33.7677, -84.4062),
+                        new LatLng(33.7814, -84.3906)));
+                googleMap.setMinZoomPreference(14.0f);
 
                 // For showing a move to my location button
                 googleMap.setMyLocationEnabled(true);
