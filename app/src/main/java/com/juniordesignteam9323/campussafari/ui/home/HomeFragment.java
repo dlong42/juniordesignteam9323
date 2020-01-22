@@ -14,7 +14,10 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.juniordesignteam9323.campussafari.CSVParse;
 import com.juniordesignteam9323.campussafari.R;
+
+import java.util.ArrayList;
 
 import androidx.fragment.app.Fragment;
 
@@ -24,10 +27,34 @@ public class HomeFragment extends Fragment {
     MapView mMapView;
     private GoogleMap googleMap;
 
+
+    public void setUpMarkers() {
+        CSVParse parser = new CSVParse("observations-75146.csv", getActivity().getApplicationContext());
+
+        ArrayList<ArrayList<String>> data = parser.getList(new int[]{36, 37, 23, 24});
+
+        ArrayList<String> scientificNames = data.get(0);
+        ArrayList<String> commonNames = data.get(1);
+        ArrayList<String> latitudes = data.get(2);
+        ArrayList<String> longitudes = data.get(3);
+
+        System.out.println("" + scientificNames.size() + " " + commonNames.size() + " " + latitudes.size() + " " + longitudes.size());
+        for (int i = 2; i < latitudes.size(); i++) {
+            System.out.println(i + ": " + latitudes.get(i) + ", " + longitudes.get(i));
+
+            if (!latitudes.get(i).equals("") && !longitudes.get(i).equals("")) {
+                googleMap.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(latitudes.get(i)), Double.parseDouble(longitudes.get(i)))).title(commonNames.get(i)).snippet(scientificNames.get(i))).setVisible(true);
+            }
+
+        }
+
+
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-
+        System.out.println("starting stuff....");
         mMapView = (MapView) rootView.findViewById(R.id.mapView);
         mMapView.onCreate(savedInstanceState);
 
@@ -52,12 +79,18 @@ public class HomeFragment extends Fragment {
                 // For showing a move to my location button
                 googleMap.setMyLocationEnabled(true);
 
+                //googleMap.addMarker(new MarkerOptions().position(new LatLng(33.7790974992, -84.3995344268)).title("Squirrel").snippet("latin squirrel")).setVisible(true);
+
+                System.out.println("Map set up");
+                setUpMarkers();
+                System.out.println("done with marker setup");
+                
+
                 // For dropping a marker at a point on the Map
-                LatLng sydney = new LatLng(-34, 151);
-                googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker Title").snippet("Marker Description"));
+
 
                 // For zooming automatically to the location of the marker
-                CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
+                CameraPosition cameraPosition = new CameraPosition.Builder().target(new LatLng(33.7766, -84.3982)).zoom(12).build();
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
             }
         });

@@ -20,17 +20,29 @@ public class CSVParse {
         }
     }
 
-    public ArrayList<String> getList(int n) {
-        ArrayList<String> toReturn = new ArrayList<String>();
+    public ArrayList<ArrayList<String>> getList(int[] ns) {
+        ArrayList<ArrayList<String>> toReturn = new ArrayList<ArrayList<String>>();
+        for (int i = 0; i < ns.length; i++) {
+            toReturn.add(new ArrayList<String>());
+        }
         String[] nextLine;
+        System.out.println("getList n: " + ns);
         try {
             while ((nextLine = reader.readNext()) != null) {
                 // nextLine[] is an array of values from the line
-                toReturn.add(nextLine[n]);
+                for (int i = 0; i < ns.length; i++) {
+                    toReturn.get(i).add(nextLine[ns[i]]);
+                }
+
             }
         } catch (IOException ex) {
             Log.d("myTag", ex.toString());
         }
+        System.out.println("data 0: " + toReturn.get(0).get(0));
+        System.out.println("data 1: " + toReturn.get(1).get(0));
+        System.out.println("data 2: " + toReturn.get(2).get(0));
+        System.out.println("data 3: " + toReturn.get(3).get(0));
+
         return toReturn;
     }
 

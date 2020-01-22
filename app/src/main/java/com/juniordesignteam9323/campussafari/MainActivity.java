@@ -22,12 +22,10 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import java.util.*;
 //import com.opencsv.CSVReader;
 //import java.io.IOException;
 //import java.io.FileReader;
 //import java.io.*;
-import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -62,10 +60,8 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
 
         CSVParse parsey = new CSVParse("observations-75146.csv", getApplicationContext());
-        ArrayList<String> temp = parsey.getList(36);
-        for(String s : temp) {
-            Log.d("myTag", "own file " + s);
-        }
+        //ArrayList<ArrayList<String>> temp = parsey.getList(new int[]{37, 36});
+
         //printCSV();
     }
 
