@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
             String[] nextLine;
             while ((nextLine = reader.readNext()) != null) {
                 // nextLine[] is an array of values from the line
+                Pin p = new Pin(nextLine[20], nextLine[21]);
                 Log.d("myTag", nextLine[36]);
             }
         }
