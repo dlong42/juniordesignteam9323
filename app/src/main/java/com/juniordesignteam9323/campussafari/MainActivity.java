@@ -22,10 +22,11 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.opencsv.CSVReader;
-import java.io.IOException;
-import java.io.FileReader;
-import java.io.*;
+import java.util.*;
+//import com.opencsv.CSVReader;
+//import java.io.IOException;
+//import java.io.FileReader;
+//import java.io.*;
 import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
@@ -60,27 +61,32 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        printCSV();
+        CSVParse parsey = new CSVParse("observations-75146.csv", getApplicationContext());
+        ArrayList<String> temp = parsey.getList(36);
+        for(String s : temp) {
+            Log.d("myTag", "own file " + s);
+        }
+        //printCSV();
     }
 
-    public void printCSV() {
-        try {
-            //String csvfileString = "/Users/BrianZhu/Desktop/Georgia Tech/Courses/Spring 2020/Junior Design/juniordesignteam9323/app/src/main/assets/"  + "observations-75146.csv";
-            //Log.d("myTag", csvfileString);
-            //File csvfile = new File(csvfileString);
-            CSVReader reader = new CSVReader(new InputStreamReader(getAssets().open("observations-75146.csv")));
-            String[] nextLine;
-            while ((nextLine = reader.readNext()) != null) {
-                // nextLine[] is an array of values from the line
-                Pin p = new Pin(nextLine[20], nextLine[21]);
-                Log.d("myTag", nextLine[36]);
-            }
-        }
-        catch (IOException ex) {
-            // handle exception
-            Log.d("myTag", ex.toString());
-        }
-    }
+//    public void printCSV() {
+//        try {
+//            //String csvfileString = "/Users/BrianZhu/Desktop/Georgia Tech/Courses/Spring 2020/Junior Design/juniordesignteam9323/app/src/main/assets/"  + "observations-75146.csv";
+//            //Log.d("myTag", csvfileString);
+//            //File csvfile = new File(csvfileString);
+//            CSVReader reader = new CSVReader(new InputStreamReader(getAssets().open("observations-75146.csv")));
+//            String[] nextLine;
+//            while ((nextLine = reader.readNext()) != null) {
+//                // nextLine[] is an array of values from the line
+//                Pin p = new Pin(nextLine[20], nextLine[21]);
+//                Log.d("myTag", nextLine[36]);
+//            }
+//        }
+//        catch (IOException ex) {
+//            // handle exception
+//            Log.d("myTag", ex.toString());
+//        }
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
