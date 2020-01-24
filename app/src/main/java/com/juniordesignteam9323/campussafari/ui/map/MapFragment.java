@@ -1,4 +1,4 @@
-package com.juniordesignteam9323.campussafari.ui.home;
+package com.juniordesignteam9323.campussafari.ui.map;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 import androidx.fragment.app.Fragment;
 
-public class HomeFragment extends Fragment {
+public class MapFragment extends Fragment {
 
 
     MapView mMapView;

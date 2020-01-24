@@ -1,16 +1,16 @@
-package com.juniordesignteam9323.campussafari.ui.gallery;
+package com.juniordesignteam9323.campussafari.ui.reports;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class GalleryViewModel extends ViewModel {
+public class ReportsViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public GalleryViewModel() {
+    public ReportsViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is gallery fragment");
+        mText.setValue("This is reports fragment");
     }
 
     public LiveData<String> getText() {
