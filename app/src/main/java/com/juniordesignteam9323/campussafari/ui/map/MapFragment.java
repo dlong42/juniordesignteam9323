@@ -29,7 +29,7 @@ public class MapFragment extends Fragment {
 
 
     public void setUpMarkers() {
-        CSVParse parser = new CSVParse("observations-75146.csv", getActivity().getApplicationContext());
+        CSVParse parser = new CSVParse("observations-64324.csv", getActivity().getApplicationContext());
 
         ArrayList<ArrayList<String>> data = parser.getList(new int[]{36, 37, 23, 24});
 
