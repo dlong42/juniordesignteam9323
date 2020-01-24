@@ -1,4 +1,4 @@
-package com.juniordesignteam9323.campussafari.ui.home;
+package com.juniordesignteam9323.campussafari.ui.map;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,7 +18,7 @@ import com.juniordesignteam9323.campussafari.R;
 
 import androidx.fragment.app.Fragment;
 
-public class HomeFragment extends Fragment {
+public class MapFragment extends Fragment {
 
 
     MapView mMapView;
@@ -26,7 +26,7 @@ public class HomeFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_map, container, false);
 
         mMapView = (MapView) rootView.findViewById(R.id.mapView);
         mMapView.onCreate(savedInstanceState);

@@ -1,16 +1,16 @@
-package com.juniordesignteam9323.campussafari.ui.send;
+package com.juniordesignteam9323.campussafari.ui.achievements;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class SendViewModel extends ViewModel {
+public class AchievementsViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public SendViewModel() {
+    public AchievementsViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is send fragment");
+        mText.setValue("This is achievements fragment");
     }
 
     public LiveData<String> getText() {

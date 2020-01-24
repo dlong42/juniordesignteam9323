@@ -1,4 +1,4 @@
-package com.juniordesignteam9323.campussafari.ui.send;
+package com.juniordesignteam9323.campussafari.ui.achievements;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.juniordesignteam9323.campussafari.R;
 
-public class SendFragment extends Fragment {
+public class AchievementsFragment extends Fragment {
 
-    private SendViewModel sendViewModel;
+    private AchievementsViewModel achievementsViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        sendViewModel =
-                ViewModelProviders.of(this).get(SendViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_send, container, false);
-        final TextView textView = root.findViewById(R.id.text_send);
-        sendViewModel.getText().observe(this, new Observer<String>() {
+        achievementsViewModel =
+                ViewModelProviders.of(this).get(AchievementsViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_achievements, container, false);
+        final TextView textView = root.findViewById(R.id.text_achievements);
+        achievementsViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

@@ -1,16 +1,16 @@
-package com.juniordesignteam9323.campussafari.ui.tools;
+package com.juniordesignteam9323.campussafari.ui.friends;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class ToolsViewModel extends ViewModel {
+public class FriendsViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public ToolsViewModel() {
+    public FriendsViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is tools fragment");
+        mText.setValue("This is friends fragment");
     }
 
     public LiveData<String> getText() {

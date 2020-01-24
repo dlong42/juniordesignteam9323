@@ -3,41 +3,45 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@+id/nav_map">
 
     <fragment
-        android:id="@+id/nav_home"
-        android:name="com.juniordesignteam9323.campussafari.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/nav_map"
+        android:name="com.juniordesignteam9323.campussafari.ui.map.MapFragment"
+        android:label="@string/menu_map"
+        tools:layout="@layout/fragment_map" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.juniordesignteam9323.campussafari.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_log"
+        android:name="com.juniordesignteam9323.campussafari.ui.log.LogFragment"
+        android:label="@string/menu_log"
+        tools:layout="@layout/fragment_log" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.juniordesignteam9323.campussafari.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_achievements"
+        android:name="com.juniordesignteam9323.campussafari.ui.friends.FriendsFragment"
+        android:label="@string/menu_achievements"
+        tools:layout="@layout/fragment_achievements" />
 
     <fragment
-        android:id="@+id/nav_tools"
-        android:name="com.juniordesignteam9323.campussafari.ui.tools.ToolsFragment"
-        android:label="@string/menu_tools"
-        tools:layout="@layout/fragment_tools" />
-
+        android:id="@+id/nav_leaderboard"
+        android:name="com.juniordesignteam9323.campussafari.ui.settings.SettingsFragment"
+        android:label="@string/menu_leaderboard"
+        tools:layout="@layout/fragment_leaderboard" />
     <fragment
-        android:id="@+id/nav_share"
-        android:name="com.juniordesignteam9323.campussafari.ui.share.ShareFragment"
-        android:label="@string/menu_share"
-        tools:layout="@layout/fragment_share" />
-
+        android:id="@+id/nav_friends"
+        android:name="com.juniordesignteam9323.campussafari.ui.settings.SettingsFragment"
+        android:label="@string/menu_friends"
+        tools:layout="@layout/fragment_friends" />
     <fragment
-        android:id="@+id/nav_send"
-        android:name="com.juniordesignteam9323.campussafari.ui.send.SendFragment"
-        android:label="@string/menu_send"
-        tools:layout="@layout/fragment_send" />
+        android:id="@+id/nav_reports"
+        android:name="com.juniordesignteam9323.campussafari.ui.settings.SettingsFragment"
+        android:label="@string/menu_reports"
+        tools:layout="@layout/fragment_reports" />
+    <fragment
+        android:id="@+id/nav_settings"
+        android:name="com.juniordesignteam9323.campussafari.ui.settings.SettingsFragment"
+        android:label="@string/menu_settings"
+        tools:layout="@layout/fragment_settings" />
+
 </navigation>
