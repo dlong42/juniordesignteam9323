@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/nav_log"
-        android:name="com.juniordesignteam9323.campussafari.ui.log.LogFragment"
+        android:name="com.juniordesignteam9323.campussafari.ui.oblog.OblogFragment"
         android:label="@string/menu_log"
         tools:layout="@layout/fragment_log" />
 
