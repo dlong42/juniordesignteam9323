@@ -62,11 +62,11 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
 
         String[] snippets = marker.getSnippet().split(",");
 
-        level.setText(snippets[1] + "clearly");
+        level.setText(snippets[1]);
 
-        //image.setImageDrawable(this.loadImageFromUrl(snippets[0]));
+        image.setImageDrawable(this.loadImageFromUrl(snippets[0]));
 
-        image.setImageDrawable(this.loadImageFromUrl("https://static.inaturalist.org/photos/10318980/large.jpg?1504908199"));
+        //image.setImageDrawable(this.loadImageFromUrl("https://static.inaturalist.org/photos/10318980/large.jpg?1504908199"));
 
         return view;
     }

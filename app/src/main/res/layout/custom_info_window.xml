@@ -9,18 +9,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         />
-    <ImageView
-        android:id="@+id/pic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        />
+
     <TextView
         android:id="@+id/level"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:singleLine="false"
         android:layout_marginTop="8dp" />
+    <ImageView
+        android:id="@+id/pic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        />
 
 
 </LinearLayout>

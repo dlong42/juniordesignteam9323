@@ -34,7 +34,7 @@ public class MapFragment extends Fragment {
     public void setUpMarkers() {
         CSVParse parser = new CSVParse("observations-64324.csv", getActivity().getApplicationContext());
 
-        ArrayList<ArrayList<String>> data = parser.getList(new int[]{36, 37, 23, 24, 10, 12});
+        ArrayList<ArrayList<String>> data = parser.getList(new int[]{36, 37, 23, 24, 10, 13});
 
         ArrayList<String> scientificNames = data.get(0);
         ArrayList<String> commonNames = data.get(1);
