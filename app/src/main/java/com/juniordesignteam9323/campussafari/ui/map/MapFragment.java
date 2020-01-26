@@ -15,10 +15,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.juniordesignteam9323.campussafari.CSVParse;
+import com.juniordesignteam9323.campussafari.CustomInfoWindowAdapter;
 import com.juniordesignteam9323.campussafari.R;
-import java.util.Random;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import androidx.fragment.app.Fragment;
 
@@ -33,19 +34,23 @@ public class MapFragment extends Fragment {
     public void setUpMarkers() {
         CSVParse parser = new CSVParse("observations-64324.csv", getActivity().getApplicationContext());
 
-        ArrayList<ArrayList<String>> data = parser.getList(new int[]{36, 37, 23, 24, 10});
+        ArrayList<ArrayList<String>> data = parser.getList(new int[]{36, 37, 23, 24, 10, 12});
 
         ArrayList<String> scientificNames = data.get(0);
         ArrayList<String> commonNames = data.get(1);
         ArrayList<String> latitudes = data.get(2);
         ArrayList<String> longitudes = data.get(3);
+        ArrayList<String> urls = data.get(5);
 
         System.out.println("" + scientificNames.size() + " " + commonNames.size() + " " + latitudes.size() + " " + longitudes.size());
         for (int i = 2; i < latitudes.size(); i++) {
             System.out.println(i + ": " + latitudes.get(i) + ", " + longitudes.get(i));
 
             if (!latitudes.get(i).equals("") && !longitudes.get(i).equals("") && data.get(4).get(i).equals("research")) {
-                googleMap.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(latitudes.get(i)), Double.parseDouble(longitudes.get(i)))).title(commonNames.get(i)).snippet(scientificNames.get(i)).snippet("Level: " + (random.nextInt(10) + 1))).setVisible(true);
+                MarkerOptions tempMark = new MarkerOptions().position(new LatLng(Double.parseDouble(latitudes.get(i)), Double.parseDouble(longitudes.get(i)))).title(commonNames.get(i)).snippet(scientificNames.get(i)).snippet(urls.get(i) + ",Level: " + (random.nextInt(10) + 1));
+
+               googleMap.addMarker(tempMark).setVisible(true);
+                //m.setTag(new InfoWindowData());
             }
 
         }
@@ -86,6 +91,9 @@ public class MapFragment extends Fragment {
                 //googleMap.addMarker(new MarkerOptions().position(new LatLng(33.7790974992, -84.3995344268)).title("Squirrel").snippet("latin squirrel")).setVisible(true);
 
                 System.out.println("Map set up");
+                CustomInfoWindowAdapter customInfoWindow = new CustomInfoWindowAdapter(getContext());
+                googleMap.setInfoWindowAdapter(customInfoWindow);
+
                 setUpMarkers();
                 System.out.println("done with marker setup");
                 
