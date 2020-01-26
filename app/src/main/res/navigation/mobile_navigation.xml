@@ -43,5 +43,10 @@
         android:name="com.juniordesignteam9323.campussafari.ui.settings.SettingsFragment"
         android:label="@string/menu_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.juniordesignteam9323.campussafari.ui.profile.settings.ProfileFragment"
+        android:label="@string/menu_profile"
+        tools:layout="@layout/fragment_profile" />
 
 </navigation>
