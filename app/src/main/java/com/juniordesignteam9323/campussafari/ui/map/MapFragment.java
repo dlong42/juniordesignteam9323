@@ -16,6 +16,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.juniordesignteam9323.campussafari.CSVParse;
 import com.juniordesignteam9323.campussafari.R;
+import java.util.Random;
 
 import java.util.ArrayList;
 
@@ -26,6 +27,7 @@ public class MapFragment extends Fragment {
 
     MapView mMapView;
     private GoogleMap googleMap;
+    private Random random;
 
 
     public void setUpMarkers() {
@@ -43,7 +45,7 @@ public class MapFragment extends Fragment {
             System.out.println(i + ": " + latitudes.get(i) + ", " + longitudes.get(i));
 
             if (!latitudes.get(i).equals("") && !longitudes.get(i).equals("") && data.get(4).get(i).equals("research")) {
-                googleMap.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(latitudes.get(i)), Double.parseDouble(longitudes.get(i)))).title(commonNames.get(i)).snippet(scientificNames.get(i))).setVisible(true);
+                googleMap.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(latitudes.get(i)), Double.parseDouble(longitudes.get(i)))).title(commonNames.get(i)).snippet(scientificNames.get(i)).snippet("Level: " + (random.nextInt(10) + 1))).setVisible(true);
             }
 
         }
@@ -65,6 +67,8 @@ public class MapFragment extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        random = new Random();
 
         mMapView.getMapAsync(new OnMapReadyCallback() {
             @Override
