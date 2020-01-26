@@ -19,23 +19,23 @@
 
     <fragment
         android:id="@+id/nav_achievements"
-        android:name="com.juniordesignteam9323.campussafari.ui.friends.FriendsFragment"
+        android:name="com.juniordesignteam9323.campussafari.ui.achievements.AchievementsFragment"
         android:label="@string/menu_achievements"
         tools:layout="@layout/fragment_achievements" />
 
     <fragment
         android:id="@+id/nav_leaderboard"
-        android:name="com.juniordesignteam9323.campussafari.ui.settings.SettingsFragment"
+        android:name="com.juniordesignteam9323.campussafari.ui.leaderboard.LeaderboardFragment"
         android:label="@string/menu_leaderboard"
         tools:layout="@layout/fragment_leaderboard" />
     <fragment
         android:id="@+id/nav_friends"
-        android:name="com.juniordesignteam9323.campussafari.ui.settings.SettingsFragment"
+        android:name="com.juniordesignteam9323.campussafari.ui.friends.FriendsFragment"
         android:label="@string/menu_friends"
         tools:layout="@layout/fragment_friends" />
     <fragment
         android:id="@+id/nav_reports"
-        android:name="com.juniordesignteam9323.campussafari.ui.settings.SettingsFragment"
+        android:name="com.juniordesignteam9323.campussafari.ui.reports.ReportsFragment"
         android:label="@string/menu_reports"
         tools:layout="@layout/fragment_reports" />
     <fragment

@@ -32,7 +32,6 @@
             android:id="@+id/nav_reports"
             android:icon="@drawable/ic_reports"
             android:title="@string/menu_reports" />
-
     </group>
 
 

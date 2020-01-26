@@ -22,6 +22,11 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+//import com.opencsv.CSVReader;
+//import java.io.IOException;
+//import java.io.FileReader;
+//import java.io.*;
+
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
@@ -53,7 +58,31 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        CSVParse parsey = new CSVParse("observations-75146.csv", getApplicationContext());
+        //ArrayList<ArrayList<String>> temp = parsey.getList(new int[]{37, 36});
+
+        //printCSV();
     }
+
+//    public void printCSV() {
+//        try {
+//            //String csvfileString = "/Users/BrianZhu/Desktop/Georgia Tech/Courses/Spring 2020/Junior Design/juniordesignteam9323/app/src/main/assets/"  + "observations-75146.csv";
+//            //Log.d("myTag", csvfileString);
+//            //File csvfile = new File(csvfileString);
+//            CSVReader reader = new CSVReader(new InputStreamReader(getAssets().open("observations-75146.csv")));
+//            String[] nextLine;
+//            while ((nextLine = reader.readNext()) != null) {
+//                // nextLine[] is an array of values from the line
+//                Pin p = new Pin(nextLine[20], nextLine[21]);
+//                Log.d("myTag", nextLine[36]);
+//            }
+//        }
+//        catch (IOException ex) {
+//            // handle exception
+//            Log.d("myTag", ex.toString());
+//        }
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
