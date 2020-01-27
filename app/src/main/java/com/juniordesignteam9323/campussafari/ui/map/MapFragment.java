@@ -31,9 +31,15 @@ public class MapFragment extends Fragment {
     private Random random;
 
 
+    /**
+     * This is a helper method created to add all the markers to the map.
+     * Done by Davis Williams
+     * */
     public void setUpMarkers() {
         CSVParse parser = new CSVParse("observations-64324.csv", getActivity().getApplicationContext());
 
+        //reads the CSV file to get scientific names, common names,
+        // latitudes, longitudes, observation level and image url
         ArrayList<ArrayList<String>> data = parser.getList(new int[]{36, 37, 23, 24, 10, 13});
 
         ArrayList<String> scientificNames = data.get(0);
@@ -42,13 +48,12 @@ public class MapFragment extends Fragment {
         ArrayList<String> longitudes = data.get(3);
         ArrayList<String> urls = data.get(5);
 
-        System.out.println("" + scientificNames.size() + " " + commonNames.size() + " " + latitudes.size() + " " + longitudes.size());
-        for (int i = 2; i < latitudes.size(); i++) {
-            System.out.println(i + ": " + latitudes.get(i) + ", " + longitudes.get(i));
 
+        for (int i = 2; i < latitudes.size(); i++) {
+
+            //checks to make sure the latitude and longitude are valid and that the level is "research"
             if (!latitudes.get(i).equals("") && !longitudes.get(i).equals("") && data.get(4).get(i).equals("research")) {
                 MarkerOptions tempMark = new MarkerOptions().position(new LatLng(Double.parseDouble(latitudes.get(i)), Double.parseDouble(longitudes.get(i)))).title(commonNames.get(i)).snippet(scientificNames.get(i)).snippet(urls.get(i) + ",Level: " + (random.nextInt(10) + 1));
-
                googleMap.addMarker(tempMark).setVisible(true);
                 //m.setTag(new InfoWindowData());
             }
@@ -88,17 +93,13 @@ public class MapFragment extends Fragment {
                 // For showing a move to my location button
                 googleMap.setMyLocationEnabled(true);
 
-                //googleMap.addMarker(new MarkerOptions().position(new LatLng(33.7790974992, -84.3995344268)).title("Squirrel").snippet("latin squirrel")).setVisible(true);
 
-                System.out.println("Map set up");
+
+                //set up markers with custom info windows
                 CustomInfoWindowAdapter customInfoWindow = new CustomInfoWindowAdapter(getContext());
                 googleMap.setInfoWindowAdapter(customInfoWindow);
-
                 setUpMarkers();
-                System.out.println("done with marker setup");
-                
 
-                // For dropping a marker at a point on the Map
 
 
                 // For zooming automatically to the location of the marker
