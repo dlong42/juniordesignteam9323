@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "873059845612",
+    "firebase_url": "https://campus-safari-database.firebaseio.com",
+    "project_id": "campus-safari-database",
+    "storage_bucket": "campus-safari-database.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:873059845612:android:3cb865d6a93c1731b4ecc9",
+        "android_client_info": {
+          "package_name": "com.juniordesignteam9323.campussafari"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "873059845612-pleqik3fhq5svi5pelmfed735cn262v9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.juniordesignteam9323.campussafari",
+            "certificate_hash": "a56d77f302da2f659dff7b957078a2c212a9e222"
+          }
+        },
+        {
+          "client_id": "873059845612-8cgn25e6efi3o5542fs1ns3ossjf496h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8nHRJqEvbf1byiPAukVFCg1c0eB5wi3E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "873059845612-8cgn25e6efi3o5542fs1ns3ossjf496h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
