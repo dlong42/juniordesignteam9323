@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "873059845612-lhbb00chbbkhgvmmlhahip584e035dct.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.juniordesignteam9323.campussafari",
+            "certificate_hash": "137b710121e0782f0cdce586aa3b47f9eb5a8b6a"
+          }
+        },
+        {
+          "client_id": "873059845612-bom2gp3v23b2t0dh35f0cti663mfgugp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.juniordesignteam9323.campussafari",
+            "certificate_hash": "cec172378aa979cb888885b7e8bcb05a0e4d9951"
+          }
+        },
+        {
           "client_id": "873059845612-pleqik3fhq5svi5pelmfed735cn262v9.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

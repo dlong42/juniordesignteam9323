@@ -13,16 +13,20 @@
 
     <fragment
         android:id="@+id/nav_log"
-        android:name="com.juniordesignteam9323.campussafari.ui.log.LogFragment"
-        android:label="@string/menu_log"
-        tools:layout="@layout/fragment_log" />
+        android:name="com.juniordesignteam9323.campussafari.ui.oblog.OblogFragment"
+        android:label="@string/menu_oblog"
+        tools:layout="@layout/fragment_oblog" />
 
     <fragment
         android:id="@+id/nav_achievements"
         android:name="com.juniordesignteam9323.campussafari.ui.achievements.AchievementsFragment"
         android:label="@string/menu_achievements"
         tools:layout="@layout/fragment_achievements" />
-
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.juniordesignteam9323.campussafari.ui.profile.ProfileFragment"
+        android:label="@string/menu_profile"
+        tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/nav_leaderboard"
         android:name="com.juniordesignteam9323.campussafari.ui.leaderboard.LeaderboardFragment"
@@ -43,5 +47,6 @@
         android:name="com.juniordesignteam9323.campussafari.ui.settings.SettingsFragment"
         android:label="@string/menu_settings"
         tools:layout="@layout/fragment_settings" />
+
 
 </navigation>
