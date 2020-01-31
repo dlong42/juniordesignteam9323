@@ -13,7 +13,10 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.juniordesignteam9323.campussafari.R;
+<<<<<<< Updated upstream
 import com.juniordesignteam9323.campussafari.ui.reports.ReportsViewModel;
+=======
+>>>>>>> Stashed changes
 
 public class ProfileFragment extends Fragment {
 
