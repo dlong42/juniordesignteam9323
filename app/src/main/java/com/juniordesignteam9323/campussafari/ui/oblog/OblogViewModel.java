@@ -10,7 +10,8 @@ public class OblogViewModel extends ViewModel {
 
     public OblogViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is log fragment");
+
+        mText.setValue("This is observation log fragment");
     }
 
     public LiveData<String> getText() {

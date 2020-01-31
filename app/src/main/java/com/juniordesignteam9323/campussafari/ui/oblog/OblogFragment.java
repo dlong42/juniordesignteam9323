@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.juniordesignteam9323.campussafari.R;
+import com.juniordesignteam9323.campussafari.ui.friends.FriendsViewModel;
 
 public class OblogFragment extends Fragment {
 
@@ -22,8 +23,8 @@ public class OblogFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         oblogViewModel =
                 ViewModelProviders.of(this).get(OblogViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_log, container, false);
-        final TextView textView = root.findViewById(R.id.text_log);
+        View root = inflater.inflate(R.layout.fragment_oblog, container, false);
+        final TextView textView = root.findViewById(R.id.text_oblog);
         oblogViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {

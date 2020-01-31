@@ -1,17 +1,18 @@
 package com.juniordesignteam9323.campussafari;
 
 import android.content.Context;
-
-
-import com.opencsv.CSVReader;
-import java.io.IOException;
-import java.io.*;
 import android.util.Log;
 
-import java.util.*;
+import com.opencsv.CSVReader;
+
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 public class CSVParse {
     CSVReader reader;
 
+
+    //sets up a reader at the top of the CSV file
     public CSVParse(String file, Context context){
         try {
             reader = new CSVReader(new InputStreamReader(context.getAssets().open(file)));
@@ -20,6 +21,9 @@ public class CSVParse {
         }
     }
 
+
+    //can only be used once per file, give a list of the columns of the csv file you want and it will
+    //return an arra
     public ArrayList<ArrayList<String>> getList(int[] ns) {
         ArrayList<ArrayList<String>> toReturn = new ArrayList<ArrayList<String>>();
         for (int i = 0; i < ns.length; i++) {

@@ -127,7 +127,6 @@ public class MainActivity extends AppCompatActivity {
                         .create()
                         .show();
 
-
             } else {
                 // No explanation needed, we can request the permission.
                 ActivityCompat.requestPermissions(this,
