@@ -8,12 +8,13 @@
     <string name="action_settings">Settings</string>
 
     <string name="menu_map">Map</string>
-    <string name="menu_log">Observation Log</string>
+    <string name="menu_oblog">Observation Log</string>
     <string name="menu_achievements">Achievements</string>
     <string name="menu_leaderboard">Leaderboard</string>
     <string name="menu_friends">Friends</string>
     <string name="menu_reports">Reports</string>
     <string name="menu_settings">Settings</string>
+    <string name="menu_profile">Profile</string>
 
 
     <string name="title_location_permission">Enable Location Services</string>
