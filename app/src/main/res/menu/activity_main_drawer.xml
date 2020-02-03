@@ -29,10 +29,10 @@
             android:icon="@drawable/ic_friends"
             android:title="@string/menu_friends" />
         <item
-            android:id="@+id/nav_reports"
+            android:id="@+id/nav_admin"
             android:icon="@drawable/ic_reports"
-            android:title="@string/menu_reports" />
-    </group>
+            android:title="@string/menu_admin" />
+</group>
 
 
 </menu>

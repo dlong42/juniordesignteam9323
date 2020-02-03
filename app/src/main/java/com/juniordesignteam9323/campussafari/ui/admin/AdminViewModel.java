@@ -1,16 +1,16 @@
-package com.juniordesignteam9323.campussafari.ui.reports;
+package com.juniordesignteam9323.campussafari.ui.admin;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class ReportsViewModel extends ViewModel {
+public class AdminViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public ReportsViewModel() {
+    public AdminViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is reports fragment");
+        mText.setValue("This is admin fragment");
     }
 
     public LiveData<String> getText() {
