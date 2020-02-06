@@ -6,16 +6,22 @@
     app:startDestination="@+id/nav_map">
 
     <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.juniordesignteam9323.campussafari.ui.profile.ProfileFragment"
+        android:label="@string/menu_profile"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
         android:id="@+id/nav_map"
         android:name="com.juniordesignteam9323.campussafari.ui.map.MapFragment"
         android:label="@string/menu_map"
         tools:layout="@layout/fragment_map" />
 
     <fragment
-        android:id="@+id/nav_log"
-        android:name="com.juniordesignteam9323.campussafari.ui.log.LogFragment"
-        android:label="@string/menu_log"
-        tools:layout="@layout/fragment_log" />
+        android:id="@+id/nav_oblog"
+        android:name="com.juniordesignteam9323.campussafari.ui.oblog.OblogFragment"
+        android:label="@string/menu_oblog"
+        tools:layout="@layout/fragment_oblog" />
 
     <fragment
         android:id="@+id/nav_achievements"
@@ -34,10 +40,10 @@
         android:label="@string/menu_friends"
         tools:layout="@layout/fragment_friends" />
     <fragment
-        android:id="@+id/nav_reports"
-        android:name="com.juniordesignteam9323.campussafari.ui.reports.ReportsFragment"
-        android:label="@string/menu_reports"
-        tools:layout="@layout/fragment_reports" />
+        android:id="@+id/nav_admin"
+        android:name="com.juniordesignteam9323.campussafari.ui.admin.AdminFragment"
+        android:label="@string/menu_admin"
+        tools:layout="@layout/fragment_admin" />
     <fragment
         android:id="@+id/nav_settings"
         android:name="com.juniordesignteam9323.campussafari.ui.settings.SettingsFragment"
