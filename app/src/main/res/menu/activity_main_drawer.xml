@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
+
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_map"
@@ -15,7 +16,8 @@
         <item
             android:id="@+id/nav_achievements"
             android:icon="@drawable/ic_achievements"
-            android:title="@string/menu_achievements" />
+            android:title="@string/menu_achievements"
+            android:tag="ach"/>
         <item
             android:id="@+id/nav_leaderboard"
             android:icon="@drawable/ic_leaderboard"
@@ -25,9 +27,9 @@
             android:icon="@drawable/ic_friends"
             android:title="@string/menu_friends" />
         <item
-            android:id="@+id/nav_reports"
+            android:id="@+id/nav_admin"
             android:icon="@drawable/ic_reports"
-            android:title="Reports" />
+            android:title="Admin" />
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_logout"

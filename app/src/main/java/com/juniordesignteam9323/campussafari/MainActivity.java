@@ -3,6 +3,7 @@ package com.juniordesignteam9323.campussafari;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -19,6 +20,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.juniordesignteam9323.campussafari.ui.LoginActivity;
+import com.juniordesignteam9323.campussafari.ui.achievements.AchievementsFragment;
+import com.juniordesignteam9323.campussafari.ui.achievements.AchievementsViewModel;
+import com.juniordesignteam9323.campussafari.ui.map.MapFragment;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +30,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -39,7 +45,7 @@ import android.widget.Button;
 //import java.io.FileReader;
 //import java.io.*;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity  {
 
     private AppBarConfiguration mAppBarConfiguration;
 
@@ -65,14 +71,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_map, R.id.nav_log, R.id.nav_achievements,
-                R.id.nav_leaderboard, R.id.nav_friends, R.id.nav_reports, R.id.nav_settings)
+                R.id.nav_leaderboard, R.id.nav_friends, R.id.nav_admin, R.id.nav_settings)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        navigationView.setNavigationItemSelectedListener(this);
+        //navigationView.setNavigationItemSelectedListener(this);
 
 
         CSVParse parsey = new CSVParse("observations-75146.csv", getApplicationContext());
@@ -81,16 +87,74 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //printCSV();
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-        if (id == R.id.nav_logout) {
-            logout();
-        }
-        return true;
-    }
+//    @SuppressWarnings("StatementWithEmptyBody")
+//    @Override
+//    public boolean onNavigationItemSelected(MenuItem item) {
+//         //Handle navigation view item clicks here.
+//        Fragment fragment = null;
+//        int id = item.getItemId();
+//        if (id == R.id.nav_achievements) {
+//            fragment = new AchievementsFragment();
+//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//            ft.add(id, fragment);
+//            ft.commit();
+//            //logout();
+//        }
+//        } else {
+//            fragment = new AchievementsFragment();
+//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//            ft.replace(id, fragment);
+//            ft.commit();
+//        }
+//        if (id == R.id.nav_achievements) {
+//            fragment = new Fragment();
+//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//            ft.replace(R.id.nav_achievements, fragment);
+//            ft.commit();
+//        }
+//        if (id == R.id.nav_map) {
+//            fragment = new Fragment();
+//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//            ft.replace(R.id.nav_map, fragment);
+//            ft.commit();
+//        }
+//        if (id == R.id.nav_settings) {
+//            fragment = new Fragment();
+//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//            ft.replace(R.id.nav_settings, fragment);
+//            ft.commit();
+//        }if (id == R.id.nav_oblog) {
+//            fragment = new Fragment();
+//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//            ft.replace(R.id.nav_oblog, fragment);
+//            ft.commit();
+//        }
+//        if (id == R.id.nav_admin) {
+//            fragment = new Fragment();
+//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//            ft.replace(R.id.nav_admin, fragment);
+//            ft.commit();
+//        }
+//        if (id == R.id.nav_leaderboard) {
+//            fragment = new Fragment();
+//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//            ft.replace(R.id.nav_leaderboard, fragment);
+//            ft.commit();
+//        }
+//        if (id == R.id.nav_friends) {
+//            fragment = new Fragment();
+//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//            ft.replace(R.id.nav_friends, fragment);
+//            ft.commit();
+//        }
+//        if (id == R.id.nav_log) {
+//            fragment = new Fragment();
+//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//            ft.replace(R.id.nav_log, fragment);
+//            ft.commit();
+//        }
+//        return true;
+//    }
 
 
 
