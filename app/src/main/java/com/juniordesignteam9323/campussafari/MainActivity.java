@@ -19,12 +19,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-//import com.opencsv.CSVReader;
-//import java.io.IOException;
-//import java.io.FileReader;
-//import java.io.*;
-
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private boolean admin = false;
@@ -74,9 +69,6 @@ public class MainActivity extends AppCompatActivity  {
 
 
         CSVParse parsey = new CSVParse("observations-75146.csv", getApplicationContext());
-        //ArrayList<ArrayList<String>> temp = parsey.getList(new int[]{37, 36});
-
-        //printCSV();
     }
 
 //    @SuppressWarnings("StatementWithEmptyBody")
