@@ -23,7 +23,7 @@ public class CSVParse {
 
 
     //can only be used once per file, give a list of the columns of the csv file you want and it will
-    //return an arra
+    //return an array
     public ArrayList<ArrayList<String>> getList(int[] ns) {
         ArrayList<ArrayList<String>> toReturn = new ArrayList<ArrayList<String>>();
         for (int i = 0; i < ns.length; i++) {
