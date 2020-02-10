@@ -41,7 +41,6 @@ public class LoginActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         checkLocationPermission();
-
         FirebaseAuth auth = FirebaseAuth.getInstance();
         if (auth.getCurrentUser() != null) {
             Intent intent = new Intent(this, MainActivity.class);

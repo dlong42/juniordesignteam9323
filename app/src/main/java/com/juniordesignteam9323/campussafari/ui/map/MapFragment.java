@@ -1,5 +1,7 @@
 package com.juniordesignteam9323.campussafari.ui.map;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +23,8 @@ import com.juniordesignteam9323.campussafari.R;
 import java.util.ArrayList;
 import java.util.Random;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 public class MapFragment extends Fragment {
@@ -65,48 +69,60 @@ public class MapFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_map, container, false);
+        View rootView = null;
         System.out.println("starting stuff....");
-        mMapView = (MapView) rootView.findViewById(R.id.mapView);
-        mMapView.onCreate(savedInstanceState);
 
-        mMapView.onResume(); // needed to get the map to display immediately
+        // Checks if the user has given us permission to use their location - if not, we don't
+        // display the map, but instead we show a page asking them to go to settings and enable
+        // that permission.
+        if (ActivityCompat.checkSelfPermission(getContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            rootView = inflater.inflate(R.layout.fragment_enablelocation, container, false);
+        } else {
+            rootView = inflater.inflate(R.layout.fragment_map, container, false);
+            mMapView = (MapView) rootView.findViewById(R.id.mapView);
+            mMapView.onCreate(savedInstanceState);
 
-        try {
-            MapsInitializer.initialize(getActivity().getApplicationContext());
-        } catch (Exception e) {
-            e.printStackTrace();
+            mMapView.onResume(); // needed to get the map to display immediately
+
+            try {
+                MapsInitializer.initialize(getActivity().getApplicationContext());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            random = new Random();
+
+            mMapView.getMapAsync(new OnMapReadyCallback() {
+                @Override
+                public void onMapReady(GoogleMap mMap) {
+                    googleMap = mMap;
+
+                    //confine map and set zoom
+                    googleMap.setLatLngBoundsForCameraTarget(new LatLngBounds(new LatLng(33.7677, -84.4062),
+                            new LatLng(33.7814, -84.3906)));
+                    googleMap.setMinZoomPreference(14.0f);
+
+                    // For showing a move to my location button
+                    googleMap.setMyLocationEnabled(true);
+
+
+
+                    //set up markers with custom info windows
+                    CustomInfoWindowAdapter customInfoWindow = new CustomInfoWindowAdapter(getContext());
+                    googleMap.setInfoWindowAdapter(customInfoWindow);
+                    setUpMarkers();
+
+
+
+                    // For zooming automatically to the location of the marker
+                    CameraPosition cameraPosition = new CameraPosition.Builder().target(new LatLng(33.7766, -84.3982)).zoom(12).build();
+                    googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                }
+            });
         }
 
-        random = new Random();
-
-        mMapView.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(GoogleMap mMap) {
-                googleMap = mMap;
-
-                //confine map and set zoom
-                googleMap.setLatLngBoundsForCameraTarget(new LatLngBounds(new LatLng(33.7677, -84.4062),
-                        new LatLng(33.7814, -84.3906)));
-                googleMap.setMinZoomPreference(14.0f);
-
-                // For showing a move to my location button
-                googleMap.setMyLocationEnabled(true);
-
-
-
-                //set up markers with custom info windows
-                CustomInfoWindowAdapter customInfoWindow = new CustomInfoWindowAdapter(getContext());
-                googleMap.setInfoWindowAdapter(customInfoWindow);
-                setUpMarkers();
-
-
-
-                // For zooming automatically to the location of the marker
-                CameraPosition cameraPosition = new CameraPosition.Builder().target(new LatLng(33.7766, -84.3982)).zoom(12).build();
-                googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-            }
-        });
 
         return rootView;
     }
@@ -114,24 +130,40 @@ public class MapFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        mMapView.onResume();
+        if (ActivityCompat.checkSelfPermission(getContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            mMapView.onResume();
+        }
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        mMapView.onPause();
+        if (ActivityCompat.checkSelfPermission(getContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            mMapView.onPause();
+        }
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mMapView.onDestroy();
+        if (ActivityCompat.checkSelfPermission(getContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            mMapView.onDestroy();
+        }
     }
 
     @Override
     public void onLowMemory() {
         super.onLowMemory();
-        mMapView.onLowMemory();
+        if (ActivityCompat.checkSelfPermission(getContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            mMapView.onLowMemory();
+        }
     }
 }
