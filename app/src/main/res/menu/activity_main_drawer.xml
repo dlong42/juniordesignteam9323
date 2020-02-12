@@ -10,9 +10,9 @@
             android:icon="@drawable/ic_map"
             android:title="@string/menu_map" />
         <item
-            android:id="@+id/nav_log"
+            android:id="@+id/nav_oblog"
             android:icon="@drawable/ic_log"
-            android:title="Menu Log" />
+            android:title="@string/menu_oblog" />
         <item
             android:id="@+id/nav_achievements"
             android:icon="@drawable/ic_achievements"
@@ -27,13 +27,17 @@
             android:icon="@drawable/ic_friends"
             android:title="@string/menu_friends" />
         <item
-            android:id="@+id/nav_admin"
-            android:icon="@drawable/ic_reports"
-            android:title="Admin" />
+        android:id="@+id/nav_admin"
+        android:icon="@drawable/ic_reports"
+        android:title="@string/menu_admin" />
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_profile"
+            android:title="@string/menu_profile" />
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_logout"
-            android:title="Sign Out" />
+            android:title="@string/menu_logout" />
     </group>
 
 </menu>

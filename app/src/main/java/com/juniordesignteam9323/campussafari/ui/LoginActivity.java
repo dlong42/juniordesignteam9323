@@ -79,13 +79,12 @@ public class LoginActivity extends AppCompatActivity {
                 //add/or update user in database
                 final String TAG="LoginActivity";
 
-                db.collection("users").document(user.getDisplayName()).set(user)
+                db.collection("users").document(user.getEmail()).set(user)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
-                                    Log.d(TAG, "DocumentSnapshot added with ID: " + user.getDisplayName()); }
+                                    Log.d(TAG, "DocumentSnapshot added with ID: " + user.getEmail()); }
                             });
-
 
 
 
