@@ -6,22 +6,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-<<<<<<< Updated upstream
-import androidx.annotation.Nullable;
-import androidx.annotation.NonNull;
-=======
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
->>>>>>> Stashed changes
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.juniordesignteam9323.campussafari.R;
-<<<<<<< Updated upstream
 import com.juniordesignteam9323.campussafari.ui.friends.FriendsViewModel;
-=======
->>>>>>> Stashed changes
 
 public class OblogFragment extends Fragment {
 

@@ -1,39 +1,28 @@
 package com.juniordesignteam9323.campussafari;
 
-import android.Manifest;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.pm.PackageManager;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.auth.FirebaseAuth;
+import com.juniordesignteam9323.campussafari.ui.LoginActivity;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-//import com.opencsv.CSVReader;
-//import java.io.IOException;
-//import java.io.FileReader;
-//import java.io.*;
-
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
+    private boolean admin = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,26 +37,111 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                NavigationView navigationView = findViewById(R.id.nav_view);
+                if (admin == false) {
+                    admin = true;
+                    navigationView.getMenu().findItem(R.id.nav_admin).setVisible(true);
+                } else {
+                    admin = false;
+                    navigationView.getMenu().findItem(R.id.nav_admin).setVisible(false);
+                }
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+
+        if (admin == false) {
+            navigationView.getMenu().findItem(R.id.nav_admin).setVisible(false);
+        }
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_profile, R.id.nav_map,  R.id.nav_oblog, R.id.nav_achievements,
                 R.id.nav_leaderboard, R.id.nav_friends, R.id.nav_reports, R.id.nav_settings)
+                
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        CSVParse parsey = new CSVParse("observations-75146.csv", getApplicationContext());
-        //ArrayList<ArrayList<String>> temp = parsey.getList(new int[]{37, 36});
+        //navigationView.setNavigationItemSelectedListener(this);
 
-        //printCSV();
+
+        CSVParse parsey = new CSVParse("observations-75146.csv", getApplicationContext());
     }
+
+//    @SuppressWarnings("StatementWithEmptyBody")
+//    @Override
+//    public boolean onNavigationItemSelected(MenuItem item) {
+//         //Handle navigation view item clicks here.
+//        Fragment fragment = null;
+//        int id = item.getItemId();
+//        if (id == R.id.nav_achievements) {
+//            fragment = new AchievementsFragment();
+//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//            ft.add(id, fragment);
+//            ft.commit();
+//            //logout();
+//        }
+//        } else {
+//            fragment = new AchievementsFragment();
+//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//            ft.replace(id, fragment);
+//            ft.commit();
+//        }
+//        if (id == R.id.nav_achievements) {
+//            fragment = new Fragment();
+//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//            ft.replace(R.id.nav_achievements, fragment);
+//            ft.commit();
+//        }
+//        if (id == R.id.nav_map) {
+//            fragment = new Fragment();
+//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//            ft.replace(R.id.nav_map, fragment);
+//            ft.commit();
+//        }
+//        if (id == R.id.nav_settings) {
+//            fragment = new Fragment();
+//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//            ft.replace(R.id.nav_settings, fragment);
+//            ft.commit();
+//        }if (id == R.id.nav_oblog) {
+//            fragment = new Fragment();
+//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//            ft.replace(R.id.nav_oblog, fragment);
+//            ft.commit();
+//        }
+//        if (id == R.id.nav_admin) {
+//            fragment = new Fragment();
+//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//            ft.replace(R.id.nav_admin, fragment);
+//            ft.commit();
+//        }
+//        if (id == R.id.nav_leaderboard) {
+//            fragment = new Fragment();
+//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//            ft.replace(R.id.nav_leaderboard, fragment);
+//            ft.commit();
+//        }
+//        if (id == R.id.nav_friends) {
+//            fragment = new Fragment();
+//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//            ft.replace(R.id.nav_friends, fragment);
+//            ft.commit();
+//        }
+//        if (id == R.id.nav_log) {
+//            fragment = new Fragment();
+//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//            ft.replace(R.id.nav_log, fragment);
+//            ft.commit();
+//        }
+//        return true;
+//    }
+
+
 
 //    public void printCSV() {
 //        try {
@@ -102,45 +176,15 @@ public class MainActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
-    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
 
-    public boolean checkLocationPermission() {
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
 
-            // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.ACCESS_FINE_LOCATION)) {
-
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
-                new AlertDialog.Builder(this)
-                        .setTitle(R.string.title_location_permission)
-                        .setMessage(R.string.text_location_permission)
-                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                //Prompt the user once explanation has been shown
-                                ActivityCompat.requestPermissions(MainActivity.this,
-                                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                                        MY_PERMISSIONS_REQUEST_LOCATION);
-                            }
-                        })
-                        .create()
-                        .show();
-
-            } else {
-                // No explanation needed, we can request the permission.
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                        MY_PERMISSIONS_REQUEST_LOCATION);
-            }
-            return false;
-        } else {
-            return true;
-        }
+    //sign out method
+    private void logout() {
+        FirebaseAuth.getInstance().signOut();
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
     }
+
+
 
 }

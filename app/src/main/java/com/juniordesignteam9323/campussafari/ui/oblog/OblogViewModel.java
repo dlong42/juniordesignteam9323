@@ -10,12 +10,8 @@ public class OblogViewModel extends ViewModel {
 
     public OblogViewModel() {
         mText = new MutableLiveData<>();
-<<<<<<< Updated upstream
 
         mText.setValue("This is observation log fragment");
-=======
-        mText.setValue("This is Observation Log fragment");
->>>>>>> Stashed changes
     }
 
     public LiveData<String> getText() {
