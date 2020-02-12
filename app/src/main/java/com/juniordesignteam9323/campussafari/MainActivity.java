@@ -2,6 +2,7 @@ package com.juniordesignteam9323.campussafari;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 
@@ -27,12 +28,28 @@ import androidx.navigation.ui.NavigationUI;
 public class MainActivity extends AppCompatActivity  {
 
     private AppBarConfiguration mAppBarConfiguration;
-    private boolean admin = false;
+    private UserData userData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        userData = (UserData) (getIntent().getSerializableExtra("USERDATA"));
+        if (userData == null){
+            Log.d("Userdata", "null");
+        } else {
+            Log.d("Userdata", "Admin: " + userData.getAdmin() + "Email: " + userData.getEmail());
+        }
+
+
+        if (userData == null) {
+            userData = new UserData(true, "weigel@gmail.com");
+        }
+
+        Log.d("admin set up", "status: "+ userData.getAdmin() + " Email: " + userData.getEmail());
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -42,22 +59,14 @@ public class MainActivity extends AppCompatActivity  {
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                NavigationView navigationView = findViewById(R.id.nav_view);
-                if (admin == false) {
-                    admin = true;
-                    navigationView.getMenu().findItem(R.id.nav_admin).setVisible(true);
-                } else {
-                    admin = false;
-                    navigationView.getMenu().findItem(R.id.nav_admin).setVisible(false);
-                }
+
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
 
-        if (admin == false) {
-            navigationView.getMenu().findItem(R.id.nav_admin).setVisible(false);
-        }
+        navigationView.getMenu().findItem(R.id.nav_admin).setVisible(userData.getAdmin());
+
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -77,6 +86,10 @@ public class MainActivity extends AppCompatActivity  {
         //ArrayList<ArrayList<String>> temp = parsey.getList(new int[]{37, 36});
 
         //printCSV();
+    }
+
+    public UserData getUserData() {
+        return this.userData;
     }
 
 //    @SuppressWarnings("StatementWithEmptyBody")

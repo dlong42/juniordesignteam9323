@@ -6,32 +6,32 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 
-import androidx.annotation.NonNull;
+import com.firebase.ui.auth.AuthUI;
+import com.firebase.ui.auth.IdpResponse;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.juniordesignteam9323.campussafari.MainActivity;
+import com.juniordesignteam9323.campussafari.R;
+import com.juniordesignteam9323.campussafari.UserData;
+
+import java.util.Arrays;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
-import android.util.Log;
-import android.view.View;
-
-import com.firebase.ui.auth.AuthUI;
-import com.firebase.ui.auth.IdpResponse;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.juniordesignteam9323.campussafari.MainActivity;
-import com.juniordesignteam9323.campussafari.R;
-import java.util.Arrays;
 
 public class LoginActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 123;
     public FirebaseAuth auth;
     public FirebaseUser user;
+    public UserData userData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +62,16 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    private void writeUserData(FirebaseFirestore db) {
+
+                if (userData == null) {
+                    userData = new UserData(false, user.getEmail());
+                    db.collection("userData").document(user.getEmail()).set(userData);
+                }
+
+        }
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -73,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
                 // Successfully signed in
 
                 //get instance of databse
-                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                final FirebaseFirestore db = FirebaseFirestore.getInstance();
                 user = FirebaseAuth.getInstance().getCurrentUser();
 
                 //add/or update user in database
@@ -89,7 +99,37 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
+                //get the userData from the database.
+                db.collection("userData").document(user.getEmail()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+
+                        userData = documentSnapshot.toObject(UserData.class);
+                        if (userData != null) {
+                            Log.d("Userdata", "initial pull admin status: " + userData.getAdmin());
+                        }
+                        writeUserData(db);
+
+                        //
+                    }
+                });
+
+
+
+
+
+                Log.d("Userdata", "before while loop status: "+ userData.getAdmin() + " Email: " + userData.getEmail());
+                while(userData == null) {
+                    try {
+                        wait();
+                    } catch (Exception e) {
+                        Log.d("Wait broke", e.getMessage());
+                    }
+                }
                 Intent intent = new Intent(this, MainActivity.class);
+                Log.d("Userdata", "intent time Admin: " + userData.getAdmin() + "Email: " + userData.getEmail());
+                intent.putExtra("USERDATA", userData);
                 startActivity(intent);
                 // ...
             } else {
