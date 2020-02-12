@@ -23,9 +23,12 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 import com.juniordesignteam9323.campussafari.MainActivity;
 import com.juniordesignteam9323.campussafari.R;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -78,16 +81,12 @@ public class LoginActivity extends AppCompatActivity {
 
                 //add/or update user in database
                 final String TAG="LoginActivity";
-
-                db.collection("users").document(user.getDisplayName()).set(user)
+                db.collection("users").document(user.getEmail()).set(user)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
-                                    Log.d(TAG, "DocumentSnapshot added with ID: " + user.getDisplayName()); }
+                                    Log.d(TAG, "DocumentSnapshot added with ID: " + user.getEmail()); }
                             });
-
-
-
 
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
