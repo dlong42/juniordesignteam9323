@@ -3,7 +3,9 @@ package com.juniordesignteam9323.campussafari;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.StrictMode;
+import android.renderscript.ScriptGroup;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -35,16 +37,23 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
     public Drawable loadImageFromUrl(String url) {
         //TODO: This is a bad way of getting the internet to work.
         // Could make the app not run at all in areas with bad internet
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-
-        StrictMode.setThreadPolicy(policy);
-
+//        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+////
+////        StrictMode.setThreadPolicy(policy);
+////
+////        try {
+////            InputStream is = (InputStream) new URL(url).getContent();
+////            Drawable d = Drawable.createFromStream(is, null);
+////            return d;
+////        } catch (Exception e) {
+////            Log.d("url", e.toString());
+////            return null;
+////        }
         try {
-            InputStream is = (InputStream) new URL(url).getContent();
-            Drawable d = Drawable.createFromStream(is, null);
+            Drawable d = new RetrieveImage().execute(url).get();
             return d;
-        } catch (Exception e) {
-            Log.d("url", e.toString());
+        } catch(Exception e) {
+            Log.d("url_out", e.getStackTrace().toString());
             return null;
         }
     }
@@ -66,8 +75,27 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
         String[] snippets = marker.getSnippet().split(",");
         level.setText(snippets[1]);
         image.setImageDrawable(this.loadImageFromUrl(snippets[0]));
-
-
         return view;
+    }
+}
+
+class RetrieveImage extends AsyncTask<String, Void, Drawable> {
+    protected void onPreExecute(){
+        super.onPreExecute();
+    }
+
+    protected Drawable doInBackground(String... urls) {
+        try {
+            InputStream is = (InputStream) new URL(urls[0]).getContent();
+            Drawable d = Drawable.createFromStream(is, null);
+            return d;
+        } catch (Exception e) {
+            Log.d("url", e.toString());
+            return null;
+        }
+    }
+
+    protected void onPostExecute(Drawable result) {
+        super.onPostExecute(result);
     }
 }

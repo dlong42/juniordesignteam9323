@@ -78,7 +78,7 @@ public class MapFragment extends Fragment {
         if (ActivityCompat.checkSelfPermission(getContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-            rootView = inflater.inflate(sR.layout.fragment_enablelocation, container, false);
+            rootView = inflater.inflate(R.layout.fragment_enablelocation, container, false);
         } else {
             rootView = inflater.inflate(R.layout.fragment_map, container, false);
             mMapView = (MapView) rootView.findViewById(R.id.mapView);
