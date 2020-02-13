@@ -20,12 +20,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-//import com.opencsv.CSVReader;
-//import java.io.IOException;
-//import java.io.FileReader;
-//import java.io.*;
-
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private UserData userData;
@@ -71,21 +66,16 @@ public class MainActivity extends AppCompatActivity  {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_map, R.id.nav_log, R.id.nav_achievements,
-                R.id.nav_leaderboard, R.id.nav_friends, R.id.nav_admin, R.id.nav_settings)
+                R.id.nav_oblog, R.id.nav_map, R.id.nav_oblog, R.id.nav_achievements, R.id.nav_profile,
+                R.id.nav_leaderboard, R.id.nav_friends, R.id.nav_admin, R.id.nav_settings, R.id.nav_logout)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        //navigationView.setNavigationItemSelectedListener(this);
-
-
         CSVParse parsey = new CSVParse("observations-75146.csv", getApplicationContext());
-        //ArrayList<ArrayList<String>> temp = parsey.getList(new int[]{37, 36});
 
-        //printCSV();
     }
 
     public UserData getUserData() {
@@ -195,15 +185,4 @@ public class MainActivity extends AppCompatActivity  {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
-
-
-    //sign out method
-    private void logout() {
-        FirebaseAuth.getInstance().signOut();
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-    }
-
-
-
 }
