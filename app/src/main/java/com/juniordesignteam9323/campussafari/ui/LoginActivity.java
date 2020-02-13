@@ -97,8 +97,6 @@ public class LoginActivity extends AppCompatActivity {
                             });
 
 
-
-
                 //get the userData from the database.
                 db.collection("userData").document(user.getEmail()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
@@ -110,6 +108,10 @@ public class LoginActivity extends AppCompatActivity {
                             Log.d("Userdata", "initial pull admin status: " + userData.getAdmin());
                         }
                         writeUserData(db);
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        Log.d("Userdata", "intent time Admin: " + userData.getAdmin() + "Email: " + userData.getEmail());
+                        intent.putExtra("USERDATA", userData);
+                        startActivity(intent);
 
                         //
                     }
@@ -118,19 +120,9 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
+//                Log.d("Userdata", "before while loop status: "+ userData.getAdmin() + " Email: " + userData.getEmail());
 
-                Log.d("Userdata", "before while loop status: "+ userData.getAdmin() + " Email: " + userData.getEmail());
-                while(userData == null) {
-                    try {
-                        wait();
-                    } catch (Exception e) {
-                        Log.d("Wait broke", e.getMessage());
-                    }
-                }
-                Intent intent = new Intent(this, MainActivity.class);
-                Log.d("Userdata", "intent time Admin: " + userData.getAdmin() + "Email: " + userData.getEmail());
-                intent.putExtra("USERDATA", userData);
-                startActivity(intent);
+
                 // ...
             } else {
                 // Sign in failed. If response is null the user canceled the
