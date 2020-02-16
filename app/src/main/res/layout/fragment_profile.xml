@@ -7,14 +7,16 @@
 
     <TextView
         android:id="@+id/text_profile"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="199dp"
+        android:layout_height="45dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="236dp"
         android:layout_marginEnd="8dp"
-        android:textAlignment="center"
+        android:textAlignment="gravity"
+        android:textColor="#4465B3"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.229"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,10 +24,12 @@
         android:id="@+id/change_nickname"
         android:layout_width="78dp"
         android:layout_height="37dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="236dp"
+        android:background="#85A9FF"
         android:text="@string/profile_edit"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.975"
+        app:layout_constraintHorizontal_bias="0.81"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,8 +38,24 @@
         android:layout_width="178dp"
         android:layout_height="35dp"
         android:layout_marginStart="116dp"
-        android:layout_marginTop="648dp"
+        android:layout_marginTop="496dp"
+        android:background="#85A9FF"
         android:text="@string/profile_changePassword"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="156dp"
+        android:layout_height="174dp"
+        android:layout_marginTop="36dp"
+        android:background="#00009688"
+        android:contentDescription="Avatar"
+        android:src="@drawable/ic_avatar1"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

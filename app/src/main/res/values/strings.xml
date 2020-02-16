@@ -30,6 +30,7 @@
     <!-- Strings used in PasswordActivity   -->
     <string name="psswrd_update">Update Password</string>
     <string name="psswrd_old">Old Password</string>
+    <string name="psswrd_old2">Confirm Old Password</string>
     <string name="psswrd_new">New Password</string>
     <string name="psswrd_change">Update My Password</string>
     <string name="psswrd_cancel">Cancel</string>
