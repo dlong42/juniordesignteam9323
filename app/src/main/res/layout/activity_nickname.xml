@@ -5,15 +5,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"/>
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="38dp"
         android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="9dp"
-        android:layout_marginBottom="492dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="222dp"
+        android:layout_marginBottom="471dp"
         android:text="@string/nickname_newNickname"
+        android:textColor="#4465B3"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,14 +37,14 @@
 
     <EditText
         android:id="@+id/editText"
-        android:layout_width="237dp"
+        android:layout_width="194dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="149dp"
+        android:layout_marginStart="11dp"
         android:layout_marginTop="212dp"
         android:layout_marginEnd="25dp"
+        android:layout_toEndOf="@+id/textView2"
         android:ems="10"
         android:inputType="textUri|textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,28 +53,19 @@
 
     <TextView
         android:id="@+id/nickname_header"
-        android:layout_width="354dp"
-        android:layout_height="71dp"
+        android:layout_width="339dp"
+        android:layout_height="67dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="46dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="147dp"
         android:text="@string/nickname_updateNickname"
+        android:textColor="#4465B3"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/nickname_cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="38dp"
-        android:layout_marginTop="270dp"
-        android:text="@string/nickname_cancel" />
 
     <Button
         android:id="@+id/nickname_submit"
@@ -66,9 +73,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="271dp"
-        android:layout_marginEnd="46dp"
-        android:text="@string/nickname_submit" />
+        android:layout_marginTop="268dp"
+        android:layout_marginEnd="25dp"
+        android:background="#FF7A5E"
+        android:text="@string/nickname_submit"
+        android:textColor="#FFFFFF" />
 
     <TextView
         android:id="@+id/nickname_error"
@@ -81,5 +90,17 @@
         android:layout_marginBottom="323dp"
         android:textColor="@color/colorError"
         android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/nickname_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="184dp"
+        android:layout_marginTop="268dp"
+        android:background="#85A9FF"
+        android:text="@string/nickname_cancel"
+        android:textColor="#FFFFFF" />
 
 </RelativeLayout>

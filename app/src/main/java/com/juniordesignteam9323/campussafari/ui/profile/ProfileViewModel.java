@@ -15,7 +15,7 @@ public class ProfileViewModel extends ViewModel {
         mText = new MutableLiveData<>();
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
-        mText.setValue("Nickname: " + user.getDisplayName());
+        mText.setValue(user.getDisplayName());
     }
 
     public LiveData<String> getText() {
