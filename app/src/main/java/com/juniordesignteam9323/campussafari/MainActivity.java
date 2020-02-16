@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -62,6 +63,20 @@ public class MainActivity extends AppCompatActivity {
 
         navigationView.getMenu().findItem(R.id.nav_admin).setVisible(userData.getAdmin());
 
+        // Set avatar to be in the top left of the nav bar
+        View hView = navigationView.getHeaderView(0);
+        ImageView avatar = hView.findViewById(R.id.imageView);
+
+        String avatarId = userData.getAvatar();
+        if (avatarId.equals("owl")) {
+            avatar.setImageResource(R.drawable.avatar_owl);
+        } else if (avatarId.equals("bear")) {
+            avatar.setImageResource(R.drawable.avatar_bear);
+        } else if (avatarId.equals("chameleon")) {
+            avatar.setImageResource(R.drawable.avatar_chameleon);
+        } else if (avatarId.equals("raccoon")) {
+            avatar.setImageResource(R.drawable.avatar_raccoon);
+        }
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.

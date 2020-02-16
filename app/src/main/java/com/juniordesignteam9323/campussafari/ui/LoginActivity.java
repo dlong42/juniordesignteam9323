@@ -119,7 +119,7 @@ public class LoginActivity extends AppCompatActivity {
                             Log.d("Userdata", "initial pull admin status: " + userData.getAdmin());
                         }
                         writeUserData(db);
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), ProfileCreationActivity.class);
                         Log.d("Userdata", "intent time Admin: " + userData.getAdmin() + "Email: " + userData.getEmail());
                         intent.putExtra("USERDATA", userData);
                         startActivity(intent);

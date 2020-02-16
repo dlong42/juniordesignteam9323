@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/pcreate_header"
+        android:layout_width="354dp"
+        android:layout_height="71dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="46dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/pcreate_header"
+        android:textSize="39sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/pcreate_nicknamecreate"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="121dp"
+        android:text="@string/pcreate_nicknamecreate" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/avatarButtons"
+        android:layout_alignStart="@+id/pcreate_nicknamecreate"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/pcreate_avatar" />
+
+
+    <EditText
+        android:id="@+id/pcreate_nicknameEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="133dp"
+        android:layout_marginEnd="35dp"
+        android:ems="16"
+        android:inputType="text" />
+
+    <Button
+        android:id="@+id/pcreate_finishbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="34dp"
+        android:layout_marginBottom="240dp"
+        android:text="@string/pcreate_finishbutton" />
+
+    <RadioGroup
+        android:id="@+id/avatarButtons"
+        android:layout_width="344dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/pcreate_finishbutton"
+        android:layout_alignEnd="@+id/pcreate_nicknameEdit"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="50dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/owl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:button="@drawable/avatar_owl"></RadioButton>
+
+        <RadioButton
+            android:id="@+id/chameleon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:button="@drawable/avatar_chameleon"></RadioButton>
+
+        <RadioButton
+            android:id="@+id/bear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:button="@drawable/avatar_bear"></RadioButton>
+
+        <RadioButton
+            android:id="@+id/raccoon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:button="@drawable/avatar_raccoon"></RadioButton>
+
+    </RadioGroup>
+
+</RelativeLayout>
