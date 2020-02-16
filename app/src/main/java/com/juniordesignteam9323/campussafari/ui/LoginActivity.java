@@ -74,11 +74,14 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void writeUserData(FirebaseFirestore db) {
+    private boolean writeUserData(FirebaseFirestore db) {
 
                 if (userData == null) {
                     userData = new UserData(false, user.getEmail());
                     db.collection("userData").document(user.getEmail()).set(userData);
+                    return true;
+                } else {
+                    return false;
                 }
 
         }
@@ -118,8 +121,14 @@ public class LoginActivity extends AppCompatActivity {
                         if (userData != null) {
                             Log.d("Userdata", "initial pull admin status: " + userData.getAdmin());
                         }
-                        writeUserData(db);
-                        Intent intent = new Intent(getApplicationContext(), ProfileCreationActivity.class);
+                        boolean isNewUser = writeUserData(db);
+                        Intent intent;
+                        if (isNewUser) {
+                            intent = new Intent(getApplicationContext(), ProfileCreationActivity.class);
+                        } else {
+                            intent = new Intent(getApplicationContext(), MainActivity.class);
+                        }
+
                         Log.d("Userdata", "intent time Admin: " + userData.getAdmin() + "Email: " + userData.getEmail());
                         intent.putExtra("USERDATA", userData);
                         startActivity(intent);

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.juniordesignteam9323.campussafari.MainActivity;
 import com.juniordesignteam9323.campussafari.R;
+import com.juniordesignteam9323.campussafari.UserData;
 import com.juniordesignteam9323.campussafari.ui.LoginActivity;
 import com.juniordesignteam9323.campussafari.ui.NicknameActivity;
 import com.juniordesignteam9323.campussafari.ui.PasswordActivity;
@@ -51,6 +53,22 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         Button change_psswrdBtn = root.findViewById(R.id.change_password);
         change_nicknameBtn.setOnClickListener(this);
         change_psswrdBtn.setOnClickListener(this);
+
+        UserData userData = ((MainActivity) getActivity()).getUserData();
+
+        // Set avatar based on what user selected
+        ImageView avatar = root.findViewById(R.id.imageView4);
+        String avatarId = userData.getAvatar();
+        if (avatarId.equals("owl")) {
+            avatar.setImageResource(R.drawable.avatar_owl);
+        } else if (avatarId.equals("bear")) {
+            avatar.setImageResource(R.drawable.avatar_bear);
+        } else if (avatarId.equals("chameleon")) {
+            avatar.setImageResource(R.drawable.avatar_chameleon);
+        } else if (avatarId.equals("raccoon")) {
+            avatar.setImageResource(R.drawable.avatar_raccoon);
+        }
+
 
         return root;
     }

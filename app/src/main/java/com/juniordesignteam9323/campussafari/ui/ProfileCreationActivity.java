@@ -111,6 +111,8 @@ public class ProfileCreationActivity extends AppCompatActivity implements View.O
         updates.put("displayName", nickname);
         db.collection("users").document(user.getEmail()).update(updates);
 
+        db.collection("userData").document(user.getEmail()).set(userData);
+
         // Navigate to the main game
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         intent.putExtra("USERDATA", userData);

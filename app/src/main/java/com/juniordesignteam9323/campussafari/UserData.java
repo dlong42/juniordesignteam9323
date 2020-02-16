@@ -25,6 +25,7 @@ public class UserData implements Serializable {
     public int getPoints() {return this.points;}
     public int getLevel() {return this.level;}
     public String getAvatar() {return this.avatar;}
+    public String getNickname() {return this.nickname;}
 
     public void setPoints(int points) {this.points = points;}
     public void setLevel(int level) {this.level = level;}
