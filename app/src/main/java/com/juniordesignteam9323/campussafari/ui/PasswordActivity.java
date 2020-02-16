@@ -53,15 +53,12 @@ public class PasswordActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.psswrd_update:
                 //take user input of old and new password fields
-                EditText editText1 = findViewById(R.id.editText);
-                EditText editText2 = findViewById(R.id.editText2);
+
                 EditText editText3 = findViewById(R.id.editText3);
                 EditText editText4 = findViewById(R.id.editText4);
-                String old1 = editText1.getText().toString();
-                String old2 = editText2.getText().toString();
                 String new1 = editText3.getText().toString();
                 String new2 = editText4.getText().toString();
-                if (old1.equals(old2)& new1.equals(new2) & !new1.equals("") & !old2.equals("") & new1.length()>7) {
+                if (new1.equals(new2) & !new1.equals("")  & new1.length()>7) {
                     // Update user password
                     user.updatePassword(new1);
                     // Update new user document in database with correct password
@@ -79,7 +76,7 @@ public class PasswordActivity extends AppCompatActivity implements View.OnClickL
                     String e = "Error: password must be at least 8 characters long.";
                     TextView error = findViewById(R.id.psswrd_error);
                     error.setText(e);
-                }else if (!old1.equals(old2) | !new1.equals(new2)){
+                }else if (!new1.equals(new2)){
                     String e = "Error: either old passwords or new passwords do not match.";
                     TextView error = findViewById(R.id.psswrd_error);
                     error.setText(e);
