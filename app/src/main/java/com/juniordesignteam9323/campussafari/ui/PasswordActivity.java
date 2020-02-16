@@ -8,18 +8,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.juniordesignteam9323.campussafari.MainActivity;
 import com.juniordesignteam9323.campussafari.R;
+import com.juniordesignteam9323.campussafari.UserData;
 
-import java.util.HashMap;
-import java.util.Map;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class PasswordActivity extends AppCompatActivity implements View.OnClickListener {
     FirebaseAuth auth;
@@ -28,6 +25,7 @@ public class PasswordActivity extends AppCompatActivity implements View.OnClickL
     String oldName;
     TextView textView;
     FirebaseFirestore db;
+    UserData userData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +35,7 @@ public class PasswordActivity extends AppCompatActivity implements View.OnClickL
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
         db = FirebaseFirestore.getInstance();
+        userData = (UserData) (getIntent().getSerializableExtra("USERDATA"));
 
         Button cancel = findViewById(R.id.psswrd_cancel);
         cancel.setOnClickListener(this);
@@ -49,7 +48,9 @@ public class PasswordActivity extends AppCompatActivity implements View.OnClickL
         switch (v.getId()) {
             case R.id.psswrd_cancel:
                 //Redirect page
-                startActivity(new Intent(this, MainActivity.class));
+                Intent i = new Intent(this, MainActivity.class);
+                i.putExtra("USERDATA", userData);
+                startActivity(i);
                 break;
             case R.id.psswrd_update:
                 //take user input of old and new password fields
@@ -71,7 +72,9 @@ public class PasswordActivity extends AppCompatActivity implements View.OnClickL
                                 }
                             });
                     // Redirect page
-                    startActivity(new Intent(this, MainActivity.class));
+                    Intent i2 = new Intent(this, MainActivity.class);
+                    i2.putExtra("USERDATA", userData);
+                    startActivity(i2);
                 }else if (new1.length() < 8) {
                     String e = "Error: password must be at least 8 characters long.";
                     TextView error = findViewById(R.id.psswrd_error);
