@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    a
 
     <TextView
         android:id="@+id/text_enablelocation"
@@ -23,7 +24,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="Hello, I am a TextView"
-        tools:layout_editor_absoluteX="136dp"
-        tools:layout_editor_absoluteY="356dp" />
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="320dp"
+        android:text="Please enable location permissions in Settings"
+        app:layout_constraintStart_toStartOf="@+id/text_enablelocation"
+        app:layout_constraintTop_toBottomOf="@+id/text_enablelocation" />
 </androidx.constraintlayout.widget.ConstraintLayout>
