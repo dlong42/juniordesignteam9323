@@ -31,6 +31,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     private ProfileViewModel profileViewModel;
 
     public View view;
+    public UserData userData;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -54,7 +55,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         change_nicknameBtn.setOnClickListener(this);
         change_psswrdBtn.setOnClickListener(this);
 
-        UserData userData = ((MainActivity) getActivity()).getUserData();
+        userData = ((MainActivity) getActivity()).getUserData();
 
         // Set avatar based on what user selected
         ImageView avatar = root.findViewById(R.id.imageView4);
@@ -77,10 +78,14 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.change_nickname:
-                startActivity(new Intent(getActivity(), NicknameActivity.class));
+                Intent i = new Intent(getActivity(), NicknameActivity.class);
+                i.putExtra("USERDATA", userData);
+                startActivity(i);
                 break;
             case R.id.change_password:
-                startActivity(new Intent(getActivity(), PasswordActivity.class));
+                Intent j = new Intent(getActivity(), PasswordActivity.class);
+                j.putExtra("USERDATA", userData);
+                startActivity(j);
                 break;
             default:
                 break;
