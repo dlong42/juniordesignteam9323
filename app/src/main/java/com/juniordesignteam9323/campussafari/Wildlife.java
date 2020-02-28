@@ -2,11 +2,54 @@ package com.juniordesignteam9323.campussafari;
 import java.util.*;
 
 public class Wildlife {
+    private String taxon;
+    private String scientificName;
+    private String commonName;
+    private String latitude;
+    private String longitude;
     private String imageURl;
-    private String name;
-    private List<String> otherInformation;
+    private String level;
+    private String points;
 
+    public String getTaxon() {
+        return taxon;
+    }
 
+    public void setTaxon(String taxon) {
+        this.taxon = taxon;
+    }
+
+    public String getScientificName() {
+        return scientificName;
+    }
+
+    public void setScientificName(String scientificName) {
+        this.scientificName = scientificName;
+    }
+
+    public String getCommonName() {
+        return commonName;
+    }
+
+    public void setCommonName(String commonName) {
+        this.commonName = commonName;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
 
     public String getImageURl() {
         return imageURl;
@@ -16,19 +59,19 @@ public class Wildlife {
         this.imageURl = imageURl;
     }
 
-    public String getName() {
-        return name;
+    public String getLevel() {
+        return level;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLevel(String level) {
+        this.level = level;
     }
 
-    public List<String> getOtherInformation() {
-        return otherInformation;
+    public String getPoints() {
+        return points;
     }
 
-    public void setOtherInformation(List<String> otherInformation) {
-        this.otherInformation = otherInformation;
+    public void setPoints(String points) {
+        this.points = points;
     }
 }
