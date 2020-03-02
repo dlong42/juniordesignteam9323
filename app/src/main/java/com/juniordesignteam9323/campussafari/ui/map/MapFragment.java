@@ -146,7 +146,7 @@ public class MapFragment extends Fragment {
                 public void onLocationChanged(Location location) {
                     Log.d("Location changed", location.toString());
                     for (Marker m: markerList) {
-                        if (Math.abs(m.getPosition().latitude - location.getLatitude()) < 0.005 && Math.abs(m.getPosition().longitude - location.getLongitude()) < 0.005) {
+                        if (Math.abs(m.getPosition().latitude - location.getLatitude()) < 0.001 && Math.abs(m.getPosition().longitude - location.getLongitude()) < 0.001) {
                             m.setVisible(true);
                             Log.d("Now visible", m.getPosition().toString());
                         } else {
