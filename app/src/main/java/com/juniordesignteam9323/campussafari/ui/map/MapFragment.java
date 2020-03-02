@@ -148,10 +148,10 @@ public class MapFragment extends Fragment {
                     for (Marker m: markerList) {
                         if (Math.abs(m.getPosition().latitude - location.getLatitude()) < 0.001 && Math.abs(m.getPosition().longitude - location.getLongitude()) < 0.001) {
                             m.setVisible(true);
-                            Log.d("Now visible", m.getPosition().toString());
+                            //m.setAlpha(1);
                         } else {
-                            Log.d("Now invisible", m.getPosition().toString());
                             m.setVisible(false);
+                            //m.setAlpha(.5f);
                         }
                     }
                 }
@@ -173,8 +173,6 @@ public class MapFragment extends Fragment {
                 }
             });
         }
-
-
 
 
         return rootView;
