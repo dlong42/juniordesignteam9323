@@ -24,7 +24,10 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.juniordesignteam9323.campussafari.CSVParse;
 import com.juniordesignteam9323.campussafari.CustomInfoWindowAdapter;
+import com.juniordesignteam9323.campussafari.MainActivity;
 import com.juniordesignteam9323.campussafari.R;
+import com.juniordesignteam9323.campussafari.UserData;
+import com.juniordesignteam9323.campussafari.Wildlife;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -41,7 +44,6 @@ public class MapFragment extends Fragment {
     private ArrayList<Marker> markerList;
     private LocationManager locationManager;
     private LocationListener locationListener;
-
 
     /**
      * This is a helper method created to add all the markers to the map.
@@ -148,6 +150,7 @@ public class MapFragment extends Fragment {
                     for (Marker m: markerList) {
                         if (Math.abs(m.getPosition().latitude - location.getLatitude()) < 0.001 && Math.abs(m.getPosition().longitude - location.getLongitude()) < 0.001) {
                             m.setVisible(true);
+                            addToOb(m.getTitle());  //add this available wildlife to the observation log
                             //m.setAlpha(1);
                         } else {
                             m.setVisible(false);
@@ -176,6 +179,12 @@ public class MapFragment extends Fragment {
 
 
         return rootView;
+    }
+
+    public void addToOb(String name) {
+        UserData ud = (UserData) getActivity().getIntent().getSerializableExtra("USERDATA");
+        ud.addToObLog(new Wildlife(name));
+        Log.d("catching", name);
     }
 
     @Override

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Button;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
@@ -68,6 +69,7 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
         TextView name = view.findViewById(R.id.name);
         TextView level = view.findViewById(R.id.level);
         ImageView image = view.findViewById(R.id.pic);
+        Button button = view.findViewById(R.id.button_id);
 
         name.setText(marker.getTitle());
 
