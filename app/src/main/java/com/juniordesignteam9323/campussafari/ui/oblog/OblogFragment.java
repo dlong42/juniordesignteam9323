@@ -36,7 +36,7 @@ public class OblogFragment extends Fragment {
         return root;
     }
     // Sorts wildlife alphabetically by common name
-    public class soryByCommonName implements Comparator {
+    public class sortByCommonName implements Comparator {
         public int compare(Object o1, Object o2) {
             Wildlife w1 = (Wildlife) o1;
             Wildlife w2 = (Wildlife) o2;
@@ -50,7 +50,7 @@ public class OblogFragment extends Fragment {
         }
     }
     // Sorts wildlife alphabetically by scientific name
-    public class soryByScientificName implements Comparator {
+    public class sortByScientificName implements Comparator {
         public int compare(Object o1, Object o2) {
             Wildlife w1 = (Wildlife) o1;
             Wildlife w2 = (Wildlife) o2;
@@ -64,7 +64,7 @@ public class OblogFragment extends Fragment {
         }
     }
     // Sorts wildlife by taxon
-    public class soryByTaxon implements Comparator {
+    public class sortByTaxon implements Comparator {
         public int compare(Object o1, Object o2) {
             Wildlife w1 = (Wildlife) o1;
             Wildlife w2 = (Wildlife) o2;
@@ -78,7 +78,7 @@ public class OblogFragment extends Fragment {
         }
     }
     // Sorts wildlife by level highest to lowest
-    public class soryByLevel implements Comparator {
+    public class sortByLevel implements Comparator {
         public int compare(Object o1, Object o2) {
             Wildlife w1 = (Wildlife) o1;
             Wildlife w2 = (Wildlife) o2;
@@ -92,7 +92,7 @@ public class OblogFragment extends Fragment {
         }
     }
     // Sorts wildlife by points worth highest to lowest
-    public class soryByPoints implements Comparator {
+    public class sortByPoints implements Comparator {
         public int compare(Object o1, Object o2) {
             Wildlife w1 = (Wildlife) o1;
             Wildlife w2 = (Wildlife) o2;
