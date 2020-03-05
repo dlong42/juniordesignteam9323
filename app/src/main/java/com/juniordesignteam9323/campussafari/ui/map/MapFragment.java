@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -34,6 +35,10 @@ import java.util.Random;
 
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+
+import com.appolica.interactiveinfowindow.InfoWindowManager;
+import com.appolica.interactiveinfowindow.InfoWindow;
+import com.appolica.interactiveinfowindow.fragment.MapInfoWindowFragment;
 
 public class MapFragment extends Fragment {
 
@@ -63,11 +68,17 @@ public class MapFragment extends Fragment {
         ArrayList<String> urls = data.get(5);
 
 
+
+        // Shows the InfoWindow or hides it if it is already opened.
+
+
         for (int i = 2; i < latitudes.size(); i++) {
 
             //checks to make sure the latitude and longitude are valid and that the level is "research"
             if (!latitudes.get(i).equals("") && !longitudes.get(i).equals("") && data.get(4).get(i).equals("research")) {
-                MarkerOptions tempMark = new MarkerOptions().position(new LatLng(Double.parseDouble(latitudes.get(i)), Double.parseDouble(longitudes.get(i)))).title(commonNames.get(i)).snippet(scientificNames.get(i)).snippet(urls.get(i) + ",Level: " + (random.nextInt(10) + 1));
+                MarkerOptions tempMark = new MarkerOptions().position(new LatLng(Double.parseDouble(latitudes.get(i)), Double.parseDouble(longitudes.get(i))));
+                tempMark.title(commonNames.get(i));
+                tempMark.snippet(urls.get(i) + ",Level: " + (random.nextInt(10) + 1) + ",Scientific Name: " + scientificNames.get(i));
                 Marker m = googleMap.addMarker(tempMark);
                 if (m != null) {
                     markerList.add(m);
@@ -138,6 +149,18 @@ public class MapFragment extends Fragment {
                     // For zooming automatically to the location of the marker
                     CameraPosition cameraPosition = new CameraPosition.Builder().target(new LatLng(33.7766, -84.3982)).zoom(12).build();
                     googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
+                    googleMap.setOnInfoWindowClickListener(new OnInfoWindowClickListener() {
+
+                        @Override
+                        public void onInfoWindowClick(Marker marker) {
+                            Log.d("catching 1", marker.getTitle());
+                            Log.d("catching 2", marker.getSnippet());
+                            String[] snippets = marker.getSnippet().split(",");
+                            String scientific = snippets[2];
+                            addToOb(marker.getTitle(), scientific);
+                        }
+                    });
                 }
             });
 
@@ -150,7 +173,7 @@ public class MapFragment extends Fragment {
                     for (Marker m: markerList) {
                         if (Math.abs(m.getPosition().latitude - location.getLatitude()) < 0.001 && Math.abs(m.getPosition().longitude - location.getLongitude()) < 0.001) {
                             m.setVisible(true);
-                            addToOb(m.getTitle());  //add this available wildlife to the observation log
+                            //addToOb(m.getTitle());  //add this available wildlife to the observation log
                             //m.setAlpha(1);
                         } else {
                             m.setVisible(false);
@@ -181,10 +204,12 @@ public class MapFragment extends Fragment {
         return rootView;
     }
 
-    public void addToOb(String name) {
+    public void addToOb(String name, String scientific) {
         UserData ud = (UserData) getActivity().getIntent().getSerializableExtra("USERDATA");
+        Wildlife wild = new Wildlife(name);
+        wild.setScientificName(scientific);
         ud.addToObLog(new Wildlife(name));
-        Log.d("catching", name);
+        Log.d("catching 3", name + " " + scientific);
     }
 
     @Override
