@@ -209,7 +209,7 @@ public class MapFragment extends Fragment {
         Wildlife wild = new Wildlife(name);
         wild.setScientificName(scientific);
         ud.addToObLog(new Wildlife(name));
-        Log.d("catching 3", name + " " + scientific);
+        Log.d("catching 3",  ud.getObLogString());
     }
 
     @Override

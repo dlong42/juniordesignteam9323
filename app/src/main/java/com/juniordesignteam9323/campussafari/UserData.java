@@ -45,6 +45,16 @@ public class UserData implements Serializable {
         this.obLog.add(toAdd);
     }
 
+    public String getObLogString(){
+        String toReturn = "";
+        if(this.obLog != null){
+            for(Wildlife w : this.obLog){
+                toReturn += "\n" + w.getCommonName();
+            }
+            return toReturn;
+        }
+        return "empty observation log";
+    }
     public boolean equals(Object object) {
         if (this == object) {
             return true;
