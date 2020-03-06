@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Button;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
@@ -20,7 +21,7 @@ import java.net.URL;
 public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
 
     private Context context;
-
+    private String wildlifeName;
     public CustomInfoWindowAdapter(Context ctx) {
         context = ctx;
     }
@@ -66,14 +67,27 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
 
         //initializes view for the InfoWindow
         TextView name = view.findViewById(R.id.name);
+        TextView scientific = view.findViewById(R.id.scientific);
         TextView level = view.findViewById(R.id.level);
         ImageView image = view.findViewById(R.id.pic);
+        //Button button = view.findViewById(R.id.button_id);
+
+        wildlifeName = name.toString();
+
+//        button.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                UserData ud = ((MainActivity) context).getUserData();
+//                ud.addToObLog(new Wildlife(wildlifeName));
+//                Log.d("catching", wildlifeName);
+//            }
+//        });
 
         name.setText(marker.getTitle());
 
         //the snippet is in the format of "url, level"
         String[] snippets = marker.getSnippet().split(",");
         level.setText(snippets[1]);
+        scientific.setText(snippets[2]);
         image.setImageDrawable(this.loadImageFromUrl(snippets[0]));
         return view;
     }

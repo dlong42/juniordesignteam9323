@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private UserData userData;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,6 +98,9 @@ public class MainActivity extends AppCompatActivity {
         return this.userData;
     }
 
+    public void addToObLog(Wildlife wl) {
+        this.getUserData().addToObLog(wl);
+    }
 //    @SuppressWarnings("StatementWithEmptyBody")
 //    @Override
 //    public boolean onNavigationItemSelected(MenuItem item) {
