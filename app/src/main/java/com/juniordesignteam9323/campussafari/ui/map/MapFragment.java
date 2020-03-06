@@ -23,6 +23,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.juniordesignteam9323.campussafari.CSVParse;
 import com.juniordesignteam9323.campussafari.CustomInfoWindowAdapter;
 import com.juniordesignteam9323.campussafari.MainActivity;
@@ -206,10 +209,16 @@ public class MapFragment extends Fragment {
 
     public void addToOb(String name, String scientific) {
         UserData ud = (UserData) getActivity().getIntent().getSerializableExtra("USERDATA");
+        UserData userData = (UserData) (getActivity().getIntent().getSerializableExtra("USERDATA"));
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser user = auth.getCurrentUser();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         Wildlife wild = new Wildlife(name);
+
         wild.setScientificName(scientific);
         ud.addToObLog(new Wildlife(name));
         Log.d("catching 3",  ud.getObLogString());
+        db.collection("userData").document(user.getEmail()).set(userData);
     }
 
     @Override
