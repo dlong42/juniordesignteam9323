@@ -28,7 +28,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.juniordesignteam9323.campussafari.CSVParse;
 import com.juniordesignteam9323.campussafari.CustomInfoWindowAdapter;
-import com.juniordesignteam9323.campussafari.MainActivity;
 import com.juniordesignteam9323.campussafari.R;
 import com.juniordesignteam9323.campussafari.UserData;
 import com.juniordesignteam9323.campussafari.Wildlife;
@@ -38,10 +37,6 @@ import java.util.Random;
 
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
-
-import com.appolica.interactiveinfowindow.InfoWindowManager;
-import com.appolica.interactiveinfowindow.InfoWindow;
-import com.appolica.interactiveinfowindow.fragment.MapInfoWindowFragment;
 
 public class MapFragment extends Fragment {
 
@@ -58,27 +53,34 @@ public class MapFragment extends Fragment {
      * Done by Davis Williams
      * */
     public void setUpMarkers() {
-        CSVParse parser = new CSVParse("observations-64324.csv", getActivity().getApplicationContext());
+        //CSVParse parser = new CSVParse("observations-64324.csv", getActivity().getApplicationContext());
 
         //reads the CSV file to get scientific names, common names,
         // latitudes, longitudes, observation level and image url
-        ArrayList<ArrayList<String>> data = parser.getList(new int[]{36, 37, 23, 24, 10, 13});
+        //ArrayList<ArrayList<String>> data = parser.getList(new int[]{36, 37, 23, 24, 10, 13});
 
-        ArrayList<String> scientificNames = data.get(0);
-        ArrayList<String> commonNames = data.get(1);
-        ArrayList<String> latitudes = data.get(2);
-        ArrayList<String> longitudes = data.get(3);
-        ArrayList<String> urls = data.get(5);
+        //ArrayList<String> scientificNames = data.get(0);
+       // ArrayList<String> commonNames = data.get(1);
+        //ArrayList<String> latitudes = data.get(2);
+        //ArrayList<String> longitudes = data.get(3);
+        //ArrayList<String> urls = data.get(5);
 
 
+        CSVParse parser = new CSVParse("wildlifeDBculled.csv", getActivity().getApplicationContext());
 
+        ArrayList<ArrayList<String>> data = parser.getList(new int[]{3, 4, 5, 6, 7});
+        ArrayList<String> scientificNames = data.get(3);
+        ArrayList<String> commonNames = data.get(4);
+        ArrayList<String> latitudes = data.get(1);
+        ArrayList<String> longitudes = data.get(2);
+        ArrayList<String> urls = data.get(0);
         // Shows the InfoWindow or hides it if it is already opened.
 
 
         for (int i = 2; i < latitudes.size(); i++) {
 
             //checks to make sure the latitude and longitude are valid and that the level is "research"
-            if (!latitudes.get(i).equals("") && !longitudes.get(i).equals("") && data.get(4).get(i).equals("research")) {
+            if (!latitudes.get(i).equals("") && !longitudes.get(i).equals("")) {
                 MarkerOptions tempMark = new MarkerOptions().position(new LatLng(Double.parseDouble(latitudes.get(i)), Double.parseDouble(longitudes.get(i))));
                 tempMark.title(commonNames.get(i));
                 tempMark.snippet(urls.get(i) + ",Level: " + (random.nextInt(10) + 1) + ",Scientific Name: " + scientificNames.get(i));
