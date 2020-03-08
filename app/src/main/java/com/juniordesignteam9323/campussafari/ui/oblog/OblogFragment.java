@@ -1,5 +1,6 @@
 package com.juniordesignteam9323.campussafari.ui.oblog;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.juniordesignteam9323.campussafari.R;
 import com.juniordesignteam9323.campussafari.Wildlife;
+import com.juniordesignteam9323.campussafari.ui.OblogActivity;
 
 import java.util.Comparator;
 
@@ -21,8 +23,10 @@ public class OblogFragment extends Fragment {
 
     private OblogViewModel oblogViewModel;
 
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
         oblogViewModel =
                 ViewModelProviders.of(this).get(OblogViewModel.class);
         View root = inflater.inflate(R.layout.fragment_oblog, container, false);

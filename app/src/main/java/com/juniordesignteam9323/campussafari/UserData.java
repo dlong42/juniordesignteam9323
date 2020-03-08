@@ -10,7 +10,7 @@ public class UserData implements Serializable {
     private int level;
     private String nickname;
     private String avatar;
-    private ArrayList<Wildlife> obLog;
+    private static ArrayList<Wildlife> obLog;
 
     public UserData() {
         this.obLog = new ArrayList<Wildlife>();
@@ -30,7 +30,7 @@ public class UserData implements Serializable {
     public int getLevel() {return this.level;}
     public String getAvatar() {return this.avatar;}
     public String getNickname() {return this.nickname;}
-    public ArrayList<Wildlife> getObLog() {return this.obLog;}
+    public static ArrayList<Wildlife> getObLog() {return obLog;}
 
     public void setPoints(int points) {this.points = points;}
     public void setLevel(int level) {this.level = level;}
@@ -42,6 +42,7 @@ public class UserData implements Serializable {
         if(this.obLog == null) {
             this.obLog = new ArrayList<Wildlife>();
         }
+
         this.obLog.add(toAdd);
     }
 
