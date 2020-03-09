@@ -174,10 +174,22 @@ public class MapFragment extends Fragment {
                 @Override
                 public void onLocationChanged(Location location) {
                     Log.d("Location changed", location.toString());
+
+                    //int i =0; //for testing
                     for (Marker m: markerList) {
+
                         if (Math.abs(m.getPosition().latitude - location.getLatitude()) < 0.001 && Math.abs(m.getPosition().longitude - location.getLongitude()) < 0.001) {
                             m.setVisible(true);
-                            //addToOb(m.getTitle());  //add this available wildlife to the observation log
+
+                            /*for testing purposes, delete later
+                            if (i < 5) {
+                                String[] snippets = m.getSnippet().split(",");
+                                String scientific = snippets[2];
+                                String imageLink = snippets[0];
+                                addToOb(m.getTitle(), scientific, imageLink); //add this available wildlife to the observation log
+                                i++;
+                            }*/
+                            //addToOb(m.getTitle());
                             //m.setAlpha(1);
                         } else {
                             m.setVisible(false);

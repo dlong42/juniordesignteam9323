@@ -13,7 +13,7 @@ public class DataModel {
     Drawable image;
 
 
-    //standardizes the information from Wildlife for the Custom Adapter, used in OblogActivity
+    //standardizes the information from Wildlife for the Custom Adapter, used in OblogFragment
     public DataModel(String nickname, String taxon, String scientificName, String commonName, int id_, Drawable image) {
         this.nickname = nickname;
         this.taxon = taxon;

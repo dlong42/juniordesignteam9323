@@ -6,11 +6,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.juniordesignteam9323.campussafari.DataModel;
 import com.juniordesignteam9323.campussafari.R;
-import com.juniordesignteam9323.campussafari.ui.OblogActivity;
+
 
 import java.util.ArrayList;
 
@@ -20,6 +21,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
+        private CardView cardView;
         TextView textViewNickname;
         TextView textViewTaxon;
         ImageView imageViewIcon;
@@ -42,15 +44,17 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.layout_oblog, parent, false);
 
-        //view.setOnClickListener(OblogActivity.myOnClickListener);
+        view.setOnClickListener(OblogFragment.myOnClickListener);
 
         MyViewHolder myViewHolder = new MyViewHolder(view);
         return myViewHolder;
+        //CardView cv = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_oblog, parent, false);
+        //return new MyViewHolder(cv);
     }
 
     @Override
-    public void onBindViewHolder(final MyViewHolder holder, final int listPosition) {
-
+    public void onBindViewHolder(MyViewHolder holder, int listPosition) {
+        //CardView cardview = holder.cardView;
         TextView textViewNickname = holder.textViewNickname;
         TextView textViewTaxon = holder.textViewTaxon;
         ImageView imageView = holder.imageViewIcon;
