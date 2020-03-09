@@ -1,16 +1,17 @@
 package com.juniordesignteam9323.campussafari;
+import java.io.Serializable;
+
 import java.util.*;
 
-public class Wildlife {
+public class Wildlife implements Serializable {
     private String taxon;
     private String scientificName;
     private String commonName;
     private String level;
     private String points;
 
-    public Wildlife(String commonName) {
-        this.commonName = commonName;
-    }
+    public Wildlife() {this.commonName = null;}
+    public Wildlife(String commonName) {this.commonName = commonName;}
 
     public String getTaxon() {return taxon;}
     public String getScientificName() {return scientificName;}
