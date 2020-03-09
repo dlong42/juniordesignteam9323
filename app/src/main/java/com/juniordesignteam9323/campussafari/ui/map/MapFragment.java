@@ -66,14 +66,17 @@ public class MapFragment extends Fragment {
         //ArrayList<String> urls = data.get(5);
 
 
-        CSVParse parser = new CSVParse("wildlifeDBculled.csv", getActivity().getApplicationContext());
+        CSVParse parser = new CSVParse("wildlifeDB.csv", getActivity().getApplicationContext());
 
-        ArrayList<ArrayList<String>> data = parser.getList(new int[]{3, 4, 5, 6, 7});
-        ArrayList<String> scientificNames = data.get(3);
-        ArrayList<String> commonNames = data.get(4);
-        ArrayList<String> latitudes = data.get(1);
-        ArrayList<String> longitudes = data.get(2);
-        ArrayList<String> urls = data.get(0);
+        ArrayList<ArrayList<String>> data = parser.getList(new int[]{0, 3, 4, 5, 6, 7, 9, 10});
+        ArrayList<String> scientificNames = data.get(4);
+        ArrayList<String> commonNames = data.get(5);
+        ArrayList<String> latitudes = data.get(2);
+        ArrayList<String> longitudes = data.get(3);
+        ArrayList<String> urls = data.get(1);
+        ArrayList<String> id = data.get(0);
+        ArrayList<String> levels = data.get(6);
+        ArrayList<String> points = data.get(7);
         // Shows the InfoWindow or hides it if it is already opened.
 
 
@@ -83,7 +86,7 @@ public class MapFragment extends Fragment {
             if (!latitudes.get(i).equals("") && !longitudes.get(i).equals("")) {
                 MarkerOptions tempMark = new MarkerOptions().position(new LatLng(Double.parseDouble(latitudes.get(i)), Double.parseDouble(longitudes.get(i))));
                 tempMark.title(commonNames.get(i));
-                tempMark.snippet(urls.get(i) + ",Level: " + (random.nextInt(10) + 1) + ",Scientific Name: " + scientificNames.get(i));
+                tempMark.snippet(urls.get(i) + ",Level: " + levels.get(i) + ",Scientific Name: " + scientificNames.get(i));
                 Marker m = googleMap.addMarker(tempMark);
                 if (m != null) {
                     markerList.add(m);
