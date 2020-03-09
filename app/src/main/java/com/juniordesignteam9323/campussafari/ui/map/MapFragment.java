@@ -2,6 +2,7 @@ package com.juniordesignteam9323.campussafari.ui.map;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -31,6 +32,7 @@ import com.juniordesignteam9323.campussafari.CustomInfoWindowAdapter;
 import com.juniordesignteam9323.campussafari.R;
 import com.juniordesignteam9323.campussafari.UserData;
 import com.juniordesignteam9323.campussafari.Wildlife;
+import com.juniordesignteam9323.campussafari.ui.oblog.WildlifeActivity;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -166,7 +168,9 @@ public class MapFragment extends Fragment {
                             Log.d("catching 2", marker.getSnippet());
                             String[] snippets = marker.getSnippet().split(",");
                             String scientific = snippets[2];
-                            addToOb(marker.getTitle(), scientific);
+                            String image_url = snippets[0];
+
+                            addToOb(marker.getTitle(), scientific, image_url);
                         }
                     });
                 }
@@ -212,7 +216,7 @@ public class MapFragment extends Fragment {
         return rootView;
     }
 
-    public void addToOb(String name, String scientific) {
+    public void addToOb(String name, String scientific, String image_url) {
         UserData ud = (UserData) getActivity().getIntent().getSerializableExtra("USERDATA");
         UserData userData = (UserData) (getActivity().getIntent().getSerializableExtra("USERDATA"));
         FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -221,9 +225,14 @@ public class MapFragment extends Fragment {
         Wildlife wild = new Wildlife(name);
 
         wild.setScientificName(scientific);
+        wild.setImage_url(image_url);
         ud.addToObLog(new Wildlife(name));
         Log.d("catching 3",  ud.getObLogString());
         db.collection("userData").document(user.getEmail()).set(userData);
+        // Navigates to WildlifeActivity, passing in the index of the wildlife in Oblog
+        Intent intent = new Intent(getActivity(), WildlifeActivity.class);
+        intent.putExtra("WILDLIFE", wild);
+        startActivity(intent);
     }
 
     @Override
