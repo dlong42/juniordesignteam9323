@@ -1,7 +1,11 @@
 package com.juniordesignteam9323.campussafari.ui.oblog;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -10,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.juniordesignteam9323.campussafari.R;
 import com.juniordesignteam9323.campussafari.Wildlife;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
@@ -28,6 +33,7 @@ public class WildlifeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wildlife);
 
+        // Get wildlife object passed from MapFragment through the intent
         Wildlife wildlife = (Wildlife) getIntent().getSerializableExtra("WILDLIFE");
 
         this.image_url = wildlife.getImage_url();
@@ -36,30 +42,66 @@ public class WildlifeActivity extends AppCompatActivity {
         this.taxon = wildlife.getTaxon();
         this.level = wildlife.getLevel();
         this.points_worth = wildlife.getPoints();
-        ImageView imgView =(ImageView)findViewById(R.id.wildlife_pic);
-        Drawable drawable = LoadImageFromWebOperations(image_url);
-        imgView.setImageDrawable(drawable);
 
+        // Fields yet to be implemented within the app
+        this.wildlife_nickname = "Nicknames have yet to be implemented.";
+        this.fun_fact = "Fun facts have yet to be implemented.";
+
+        // Set the image
+        ImageView imgView =(ImageView)findViewById(R.id.wildlife_pic);
+        Bitmap bitmap = convertPicture(image_url);
+        imgView.setImageBitmap(bitmap);
+
+        // Set text fields appropriately
         TextView common = findViewById(R.id.wildlife_common);
-        common.setText(getTextC(wildlife.getCommonName()));
+        common.setText(getTextC(common_name));
 
         TextView scientific = findViewById(R.id.wildlife_scientific);
-        scientific.setText(getTextS(wildlife.getScientificName()));
+        scientific.setText(getTextS(scientific_name));
+        // These have yet to be filled by csv parser
+        TextView taxon = findViewById(R.id.wildlife_taxon);
+        taxon.setText(getTextT(this.taxon));
+
+        TextView level = findViewById(R.id.wildlife_level);
+        level.setText(getTextL(this.level));
+
+        TextView points = findViewById(R.id.wildlife_points);
+        points.setText(getTextP(this.points_worth));
+
+        TextView nn = findViewById(R.id.wildlife_nname);
+        nn.setText(getTextN(this.wildlife_nickname));
+
+        TextView ff = findViewById(R.id.wildlife_ff);
+        ff.setText(getTextF(this.fun_fact));
+
+
     }
 
+    // Getters that return text Strings
     public String getTextC(String text) {return "Common Name: " + text;}
     public String getTextS(String text) {return "Scientific Name: " + text;}
+    public String getTextT(String text) {return "Taxon: " + text;}
+    public String getTextL(String text) {return "Level: " + text;}
+    public String getTextP(String text) {return "Points worth: " + text;}
+    public String getTextN(String text) {return "Nickname: " + text;}
+    public String getTextF(String text) {return "Fun Fact: " + text;}
 
-    private Drawable LoadImageFromWebOperations(String url)
-    {
-        try{
-            InputStream is = (InputStream) new URL(url).getContent();
-            Drawable d = Drawable.createFromStream(is, "src name");
-            return d;
-        }catch (Exception e) {
-            System.out.println("Exc="+e);
-            return null;
+
+    // Convert an image url into a bitmap -- necessary to set an ImageView
+    private Bitmap convertPicture(String url_given) {
+        String drawableRes = url_given;
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        Bitmap bitmap;
+        try {
+            URL url = new URL(drawableRes);
+            bitmap = BitmapFactory.decodeStream((InputStream)url.getContent());
+        } catch (IOException e) {
+            Log.e("Error converting pic", e.getMessage());
+            bitmap = null;
         }
+        return bitmap;
+
     }
 
 }

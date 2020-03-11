@@ -4,35 +4,106 @@
     android:id="@+id/wildlife"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:contentDescription="@string/wildlife_level"
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/wildlife_scientific"
-        android:layout_width="241dp"
-        android:layout_height="47dp"
+        android:id="@+id/wildlife_taxon"
+        android:layout_width="119dp"
+        android:layout_height="54dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="37dp"
-        android:layout_marginTop="361dp"
-        android:text="@string/wildlife_sname" />
+        android:layout_marginStart="39dp"
+        android:layout_marginTop="548dp"
+        android:text="@string/wildlife_taxon"
+        android:textColor="#000000"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/wildlife_scientific"
+        android:layout_width="342dp"
+        android:layout_height="55dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="41dp"
+        android:layout_marginTop="491dp"
+        android:text="@string/wildlife_sname"
+        android:textColor="#000000"
+        android:textSize="15sp" />
 
     <ImageView
         android:id="@+id/wildlife_pic"
-        android:layout_width="match_parent"
-        android:layout_height="264dp"
+        android:layout_width="320dp"
+        android:layout_height="331dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="43dp"
+        android:layout_marginTop="55dp"
         android:contentDescription="@string/wildlife_pic"
         app:srcCompat="@drawable/avatar_bear" />
 
     <TextView
         android:id="@+id/wildlife_common"
-        android:layout_width="237dp"
-        android:layout_height="37dp"
+        android:layout_width="348dp"
+        android:layout_height="50dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="309dp"
-        android:text="@string/wildlife_cname" />
+        android:layout_marginStart="41dp"
+        android:layout_marginTop="430dp"
+        android:text="@string/wildlife_cname"
+        android:textColor="#000000"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/wildlife_level"
+        android:layout_width="133dp"
+        android:layout_height="41dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="387dp"
+        android:text="@string/wildlife_level"
+        android:textColor="#000000"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/wildlife_points"
+        android:layout_width="129dp"
+        android:layout_height="38dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="387dp"
+        android:layout_marginEnd="14dp"
+        android:text="@string/wildlife_points"
+        android:textColor="#000000"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/wildlife_ff"
+        android:layout_width="354dp"
+        android:layout_height="103dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="22dp"
+        android:layout_marginBottom="18dp"
+        android:text="@string/wildlife_ff"
+        android:textColor="#000000"
+        android:textSize="15sp"/>
+
+    <TextView
+        android:id="@+id/wildlife_nname"
+        android:layout_width="334dp"
+        android:layout_height="48dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="4dp"
+        android:textColor="#000000"
+        android:textSize="15sp"
+        android:text="@string/wildlife_nname" />
 
 </RelativeLayout>

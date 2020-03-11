@@ -90,6 +90,7 @@ public class MapFragment extends Fragment {
                 tempMark.title(commonNames.get(i));
                 tempMark.snippet(urls.get(i) + ",Level: " + levels.get(i) + ",Scientific Name: " + scientificNames.get(i));
                 Marker m = googleMap.addMarker(tempMark);
+
                 if (m != null) {
                     markerList.add(m);
                 }
