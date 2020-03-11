@@ -170,8 +170,9 @@ public class MapFragment extends Fragment {
                             String[] snippets = marker.getSnippet().split(",");
                             String scientific = snippets[2];
                             String image_url = snippets[0];
+                            String level = snippets[1];
 
-                            addToOb(marker.getTitle(), scientific, image_url);
+                            addToOb(marker.getTitle(), scientific, image_url, level);
                         }
                     });
                 }
@@ -217,7 +218,7 @@ public class MapFragment extends Fragment {
         return rootView;
     }
 
-    public void addToOb(String name, String scientific, String image_url) {
+    public void addToOb(String name, String scientific, String image_url, String level) {
         UserData ud = (UserData) getActivity().getIntent().getSerializableExtra("USERDATA");
         UserData userData = (UserData) (getActivity().getIntent().getSerializableExtra("USERDATA"));
         FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -227,6 +228,7 @@ public class MapFragment extends Fragment {
 
         wild.setScientificName(scientific);
         wild.setImage_url(image_url);
+        wild.setLevel(level);
         ud.addToObLog(new Wildlife(name));
         Log.d("catching 3",  ud.getObLogString());
         db.collection("userData").document(user.getEmail()).set(userData);
