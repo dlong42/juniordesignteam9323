@@ -55,6 +55,11 @@ public class MapFragment extends Fragment {
      * Done by Davis Williams
      * */
     public void setUpMarkers() {
+        UserData ud = (UserData) getActivity().getIntent().getSerializableExtra("USERDATA");
+        UserData userData = (UserData) (getActivity().getIntent().getSerializableExtra("USERDATA"));
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser user = auth.getCurrentUser();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         //CSVParse parser = new CSVParse("observations-64324.csv", getActivity().getApplicationContext());
 
         //reads the CSV file to get scientific names, common names,
@@ -92,8 +97,9 @@ public class MapFragment extends Fragment {
                 double lon = Double.parseDouble(longitudes.get(i));
                 int id = Integer.parseInt(ids.get(i));
                 Wildlife tempWildlife = new Wildlife(commonNames.get(i), scientificNames.get(i), taxons.get(i), levels.get(i), points.get(i), urls.get(i), lat, lon, id);
-                //this.addToObInit(tempWildlife);
+                tempWildlife.setCaught(ud.isCaught(tempWildlife));
                 MarkerOptions tempMark = new MarkerOptions().position(new LatLng(lat, lon));
+
                 tempMark.title(tempWildlife.getCommonName());
                 tempMark.snippet(tempWildlife.getImage_url() + ",Level: " + tempWildlife.getLevel());
                 Marker m = googleMap.addMarker(tempMark);
@@ -107,7 +113,10 @@ public class MapFragment extends Fragment {
 
         }
 
-
+//        db.collection("userData").document(user.getEmail()).set(userData);
+//        // Navigates to WildlifeActivity, passing in the index of the wildlife in Oblog
+//        Intent intent = new Intent(getActivity(), WildlifeActivity.class);
+//        startActivity(intent);
     }
 
 
@@ -172,13 +181,14 @@ public class MapFragment extends Fragment {
 
                         @Override
                         public void onInfoWindowClick(Marker marker) {
-                            Log.d("catching 1", marker.getTitle());
+                            Log.d("catching 1", "trying to catch " + marker.getTitle() + " " + ((Wildlife)marker.getTag()).getId());
                             Log.d("catching 2", marker.getSnippet());
                             String[] snippets = marker.getSnippet().split(",");
                             String image_url = snippets[0];
 
+                            Log.d("catching 3", "previously caught " + ((Wildlife) marker.getTag()).getCaught() + "");
                             addToObInit((Wildlife) marker.getTag());
-                            Log.d("catching 4", ((Wildlife) marker.getTag()).getCaught() + "");
+                            Log.d("catching 5", ((Wildlife) marker.getTag()).getCaught() + "");
                         }
                     });
                 }
@@ -251,8 +261,10 @@ public class MapFragment extends Fragment {
 //      wild.setImage_url(image_url);
         if(toAdd.catchWildlife()) {
             ud.addToObLog(toAdd);
+        } else {
+            Log.d("catching 4a",  "already caught");
         }
-        Log.d("catching 3",  ud.getObLogString());
+        Log.d("catching 4b",  ud.getObLogString());
         db.collection("userData").document(user.getEmail()).set(userData);
         // Navigates to WildlifeActivity, passing in the index of the wildlife in Oblog
         Intent intent = new Intent(getActivity(), WildlifeActivity.class);

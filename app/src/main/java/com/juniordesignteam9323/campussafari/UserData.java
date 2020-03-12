@@ -47,7 +47,7 @@ public class UserData implements Serializable {
     }
 
     public String getObLogString(){
-        String toReturn = "";
+        String toReturn = "\n";
         if(this.obLog != null){
             for(Wildlife w : this.obLog){
                 toReturn += "\n" + w.getCommonName() + " " + w.getId() + " " + w.getCaught();
@@ -68,4 +68,12 @@ public class UserData implements Serializable {
         return (this.admin == other.admin && this.email.equals(other.email));
     }
 
+    public boolean isCaught(Wildlife w) {
+        for(Wildlife wild : obLog) {
+            if(w.equals(wild)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
