@@ -19,6 +19,7 @@ import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
@@ -45,6 +46,7 @@ public class MapFragment extends Fragment {
 
     MapView mMapView;
     private GoogleMap googleMap;
+    private UserData userData;
     private Random random;
     private ArrayList<Marker> markerList;
     private LocationManager locationManager;
@@ -102,6 +104,12 @@ public class MapFragment extends Fragment {
 
                 tempMark.title(tempWildlife.getCommonName());
                 tempMark.snippet(tempWildlife.getImage_url() + ",Level: " + tempWildlife.getLevel());
+
+                if (tempWildlife.getCaught()) {
+                    tempMark.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
+                } else {
+                    tempMark.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                }
                 Marker m = googleMap.addMarker(tempMark);
                 m.setTag(tempWildlife);
                 if (m != null) {
@@ -126,6 +134,7 @@ public class MapFragment extends Fragment {
         View rootView = null;
         System.out.println("starting stuff....");
         markerList = new ArrayList<>();
+        final UserData userData = (UserData) (getActivity().getIntent().getSerializableExtra("USERDATA"));
 
 
 
@@ -189,6 +198,9 @@ public class MapFragment extends Fragment {
                             Log.d("catching 3", "previously caught " + ((Wildlife) marker.getTag()).getCaught() + "");
                             addToObInit((Wildlife) marker.getTag());
                             Log.d("catching 5", ((Wildlife) marker.getTag()).getCaught() + "");
+                            Log.d("LEveL: ", ((Wildlife) marker.getTag()).getLevel());
+                            Log.d("User level: ", "" + userData.getLevel());
+                            marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
                         }
                     });
                 }
@@ -201,7 +213,9 @@ public class MapFragment extends Fragment {
                 public void onLocationChanged(Location location) {
                     Log.d("Location changed", location.toString());
                     for (Marker m: markerList) {
-                        if (Math.abs(m.getPosition().latitude - location.getLatitude()) < 0.001 && Math.abs(m.getPosition().longitude - location.getLongitude()) < 0.001) {
+                        if (Math.abs(m.getPosition().latitude - location.getLatitude()) < 0.001
+                                && Math.abs(m.getPosition().longitude - location.getLongitude()) < 0.001
+                                && Integer.parseInt(((Wildlife) m.getTag()).getLevel()) <= userData.getLevel()) {
                             m.setVisible(true);
                             //addToOb(m.getTitle());  //add this available wildlife to the observation log
                             //m.setAlpha(1);
