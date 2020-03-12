@@ -3,6 +3,7 @@ package com.juniordesignteam9323.campussafari;
 import java.io.Serializable;
 import java.util.*;
 
+
 public class UserData implements Serializable {
     private boolean admin;
     private String email;
@@ -49,7 +50,7 @@ public class UserData implements Serializable {
         String toReturn = "";
         if(this.obLog != null){
             for(Wildlife w : this.obLog){
-                toReturn += "\n" + w.getCommonName();
+                toReturn += "\n" + w.getCommonName() + " " + w.getId() + " " + w.getCaught();
             }
             return toReturn;
         }
