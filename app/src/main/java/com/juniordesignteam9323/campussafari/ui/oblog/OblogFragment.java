@@ -77,6 +77,18 @@ public class OblogFragment extends Fragment {
         /*makes a datamodel for each animal observed, then adds to data Arraylist which is sent to
         adapter to put into Observation Log's Recycler view*/
         for (int i = 0; i < observed.size(); i++) {
+            if (observed.get(i).getCommonName() == null){
+                System.out.println("Common Name Null");
+            }
+            if (observed.get(i).getTaxon() == null){
+                System.out.println("Taxon Null");
+            }
+            if (observed.get(i).getScientificName() == null){
+                System.out.println("Sci Name Null");
+            }
+            if (observed.get(i).getUrl() == null) {
+                System.out.println("URL Null");
+            }
             Drawable d = urlConverter(observed.get(i).getUrl());
             data.add(new DataModel(
                     observed.get(i).getCommonName(),
@@ -86,6 +98,7 @@ public class OblogFragment extends Fragment {
                     i,
                     d
             ));
+            System.out.println("Data Model:" + data.get(i).getCommonName()+ data.get(i).getTaxon() + data.get(i).getScientificName());
         }
         adapter = new CustomAdapter(data);
         recyclerView.setAdapter(adapter);

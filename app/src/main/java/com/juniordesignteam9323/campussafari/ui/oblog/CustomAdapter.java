@@ -44,7 +44,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.layout_oblog, parent, false);
 
-        view.setOnClickListener(OblogFragment.myOnClickListener);
+        //view.setOnClickListener(OblogFragment.myOnClickListener);
 
         MyViewHolder myViewHolder = new MyViewHolder(view);
         return myViewHolder;
