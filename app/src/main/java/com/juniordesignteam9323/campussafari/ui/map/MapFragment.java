@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -25,6 +24,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -104,13 +104,12 @@ public class MapFragment extends Fragment {
 
                 tempMark.title(tempWildlife.getCommonName());
                 tempMark.snippet(tempWildlife.getImage_url() + ",Level: " + tempWildlife.getLevel());
+                tempMark.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
 
-                if (tempWildlife.getCaught()) {
-                    tempMark.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
-                } else {
-                    tempMark.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
-                }
                 Marker m = googleMap.addMarker(tempMark);
+                if (tempWildlife.getCaught()) {
+                    m.setAlpha(.25f);
+                }
                 m.setTag(tempWildlife);
                 if (m != null) {
                     markerList.add(m);
@@ -158,6 +157,9 @@ public class MapFragment extends Fragment {
                 e.printStackTrace();
             }
 
+            final FloatingActionButton catch_button = rootView.findViewById(R.id.catch_button);
+            catch_button.hide();
+
             random = new Random();
 
             mMapView.getMapAsync(new OnMapReadyCallback() {
@@ -186,21 +188,36 @@ public class MapFragment extends Fragment {
                     CameraPosition cameraPosition = new CameraPosition.Builder().target(new LatLng(33.7766, -84.3982)).zoom(12).build();
                     googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
-                    googleMap.setOnInfoWindowClickListener(new OnInfoWindowClickListener() {
-
+                    googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                         @Override
-                        public void onInfoWindowClick(Marker marker) {
-                            Log.d("catching 1", "trying to catch " + marker.getTitle() + " " + ((Wildlife)marker.getTag()).getId());
-                            Log.d("catching 2", marker.getSnippet());
-                            String[] snippets = marker.getSnippet().split(",");
-                            String image_url = snippets[0];
+                        public boolean onMarkerClick(Marker marker) {
+                            final Marker mapMarker = marker;
+                            catch_button.show();
+                            catch_button.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Log.d("catching 1", "trying to catch " + mapMarker.getTitle() + " " + ((Wildlife)mapMarker.getTag()).getId());
+                                    Log.d("catching 2", mapMarker.getSnippet());
+                                    String[] snippets = mapMarker.getSnippet().split(",");
+                                    String image_url = snippets[0];
 
-                            Log.d("catching 3", "previously caught " + ((Wildlife) marker.getTag()).getCaught() + "");
-                            addToObInit((Wildlife) marker.getTag());
-                            Log.d("catching 5", ((Wildlife) marker.getTag()).getCaught() + "");
-                            Log.d("LEveL: ", ((Wildlife) marker.getTag()).getLevel());
-                            Log.d("User level: ", "" + userData.getLevel());
-                            marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
+                                    Log.d("catching 3", "previously caught " + ((Wildlife) mapMarker.getTag()).getCaught() + "");
+                                    addToObInit((Wildlife) mapMarker.getTag());
+                                    Log.d("catching 5", ((Wildlife) mapMarker.getTag()).getCaught() + "");
+                                    Log.d("LEveL: ", ((Wildlife) mapMarker.getTag()).getLevel());
+                                    Log.d("User level: ", "" + userData.getLevel());
+                                    mapMarker.setAlpha(.25f);
+                                    catch_button.hide();
+                                }
+                            });
+                            return false;
+                        }
+                    });
+
+                    googleMap.setOnInfoWindowCloseListener(new GoogleMap.OnInfoWindowCloseListener() {
+                        @Override
+                        public void onInfoWindowClose(Marker marker) {
+                            catch_button.hide();
                         }
                     });
                 }
@@ -242,6 +259,16 @@ public class MapFragment extends Fragment {
                     Log.d("Provider disabled", s);
                 }
             });
+
+
+
+
+            /**catch_button.setOnClickListener(new View.OnClickListener() {
+                 @Override
+                 public void onClick(View view) {
+                    Log.d("button", "button press");
+                 }
+            });*/
         }
 
 
@@ -275,6 +302,7 @@ public class MapFragment extends Fragment {
 //      wild.setImage_url(image_url);
         if(toAdd.catchWildlife()) {
             ud.addToObLog(toAdd);
+            userData.updatePoints(Integer.parseInt(toAdd.getPoints()));
         } else {
             Log.d("catching 4a",  "already caught");
         }
