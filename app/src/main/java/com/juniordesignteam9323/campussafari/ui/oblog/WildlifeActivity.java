@@ -66,7 +66,7 @@ public class WildlifeActivity extends AppCompatActivity {
         level.setText(getTextL(this.level));
 
         TextView points = findViewById(R.id.wildlife_points);
-        points.setText(getTextP(this.points_worth));
+        points.setText(getTextP(this.points_worth)+"");
 
         TextView nn = findViewById(R.id.wildlife_nname);
         nn.setText(getTextN(this.wildlife_nickname));
@@ -81,8 +81,8 @@ public class WildlifeActivity extends AppCompatActivity {
     public String getTextC(String text) {return "Common Name: " + text;}
     public String getTextS(String text) {return "Scientific Name: " + text;}
     public String getTextT(String text) {return "Taxon: " + text;}
-    public String getTextL(String text) {return "Level: " + text;}
-    public String getTextP(String text) {return "Points worth: " + text;}
+    public String getTextL(String level) {return "Level: " + level;}
+    public String getTextP(String points) {return "Points worth: " + points;}
     public String getTextN(String text) {return "Nickname: " + text;}
     public String getTextF(String text) {return "Fun Fact: " + text;}
 

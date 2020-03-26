@@ -67,7 +67,6 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
 
         //initializes view for the InfoWindow
         TextView name = view.findViewById(R.id.name);
-        TextView scientific = view.findViewById(R.id.scientific);
         TextView level = view.findViewById(R.id.level);
         ImageView image = view.findViewById(R.id.pic);
         //Button button = view.findViewById(R.id.button_id);
@@ -87,7 +86,6 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
         //the snippet is in the format of "url, level"
         String[] snippets = marker.getSnippet().split(",");
         level.setText(snippets[1]);
-        scientific.setText(snippets[2]);
         image.setImageDrawable(this.loadImageFromUrl(snippets[0]));
         return view;
     }

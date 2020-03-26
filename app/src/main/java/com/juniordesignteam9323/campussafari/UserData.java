@@ -3,6 +3,7 @@ package com.juniordesignteam9323.campussafari;
 import java.io.Serializable;
 import java.util.*;
 
+
 public class UserData implements Serializable {
     private boolean admin;
     private String email;
@@ -46,10 +47,10 @@ public class UserData implements Serializable {
     }
 
     public String getObLogString(){
-        String toReturn = "";
+        String toReturn = "\n";
         if(this.obLog != null){
             for(Wildlife w : this.obLog){
-                toReturn += "\n" + w.getCommonName();
+                toReturn += "\n" + w.getCommonName() + " " + w.getId() + " " + w.getCaught();
             }
             return toReturn;
         }
@@ -67,4 +68,26 @@ public class UserData implements Serializable {
         return (this.admin == other.admin && this.email.equals(other.email));
     }
 
+    public boolean isCaught(Wildlife w) {
+        for(Wildlife wild : obLog) {
+            if(w.equals(wild)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void updatePoints(int newPoints) {
+        this.points += newPoints;
+
+        if (this.points >= 300 && this.level < 2) {
+            this.level = 2;
+        } else if (this.points >= 900 && this.level < 3) {
+            this.level = 3;
+        } else if (this.points >= 1800 && this.level < 4) {
+            this.level = 4;
+        } else if (this.points >= 3600 && this.level == 5) {
+            this.level = 5;
+        }
+    }
 }
