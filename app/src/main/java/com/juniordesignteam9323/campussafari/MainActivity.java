@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -78,6 +79,15 @@ public class MainActivity extends AppCompatActivity {
         } else if (avatarId.equals("raccoon")) {
             avatar.setImageResource(R.drawable.avatar_raccoon);
         }
+
+        // Sets the info on the navbar header to the user's current nickname, points, and level
+        TextView nicknameView = hView.findViewById(R.id.nickname);
+        TextView levelView = hView.findViewById(R.id.level);
+        TextView pointsView = hView.findViewById(R.id.points);
+
+        nicknameView.setText(userData.getNickname());
+        levelView.setText("Level: " + userData.getLevel());
+        pointsView.setText("Points: " + userData.getPoints());
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
