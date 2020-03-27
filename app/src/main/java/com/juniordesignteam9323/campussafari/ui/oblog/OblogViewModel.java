@@ -13,9 +13,16 @@ public class OblogViewModel extends ViewModel {
     public OblogViewModel() {
         mText = new MutableLiveData<>();
 
-        if (UserData.getObLog().size() == 0){
+        int numCaught = 0;
+        for (int i = 0; i < UserData.getObLog().size(); i++){
+            if (UserData.getObLog().get(i).getCaught()){
+                numCaught++;
+            }
+        }
+        if (numCaught == 0){
             mText.setValue("You have no observations in your log.");
         }
+
     }
 
     public LiveData<String> getText() {

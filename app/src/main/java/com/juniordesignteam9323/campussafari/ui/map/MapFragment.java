@@ -204,7 +204,7 @@ public class MapFragment extends Fragment {
                                     Log.d("catching 3", "previously caught " + ((Wildlife) mapMarker.getTag()).getCaught() + "");
                                     addToObInit((Wildlife) mapMarker.getTag());
                                     Log.d("catching 5", ((Wildlife) mapMarker.getTag()).getCaught() + "");
-                                    Log.d("LEveL: ", ((Wildlife) mapMarker.getTag()).getLevel());
+                                    Log.d("LeveL: ", ((Wildlife) mapMarker.getTag()).getLevel());
                                     Log.d("User level: ", "" + userData.getLevel());
                                     mapMarker.setAlpha(.25f);
                                     catch_button.hide();

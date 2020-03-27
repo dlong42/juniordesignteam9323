@@ -33,6 +33,7 @@ public class UserData implements Serializable {
     public String getNickname() {return this.nickname;}
     public static ArrayList<Wildlife> getObLog() {return obLog;}
 
+
     public void setPoints(int points) {this.points = points;}
     public void setLevel(int level) {this.level = level;}
     public void setNickname(String nickname) {this.nickname = nickname;}
