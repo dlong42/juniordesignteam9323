@@ -21,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private UserData userData;
+    private TextView levelView;
+    private TextView pointsView;
 
 
     @Override
@@ -77,8 +79,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Sets the info on the navbar header to the user's current nickname, points, and level
         TextView nicknameView = hView.findViewById(R.id.nickname);
-        TextView levelView = hView.findViewById(R.id.level);
-        TextView pointsView = hView.findViewById(R.id.points);
+        levelView = hView.findViewById(R.id.level);
+        pointsView = hView.findViewById(R.id.points);
 
         nicknameView.setText(userData.getNickname());
         levelView.setText("Level: " + userData.getLevel());
@@ -139,5 +141,21 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    public TextView getLevelView() {
+        return levelView;
+    }
+
+    public TextView getPointsView() {
+        return pointsView;
+    }
+
+    public void setLevelView(TextView levelView) {
+        this.levelView = levelView;
+    }
+
+    public void setPointsView(TextView pointsView) {
+        this.pointsView = pointsView;
     }
 }

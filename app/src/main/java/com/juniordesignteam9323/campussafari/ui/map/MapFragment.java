@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -30,6 +31,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.juniordesignteam9323.campussafari.CSVParse;
 import com.juniordesignteam9323.campussafari.CustomInfoWindowAdapter;
+import com.juniordesignteam9323.campussafari.MainActivity;
 import com.juniordesignteam9323.campussafari.R;
 import com.juniordesignteam9323.campussafari.UserData;
 import com.juniordesignteam9323.campussafari.Wildlife;
@@ -306,6 +308,16 @@ public class MapFragment extends Fragment {
         } else {
             Log.d("catching 4a",  "already caught");
         }
+        MainActivity main = ((MainActivity) getActivity());
+
+        TextView levelView = main.getLevelView();
+        TextView pointsView = main.getPointsView();
+        levelView.setText("Level: " + userData.getLevel());
+        pointsView.setText("Points: " + userData.getPoints());
+
+        main.setLevelView(levelView);
+        main.setPointsView(pointsView);
+
         Log.d("catching 4b",  ud.getObLogString());
         db.collection("userData").document(user.getEmail()).set(userData);
         // Navigates to WildlifeActivity, passing in the index of the wildlife in Oblog
