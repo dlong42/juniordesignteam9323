@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -31,6 +32,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.juniordesignteam9323.campussafari.CSVParse;
 import com.juniordesignteam9323.campussafari.CustomInfoWindowAdapter;
+import com.juniordesignteam9323.campussafari.LevelUpDialog;
 import com.juniordesignteam9323.campussafari.MainActivity;
 import com.juniordesignteam9323.campussafari.R;
 import com.juniordesignteam9323.campussafari.UserData;
@@ -41,6 +43,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 public class MapFragment extends Fragment {
@@ -302,9 +305,12 @@ public class MapFragment extends Fragment {
 //      Wildlife wild = new Wildlife(name);
 //      wild.setScientificName(scientific);
 //      wild.setImage_url(image_url);
+        boolean levelUpdate = false;
         if(toAdd.catchWildlife()) {
             ud.addToObLog(toAdd);
-            userData.updatePoints(Integer.parseInt(toAdd.getPoints()));
+            DialogFragment levelUp = new LevelUpDialog();
+            levelUp.show(getFragmentManager(), "levelUp");
+            levelUpdate = userData.updatePoints(Integer.parseInt(toAdd.getPoints()));
         } else {
             Log.d("catching 4a",  "already caught");
         }
@@ -312,11 +318,17 @@ public class MapFragment extends Fragment {
 
         TextView levelView = main.getLevelView();
         TextView pointsView = main.getPointsView();
+        ProgressBar xpBar = main.getXpBar();
         levelView.setText("Level: " + userData.getLevel());
-        pointsView.setText("Points: " + userData.getPoints());
+        pointsView.setText("Points: " + userData.getPoints() + "/" + UserData.levelThreshold(userData.getLevel()));
+        if (levelUpdate) {
+            xpBar.setMax(UserData.levelThreshold(userData.getLevel()));
+        }
+        xpBar.setProgress(userData.getPoints());
 
         main.setLevelView(levelView);
         main.setPointsView(pointsView);
+        main.setXpBar(xpBar);
 
         Log.d("catching 4b",  ud.getObLogString());
         db.collection("userData").document(user.getEmail()).set(userData);
