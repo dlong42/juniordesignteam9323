@@ -198,7 +198,7 @@ public class MapFragment extends Fragment {
                             Log.d("catching 3", "previously caught " + ((Wildlife) marker.getTag()).getCaught() + "");
                             addToObInit((Wildlife) marker.getTag());
                             Log.d("catching 5", ((Wildlife) marker.getTag()).getCaught() + "");
-                            Log.d("LEveL: ", ((Wildlife) marker.getTag()).getLevel());
+                            Log.d("LeveL: ", ((Wildlife) marker.getTag()).getLevel());
                             Log.d("User level: ", "" + userData.getLevel());
                             marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
                         }
@@ -263,7 +263,8 @@ public class MapFragment extends Fragment {
 //        startActivity(intent);
 //    }
 
-    //adds all wildlife to the observation log initially, then when they are actually logged their caught variable changes
+    //all marker/pins have a Wildlife object associated with them, when the button is clicked
+    //the wildlife is then attempted to add to the user data's wildlife observation log
     public void addToObInit(Wildlife toAdd) {
         UserData ud = (UserData) getActivity().getIntent().getSerializableExtra("USERDATA");
         UserData userData = (UserData) (getActivity().getIntent().getSerializableExtra("USERDATA"));
@@ -275,6 +276,7 @@ public class MapFragment extends Fragment {
 //      wild.setImage_url(image_url);
         if(toAdd.catchWildlife()) {
             ud.addToObLog(toAdd);
+            ud.achievementCheck(toAdd);
         } else {
             Log.d("catching 4a",  "already caught");
         }
