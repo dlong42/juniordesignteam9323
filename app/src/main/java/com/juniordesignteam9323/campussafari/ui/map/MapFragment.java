@@ -206,7 +206,7 @@ public class MapFragment extends Fragment {
                                     Log.d("catching 3", "previously caught " + ((Wildlife) mapMarker.getTag()).getCaught() + "");
                                     addToObInit((Wildlife) mapMarker.getTag());
                                     Log.d("catching 5", ((Wildlife) mapMarker.getTag()).getCaught() + "");
-                                    Log.d("LEveL: ", ((Wildlife) mapMarker.getTag()).getLevel());
+                                    Log.d("Level: ", ((Wildlife) mapMarker.getTag()).getLevel());
                                     Log.d("User level: ", "" + userData.getLevel());
                                     mapMarker.setAlpha(.25f);
                                     catch_button.hide();
@@ -294,7 +294,7 @@ public class MapFragment extends Fragment {
 
     //adds all wildlife to the observation log initially, then when they are actually logged their caught variable changes
     public void addToObInit(Wildlife toAdd) {
-        UserData ud = (UserData) getActivity().getIntent().getSerializableExtra("USERDATA");
+        //UserData ud = (UserData) getActivity().getIntent().getSerializableExtra("USERDATA");
         UserData userData = (UserData) (getActivity().getIntent().getSerializableExtra("USERDATA"));
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
@@ -303,12 +303,15 @@ public class MapFragment extends Fragment {
 //      wild.setScientificName(scientific);
 //      wild.setImage_url(image_url);
         if(toAdd.catchWildlife()) {
-            ud.addToObLog(toAdd);
+            userData.addToObLog(toAdd);
             userData.updatePoints(Integer.parseInt(toAdd.getPoints()));
+            userData.achievementCheck(toAdd);
         } else {
             Log.d("catching 4a",  "already caught");
         }
+        Log.d("null debug", "before main activity");
         MainActivity main = ((MainActivity) getActivity());
+        Log.d("null debug", "after main activity");
 
         TextView levelView = main.getLevelView();
         TextView pointsView = main.getPointsView();
@@ -318,7 +321,7 @@ public class MapFragment extends Fragment {
         main.setLevelView(levelView);
         main.setPointsView(pointsView);
 
-        Log.d("catching 4b",  ud.getObLogString());
+        Log.d("catching 4b",  userData.getObLogString());
         db.collection("userData").document(user.getEmail()).set(userData);
         // Navigates to WildlifeActivity, passing in the index of the wildlife in Oblog
         Intent intent = new Intent(getActivity(), WildlifeActivity.class);

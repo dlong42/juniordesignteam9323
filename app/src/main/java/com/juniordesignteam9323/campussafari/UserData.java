@@ -16,12 +16,14 @@ public class UserData implements Serializable {
 
     public UserData() {
         this.obLog = new ArrayList<Wildlife>();
+        this.level = 1;
     }
 
     public UserData(boolean admin, String email) {
         this.admin = admin;
         this.email = email;
         this.obLog = new ArrayList<Wildlife>();
+        this.level = 1;
     }
 
     public boolean getAdmin() {
