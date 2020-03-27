@@ -46,4 +46,15 @@
     <string name="pcreate_nicknamecreate">Choose a nickname</string>
     <string name="pcreate_finishbutton">Finish</string>
     <string name="pcreate_avatar">Choose your avatar</string>
+
+    <!-- Strings used in WildlifeActivity & xml-->
+    <string name="wildlife_pic">Wildlife Image</string>
+    <string name="wildlife_cname">Common Name</string>
+    <string name="wildlife_sname">Scientific Name</string>
+    <string name="wildlife_taxon">Taxon</string>
+    <string name="wildlife_level">Level</string>
+    <string name="wildlife_points">Points</string>
+    <string name="wildlife_nname">Nickname</string>
+    <string name="wildlife_ff">Fun Fact</string>
+
 </resources>

@@ -2,6 +2,7 @@ package com.juniordesignteam9323.campussafari.ui.map;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -14,24 +15,25 @@ import android.view.ViewGroup;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.juniordesignteam9323.campussafari.CSVParse;
 import com.juniordesignteam9323.campussafari.CustomInfoWindowAdapter;
-import com.juniordesignteam9323.campussafari.MainActivity;
 import com.juniordesignteam9323.campussafari.R;
 import com.juniordesignteam9323.campussafari.UserData;
 import com.juniordesignteam9323.campussafari.Wildlife;
+import com.juniordesignteam9323.campussafari.ui.oblog.WildlifeActivity;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -39,15 +41,12 @@ import java.util.Random;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
-import com.appolica.interactiveinfowindow.InfoWindowManager;
-import com.appolica.interactiveinfowindow.InfoWindow;
-import com.appolica.interactiveinfowindow.fragment.MapInfoWindowFragment;
-
 public class MapFragment extends Fragment {
 
 
     MapView mMapView;
     private GoogleMap googleMap;
+    private UserData userData;
     private Random random;
     private ArrayList<Marker> markerList;
     private LocationManager locationManager;
@@ -58,19 +57,36 @@ public class MapFragment extends Fragment {
      * Done by Davis Williams
      * */
     public void setUpMarkers() {
-        CSVParse parser = new CSVParse("observations-64324.csv", getActivity().getApplicationContext());
+        UserData ud = (UserData) getActivity().getIntent().getSerializableExtra("USERDATA");
+        UserData userData = (UserData) (getActivity().getIntent().getSerializableExtra("USERDATA"));
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser user = auth.getCurrentUser();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        //CSVParse parser = new CSVParse("observations-64324.csv", getActivity().getApplicationContext());
 
         //reads the CSV file to get scientific names, common names,
         // latitudes, longitudes, observation level and image url
-        ArrayList<ArrayList<String>> data = parser.getList(new int[]{36, 37, 23, 24, 10, 13});
+        //ArrayList<ArrayList<String>> data = parser.getList(new int[]{36, 37, 23, 24, 10, 13});
 
-        ArrayList<String> scientificNames = data.get(0);
-        ArrayList<String> commonNames = data.get(1);
+        //ArrayList<String> scientificNames = data.get(0);
+       // ArrayList<String> commonNames = data.get(1);
+        //ArrayList<String> latitudes = data.get(2);
+        //ArrayList<String> longitudes = data.get(3);
+        //ArrayList<String> urls = data.get(5);
+
+
+        CSVParse parser = new CSVParse("wildlifeDB.csv", getActivity().getApplicationContext());
+
+        ArrayList<ArrayList<String>> data = parser.getList(new int[]{0, 3, 4, 5, 6, 7, 9, 10, 8});
+        ArrayList<String> commonNames = data.get(5);
+        ArrayList<String> scientificNames = data.get(4);
+        ArrayList<String> taxons = data.get(8);
+        ArrayList<String> levels = data.get(6);
+        ArrayList<String> points = data.get(7);
         ArrayList<String> latitudes = data.get(2);
         ArrayList<String> longitudes = data.get(3);
-        ArrayList<String> urls = data.get(5);
-
-
+        ArrayList<String> urls = data.get(1);
+        ArrayList<String> ids = data.get(0);
 
         // Shows the InfoWindow or hides it if it is already opened.
 
@@ -78,11 +94,23 @@ public class MapFragment extends Fragment {
         for (int i = 2; i < latitudes.size(); i++) {
 
             //checks to make sure the latitude and longitude are valid and that the level is "research"
-            if (!latitudes.get(i).equals("") && !longitudes.get(i).equals("") && data.get(4).get(i).equals("research")) {
-                MarkerOptions tempMark = new MarkerOptions().position(new LatLng(Double.parseDouble(latitudes.get(i)), Double.parseDouble(longitudes.get(i))));
-                tempMark.title(commonNames.get(i));
-                tempMark.snippet(urls.get(i) + ",Level: " + (random.nextInt(10) + 1) + ",Scientific Name: " + scientificNames.get(i));
+            if (!latitudes.get(i).equals("") && !longitudes.get(i).equals("")) {
+                double lat = Double.parseDouble(latitudes.get(i));
+                double lon = Double.parseDouble(longitudes.get(i));
+                int id = Integer.parseInt(ids.get(i));
+                Wildlife tempWildlife = new Wildlife(commonNames.get(i), scientificNames.get(i), taxons.get(i), levels.get(i), points.get(i), urls.get(i), lat, lon, id);
+                tempWildlife.setCaught(ud.isCaught(tempWildlife));
+                MarkerOptions tempMark = new MarkerOptions().position(new LatLng(lat, lon));
+
+                tempMark.title(tempWildlife.getCommonName());
+                tempMark.snippet(tempWildlife.getImage_url() + ",Level: " + tempWildlife.getLevel());
+                tempMark.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
+
                 Marker m = googleMap.addMarker(tempMark);
+                if (tempWildlife.getCaught()) {
+                    m.setAlpha(.25f);
+                }
+                m.setTag(tempWildlife);
                 if (m != null) {
                     markerList.add(m);
                 }
@@ -92,7 +120,10 @@ public class MapFragment extends Fragment {
 
         }
 
-
+//        db.collection("userData").document(user.getEmail()).set(userData);
+//        // Navigates to WildlifeActivity, passing in the index of the wildlife in Oblog
+//        Intent intent = new Intent(getActivity(), WildlifeActivity.class);
+//        startActivity(intent);
     }
 
 
@@ -102,6 +133,7 @@ public class MapFragment extends Fragment {
         View rootView = null;
         System.out.println("starting stuff....");
         markerList = new ArrayList<>();
+        final UserData userData = (UserData) (getActivity().getIntent().getSerializableExtra("USERDATA"));
 
 
 
@@ -124,6 +156,9 @@ public class MapFragment extends Fragment {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
+            final FloatingActionButton catch_button = rootView.findViewById(R.id.catch_button);
+            catch_button.hide();
 
             random = new Random();
 
@@ -153,16 +188,37 @@ public class MapFragment extends Fragment {
                     CameraPosition cameraPosition = new CameraPosition.Builder().target(new LatLng(33.7766, -84.3982)).zoom(12).build();
                     googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
-                    googleMap.setOnInfoWindowClickListener(new OnInfoWindowClickListener() {
-
+                    googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                         @Override
-                        public void onInfoWindowClick(Marker marker) {
-                            Log.d("catching 1", marker.getTitle());
-                            Log.d("catching 2", marker.getSnippet());
-                            String[] snippets = marker.getSnippet().split(",");
-                            String scientific = snippets[2];
-                            String imageLink = snippets[0];
-                            addToOb(marker.getTitle(), scientific, imageLink);
+                        public boolean onMarkerClick(Marker marker) {
+                            final Marker mapMarker = marker;
+                            catch_button.show();
+                            catch_button.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Log.d("catching 1", "trying to catch " + mapMarker.getTitle() + " " + ((Wildlife)mapMarker.getTag()).getId());
+                                    Log.d("catching 2", mapMarker.getSnippet());
+                                    String[] snippets = mapMarker.getSnippet().split(",");
+                                    String image_url = snippets[0];
+
+                                    Log.d("catching 3", "previously caught " + ((Wildlife) mapMarker.getTag()).getCaught() + "");
+                                    addToObInit((Wildlife) mapMarker.getTag());
+                                    Log.d("catching 5", ((Wildlife) mapMarker.getTag()).getCaught() + "");
+                                    Log.d("LEveL: ", ((Wildlife) mapMarker.getTag()).getLevel());
+                                    Log.d("User level: ", "" + userData.getLevel());
+                                    mapMarker.setAlpha(.25f);
+                                    catch_button.hide();
+                                }
+                            });
+                            return false;
+                        }
+                    });
+
+                    googleMap.setOnInfoWindowCloseListener(new GoogleMap.OnInfoWindowCloseListener() {
+                        @Override
+
+                        public void onInfoWindowClose(Marker marker) {
+                            catch_button.hide();
                         }
                     });
                 }
@@ -177,8 +233,9 @@ public class MapFragment extends Fragment {
 
                     //int i =0; //for testing
                     for (Marker m: markerList) {
-
-                        if (Math.abs(m.getPosition().latitude - location.getLatitude()) < 0.001 && Math.abs(m.getPosition().longitude - location.getLongitude()) < 0.001) {
+                        if (Math.abs(m.getPosition().latitude - location.getLatitude()) < 0.001
+                                && Math.abs(m.getPosition().longitude - location.getLongitude()) < 0.001
+                                && Integer.parseInt(((Wildlife) m.getTag()).getLevel()) <= userData.getLevel()) {
                             m.setVisible(true);
 
                             /*for testing purposes, delete later
@@ -214,25 +271,60 @@ public class MapFragment extends Fragment {
                     Log.d("Provider disabled", s);
                 }
             });
+
+
+
+
+            /**catch_button.setOnClickListener(new View.OnClickListener() {
+                 @Override
+                 public void onClick(View view) {
+                    Log.d("button", "button press");
+                 }
+            });*/
         }
 
 
         return rootView;
     }
+//    public void catchThis(Wildlife toAdd) {
+//        UserData ud = (UserData) getActivity().getIntent().getSerializableExtra("USERDATA");
+//        UserData userData = (UserData) (getActivity().getIntent().getSerializableExtra("USERDATA"));
+//        FirebaseAuth auth = FirebaseAuth.getInstance();
+//        FirebaseUser user = auth.getCurrentUser();
+//        FirebaseFirestore db = FirebaseFirestore.getInstance();
+//
+//        toAdd.catchWildlife();
+//
+//        db.collection("userData").document(user.getEmail()).set(userData);
+//        // Navigates to WildlifeActivity, passing in the index of the wildlife in Oblog
+//        Intent intent = new Intent(getActivity(), WildlifeActivity.class);
+//        intent.putExtra("WILDLIFE", toAdd);
+//        startActivity(intent);
+//    }
 
-    public void addToOb(String name, String scientific, String imageLink) {
+    //adds all wildlife to the observation log initially, then when they are actually logged their caught variable changes
+    public void addToObInit(Wildlife toAdd) {
         UserData ud = (UserData) getActivity().getIntent().getSerializableExtra("USERDATA");
         UserData userData = (UserData) (getActivity().getIntent().getSerializableExtra("USERDATA"));
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        Wildlife wild = new Wildlife(name);
 
-        wild.setScientificName(scientific);
-        wild.setUrl(imageLink);
-        ud.addToObLog(new Wildlife(name));
-        Log.d("catching 3",  ud.getObLogString());
+//      Wildlife wild = new Wildlife(name);
+//      wild.setScientificName(scientific);
+//      wild.setImage_url(image_url);
+        if(toAdd.catchWildlife()) {
+            ud.addToObLog(toAdd);
+            userData.updatePoints(Integer.parseInt(toAdd.getPoints()));
+        } else {
+            Log.d("catching 4a",  "already caught");
+        }
+        Log.d("catching 4b",  ud.getObLogString());
         db.collection("userData").document(user.getEmail()).set(userData);
+        // Navigates to WildlifeActivity, passing in the index of the wildlife in Oblog
+        Intent intent = new Intent(getActivity(), WildlifeActivity.class);
+        intent.putExtra("WILDLIFE", toAdd);
+        startActivity(intent);
     }
 
     @Override

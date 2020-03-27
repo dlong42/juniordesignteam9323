@@ -1,17 +1,12 @@
 package com.juniordesignteam9323.campussafari;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.auth.FirebaseAuth;
-import com.juniordesignteam9323.campussafari.ui.LoginActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -50,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
+        /**FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
 
             }
-        });
+        });*/
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
 
@@ -101,75 +96,6 @@ public class MainActivity extends AppCompatActivity {
     public void addToObLog(Wildlife wl) {
         this.getUserData().addToObLog(wl);
     }
-//    @SuppressWarnings("StatementWithEmptyBody")
-//    @Override
-//    public boolean onNavigationItemSelected(MenuItem item) {
-//         //Handle navigation view item clicks here.
-//        Fragment fragment = null;
-//        int id = item.getItemId();
-//        if (id == R.id.nav_achievements) {
-//            fragment = new AchievementsFragment();
-//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-//            ft.add(id, fragment);
-//            ft.commit();
-//            //logout();
-//        }
-//        } else {
-//            fragment = new AchievementsFragment();
-//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-//            ft.replace(id, fragment);
-//            ft.commit();
-//        }
-//        if (id == R.id.nav_achievements) {
-//            fragment = new Fragment();
-//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-//            ft.replace(R.id.nav_achievements, fragment);
-//            ft.commit();
-//        }
-//        if (id == R.id.nav_map) {
-//            fragment = new Fragment();
-//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-//            ft.replace(R.id.nav_map, fragment);
-//            ft.commit();
-//        }
-//        if (id == R.id.nav_settings) {
-//            fragment = new Fragment();
-//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-//            ft.replace(R.id.nav_settings, fragment);
-//            ft.commit();
-//        }if (id == R.id.nav_oblog) {
-//            fragment = new Fragment();
-//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-//            ft.replace(R.id.nav_oblog, fragment);
-//            ft.commit();
-//        }
-//        if (id == R.id.nav_admin) {
-//            fragment = new Fragment();
-//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-//            ft.replace(R.id.nav_admin, fragment);
-//            ft.commit();
-//        }
-//        if (id == R.id.nav_leaderboard) {
-//            fragment = new Fragment();
-//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-//            ft.replace(R.id.nav_leaderboard, fragment);
-//            ft.commit();
-//        }
-//        if (id == R.id.nav_friends) {
-//            fragment = new Fragment();
-//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-//            ft.replace(R.id.nav_friends, fragment);
-//            ft.commit();
-//        }
-//        if (id == R.id.nav_log) {
-//            fragment = new Fragment();
-//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-//            ft.replace(R.id.nav_log, fragment);
-//            ft.commit();
-//        }
-//        return true;
-//    }
-
 
 
 //    public void printCSV() {

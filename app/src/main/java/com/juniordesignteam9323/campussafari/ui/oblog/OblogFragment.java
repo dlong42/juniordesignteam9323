@@ -159,6 +159,7 @@ public class OblogFragment extends Fragment {
         }
     }
     // Sorts wildlife by level highest to lowest
+    // Sorts wildlife by level highest to lowest
     public class sortByLevel implements Comparator {
         public int compare(Object o1, Object o2) {
             Wildlife w1 = (Wildlife) o1;
