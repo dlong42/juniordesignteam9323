@@ -1,17 +1,13 @@
 package com.juniordesignteam9323.campussafari;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.auth.FirebaseAuth;
-import com.juniordesignteam9323.campussafari.ui.LoginActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -25,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private UserData userData;
+    private TextView levelView;
+    private TextView pointsView;
 
 
     @Override
@@ -50,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
+        /**FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
 
             }
-        });
+        });*/
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
 
@@ -78,6 +76,15 @@ public class MainActivity extends AppCompatActivity {
         } else if (avatarId.equals("raccoon")) {
             avatar.setImageResource(R.drawable.avatar_raccoon);
         }
+
+        // Sets the info on the navbar header to the user's current nickname, points, and level
+        TextView nicknameView = hView.findViewById(R.id.nickname);
+        levelView = hView.findViewById(R.id.level);
+        pointsView = hView.findViewById(R.id.points);
+
+        nicknameView.setText(userData.getNickname());
+        levelView.setText("Level: " + userData.getLevel());
+        pointsView.setText("Points: " + userData.getPoints());
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -134,5 +141,21 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    public TextView getLevelView() {
+        return levelView;
+    }
+
+    public TextView getPointsView() {
+        return pointsView;
+    }
+
+    public void setLevelView(TextView levelView) {
+        this.levelView = levelView;
+    }
+
+    public void setPointsView(TextView pointsView) {
+        this.pointsView = pointsView;
     }
 }
