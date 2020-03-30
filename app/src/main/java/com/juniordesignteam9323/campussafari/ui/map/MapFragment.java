@@ -1,6 +1,7 @@
 package com.juniordesignteam9323.campussafari.ui.map;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -130,6 +131,7 @@ public class MapFragment extends Fragment {
 
 
 
+    @SuppressLint("MissingPermission")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = null;
@@ -228,6 +230,7 @@ public class MapFragment extends Fragment {
             locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
             Log.d("Set up location manager", "success");
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5, 0, new LocationListener() {
+                @SuppressLint("MissingPermission")
                 @Override
                 public void onLocationChanged(Location location) {
                     Log.d("Location changed", location.toString());
