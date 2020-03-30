@@ -1,29 +1,14 @@
 package com.juniordesignteam9323.campussafari;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.juniordesignteam9323.campussafari.ui.LoginActivity;
-import com.juniordesignteam9323.campussafari.ui.ProfileCreationActivity;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -32,30 +17,27 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import java.util.Objects;
-
-import static com.firebase.ui.auth.AuthUI.TAG;
-
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private UserData userData;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private  FirebaseAuth auth = FirebaseAuth.getInstance();
-    private FirebaseUser user = auth.getCurrentUser();
+    private TextView levelView;
+    private TextView pointsView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        
+
+
         userData = (UserData) (getIntent().getSerializableExtra("USERDATA"));
         if (userData == null){
             Log.d("Userdata", "null");
         } else {
             Log.d("Userdata", "Admin: " + userData.getAdmin() + "Email: " + userData.getEmail());
         }
+
 
         if (userData == null) {
             userData = new UserData(true, "weigel@gmail.com");
@@ -66,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
+        /**FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,11 +56,35 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
 
             }
-        });
+        });*/
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
 
+        navigationView.getMenu().findItem(R.id.nav_admin).setVisible(userData.getAdmin());
 
+        // Set avatar to be in the top left of the nav bar
+        View hView = navigationView.getHeaderView(0);
+        ImageView avatar = hView.findViewById(R.id.imageView);
+
+        String avatarId = userData.getAvatar();
+        if (avatarId.equals("owl")) {
+            avatar.setImageResource(R.drawable.avatar_owl);
+        } else if (avatarId.equals("bear")) {
+            avatar.setImageResource(R.drawable.avatar_bear);
+        } else if (avatarId.equals("chameleon")) {
+            avatar.setImageResource(R.drawable.avatar_chameleon);
+        } else if (avatarId.equals("raccoon")) {
+            avatar.setImageResource(R.drawable.avatar_raccoon);
+        }
+
+        // Sets the info on the navbar header to the user's current nickname, points, and level
+        TextView nicknameView = hView.findViewById(R.id.nickname);
+        levelView = hView.findViewById(R.id.level);
+        pointsView = hView.findViewById(R.id.points);
+
+        nicknameView.setText(userData.getNickname());
+        levelView.setText("Level: " + userData.getLevel());
+        pointsView.setText("Points: " + userData.getPoints());
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -93,27 +99,6 @@ public class MainActivity extends AppCompatActivity {
 
         CSVParse parsey = new CSVParse("observations-75146.csv", getApplicationContext());
 
-    }
-
-    //Set avatar to be in the top left of the nav bar
-    public void setAvatarBar(NavigationView navigationView) {
-
-        navigationView.getMenu().findItem(R.id.nav_admin).setVisible(userData.getAdmin());
-
-        //Set avatar to be in the top left of the nav bar
-        View hView = navigationView.getHeaderView(0);
-        ImageView avatar = hView.findViewById(R.id.imageView);
-
-        String avatarId = userData.getAvatar();
-        if (avatarId.equals("owl")) {
-            avatar.setImageResource(R.drawable.avatar_owl);
-        } else if (avatarId.equals("bear")) {
-            avatar.setImageResource(R.drawable.avatar_bear);
-        } else if (avatarId.equals("chameleon")) {
-            avatar.setImageResource(R.drawable.avatar_chameleon);
-        } else if (avatarId.equals("raccoon")) {
-            avatar.setImageResource(R.drawable.avatar_raccoon);
-        }
     }
 
     public UserData getUserData() {
@@ -156,5 +141,21 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    public TextView getLevelView() {
+        return levelView;
+    }
+
+    public TextView getPointsView() {
+        return pointsView;
+    }
+
+    public void setLevelView(TextView levelView) {
+        this.levelView = levelView;
+    }
+
+    public void setPointsView(TextView pointsView) {
+        this.pointsView = pointsView;
     }
 }

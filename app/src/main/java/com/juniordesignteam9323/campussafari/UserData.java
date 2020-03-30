@@ -76,4 +76,18 @@ public class UserData implements Serializable {
         }
         return false;
     }
+
+    public void updatePoints(int newPoints) {
+        this.points += newPoints;
+
+        if (this.points >= 300 && this.level < 2) {
+            this.level = 2;
+        } else if (this.points >= 900 && this.level < 3) {
+            this.level = 3;
+        } else if (this.points >= 1800 && this.level < 4) {
+            this.level = 4;
+        } else if (this.points >= 3600 && this.level == 5) {
+            this.level = 5;
+        }
+    }
 }
