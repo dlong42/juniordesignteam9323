@@ -308,8 +308,6 @@ public class MapFragment extends Fragment {
         boolean levelUpdate = false;
         if(toAdd.catchWildlife()) {
             ud.addToObLog(toAdd);
-            DialogFragment levelUp = new LevelUpDialog();
-            levelUp.show(getFragmentManager(), "levelUp");
             levelUpdate = userData.updatePoints(Integer.parseInt(toAdd.getPoints()));
         } else {
             Log.d("catching 4a",  "already caught");
@@ -335,7 +333,13 @@ public class MapFragment extends Fragment {
         // Navigates to WildlifeActivity, passing in the index of the wildlife in Oblog
         Intent intent = new Intent(getActivity(), WildlifeActivity.class);
         intent.putExtra("WILDLIFE", toAdd);
-        startActivity(intent);
+        if (!levelUpdate) {
+            startActivity(intent);
+        } else {
+            DialogFragment levelUp = new LevelUpDialog(intent);
+            levelUp.show(getFragmentManager(), "levelUp");
+        }
+
     }
 
     @Override

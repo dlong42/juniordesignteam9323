@@ -3,15 +3,21 @@ package com.juniordesignteam9323.campussafari;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
-
-import com.juniordesignteam9323.campussafari.MainActivity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 public class LevelUpDialog extends DialogFragment {
+
+    private Intent intent;
+
+    public LevelUpDialog(Intent intent) {
+        this.intent = intent;
+    }
+
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -21,7 +27,7 @@ public class LevelUpDialog extends DialogFragment {
                 .setPositiveButton("Let's explore!", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-
+                        startActivity(intent);
                     }
                 });
         return builder.create();
