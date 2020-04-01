@@ -211,7 +211,7 @@ public class MapFragment extends Fragment {
                                     Log.d("catching 3", "previously caught " + ((Wildlife) mapMarker.getTag()).getCaught() + "");
                                     addToObInit((Wildlife) mapMarker.getTag());
                                     Log.d("catching 5", ((Wildlife) mapMarker.getTag()).getCaught() + "");
-                                    Log.d("LEveL: ", ((Wildlife) mapMarker.getTag()).getLevel());
+                                    Log.d("LeveL: ", ((Wildlife) mapMarker.getTag()).getLevel());
                                     Log.d("User level: ", "" + userData.getLevel());
                                     mapMarker.setAlpha(.25f);
                                     catch_button.hide();
@@ -223,6 +223,7 @@ public class MapFragment extends Fragment {
 
                     googleMap.setOnInfoWindowCloseListener(new GoogleMap.OnInfoWindowCloseListener() {
                         @Override
+
                         public void onInfoWindowClose(Marker marker) {
                             catch_button.hide();
                         }
@@ -237,12 +238,23 @@ public class MapFragment extends Fragment {
                 @Override
                 public void onLocationChanged(Location location) {
                     Log.d("Location changed", location.toString());
+
+                    //int i =0; //for testing
                     for (Marker m: markerList) {
                         if (Math.abs(m.getPosition().latitude - location.getLatitude()) < 0.001
                                 && Math.abs(m.getPosition().longitude - location.getLongitude()) < 0.001
                                 && Integer.parseInt(((Wildlife) m.getTag()).getLevel()) <= userData.getLevel()) {
                             m.setVisible(true);
-                            //addToOb(m.getTitle());  //add this available wildlife to the observation log
+
+                            /*for testing purposes, delete later
+                            if (i < 5) {
+                                String[] snippets = m.getSnippet().split(",");
+                                String scientific = snippets[2];
+                                String imageLink = snippets[0];
+                                addToOb(m.getTitle(), scientific, imageLink); //add this available wildlife to the observation log
+                                i++;
+                            }*/
+                            //addToOb(m.getTitle());
                             //m.setAlpha(1);
                         } else {
                             m.setVisible(false);
@@ -305,6 +317,7 @@ public class MapFragment extends Fragment {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+
 //      Wildlife wild = new Wildlife(name);
 //      wild.setScientificName(scientific);
 //      wild.setImage_url(image_url);
