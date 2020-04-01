@@ -44,7 +44,7 @@ public class WildlifeActivity extends AppCompatActivity {
         this.points_worth = wildlife.getPoints();
 
         // Fields yet to be implemented within the app
-        this.wildlife_nickname = "Nicknames have yet to be implemented.";
+        this.wildlife_nickname = "N/A";
         this.fun_fact = "Fun facts have yet to be implemented.";
 
         // Set the image

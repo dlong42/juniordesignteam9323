@@ -99,8 +99,8 @@ public class OblogFragment extends Fragment {
                         i,
                         d
                 ));
+                System.out.println("Data Model:" + data.get(i).getCommonName()+ data.get(i).getTaxon() + data.get(i).getScientificName());
             }
-            System.out.println("Data Model:" + data.get(i).getCommonName()+ data.get(i).getTaxon() + data.get(i).getScientificName());
         }
         adapter = new CustomAdapter(data);
         recyclerView.setAdapter(adapter);
