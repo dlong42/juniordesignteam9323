@@ -56,6 +56,8 @@
     <string name="wildlife_points">Points</string>
     <string name="wildlife_nname">Nickname</string>
     <string name="wildlife_ff">Fun Fact</string>
+    <string name="wildlife_rename">Rename: </string>
+    <string name="wildlife_submit">Submit</string>
 
     <!-- Strings used in LeaderBoard & xml-->
     <string name="brd_header">Top Players</string>

@@ -10,6 +10,7 @@ public class Wildlife implements Serializable {
     private String level;
     private String points;
     private String image_url;
+    private String nickname;
     private double latitude;
     private double longitude;
     private int id;
@@ -47,6 +48,7 @@ public class Wildlife implements Serializable {
     public double getLongitude() {return longitude;}
     public int getId() {return id;}
     public boolean getCaught() {return caught;}
+    public String getNickname() { return nickname; }
 
     public void setTaxon(String taxon) {this.taxon = taxon;}
     public void setScientificName(String scientificName) {this.scientificName = scientificName;}
@@ -58,6 +60,7 @@ public class Wildlife implements Serializable {
     public void setLongitude(double longitude) {this.longitude = longitude;}
     public void setId(int id) {this.id = id;}
     public void setCaught(boolean caught) {this.caught = caught;}
+    public void setNickname(String nickname) { this.nickname = nickname; }
 
     //changes the caught variable to true, and returns true indicating a successful catch
     //return false if the wildlife has been caught before
