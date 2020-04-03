@@ -1,6 +1,5 @@
 package com.juniordesignteam9323.campussafari.ui.oblog;
 
-import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,17 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.juniordesignteam9323.campussafari.DataModel;
+import com.juniordesignteam9323.campussafari.MainActivity;
 import com.juniordesignteam9323.campussafari.R;
 import com.juniordesignteam9323.campussafari.UserData;
 import com.juniordesignteam9323.campussafari.Wildlife;
@@ -29,6 +19,16 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+import javax.annotation.Nullable;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 public class OblogFragment extends Fragment {
 
     private OblogViewModel oblogViewModel;
@@ -37,13 +37,15 @@ public class OblogFragment extends Fragment {
     private static RecyclerView recyclerView;
     private static ArrayList<DataModel> data;
     static View.OnClickListener myOnClickListener;
+    private UserData userData;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
+        userData = ((MainActivity) getActivity()).getUserData();
         oblogViewModel =
-                ViewModelProviders.of(this).get(OblogViewModel.class);
+                ViewModelProviders.of(this, new OblogViewModel(userData)).get(OblogViewModel.class);
 
         View root = inflater.inflate(R.layout.fragment_oblog, container, false);
         final TextView textView = root.findViewById(R.id.text_oblog);
@@ -72,7 +74,7 @@ public class OblogFragment extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         data = new ArrayList<DataModel>();
-        ArrayList<Wildlife> observed = UserData.getObLog();
+        ArrayList<Wildlife> observed = userData.getObLog();
 
         /*makes a datamodel for each animal observed, then adds to data Arraylist which is sent to
         adapter to put into Observation Log's Recycler view*/

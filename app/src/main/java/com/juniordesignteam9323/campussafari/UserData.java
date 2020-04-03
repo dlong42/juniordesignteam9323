@@ -11,7 +11,7 @@ public class UserData implements Serializable {
     private int level;
     private String nickname;
     private String avatar;
-    private static ArrayList<Wildlife> obLog;
+    private ArrayList<Wildlife> obLog;
 
     public UserData() {
         this.obLog = new ArrayList<Wildlife>();
@@ -31,7 +31,7 @@ public class UserData implements Serializable {
     public int getLevel() {return this.level;}
     public String getAvatar() {return this.avatar;}
     public String getNickname() {return this.nickname;}
-    public static ArrayList<Wildlife> getObLog() {return obLog;}
+    public ArrayList<Wildlife> getObLog() {return obLog;}
 
 
     public void setPoints(int points) {this.points = points;}
