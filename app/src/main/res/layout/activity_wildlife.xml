@@ -7,6 +7,19 @@
     android:contentDescription="@string/wildlife_level"
     android:orientation="vertical">
 
+    <Button
+        android:id="@+id/wildlife_return"
+        android:layout_width="wrap_content"
+        android:layout_height="38dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="131dp"
+        android:layout_marginBottom="66dp"
+        android:background="@color/colorPrimary"
+        android:text="@string/wildlife_return"
+        android:textColor="#FFFFFF"
+        android:textColorLink="@color/colorPrimary" />
+
     <TextView
         android:id="@+id/wildlife_error"
         android:layout_width="205dp"
@@ -159,8 +172,8 @@
         android:layout_height="38dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="70dp"
-        android:layout_marginBottom="169dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginBottom="157dp"
         android:background="#FF7A5E"
         android:text="@string/wildlife_submit"
         android:textColor="#FFFFFF" />
