@@ -50,7 +50,6 @@ public class UserData implements Serializable {
     public ArrayList<Achievement> setUpAchievements(){
         ArrayList<Achievement> achievements = new ArrayList<Achievement>();
         achievements.add(new Achievement("Campus Traveller", false, new ArrayList<Boolean>(4)));
-        achievements.add(new Achievement("Tree Hugger", false, new ArrayList<Boolean>(10)));
         achievements.add(new Achievement("4.0 GPA", false, new ArrayList<Boolean>(1)));
         achievements.add(new Achievement("Taxa Driver", false, new ArrayList<Boolean>(8)));
         achievements.add(new Achievement("A for Effort", false, new ArrayList<Boolean>(1)));
@@ -61,67 +60,140 @@ public class UserData implements Serializable {
 
     public void achievementCheck(Wildlife added) {
         //check for the campus traveller achievement, 0
-        //check for the tree hugger achievement, 1
-        //check for the 4.0 achievement, 2
+        this.traveller(added);
+        //check for the 4.0 achievement, 1
         if(added.getCommonName().equals("Albino Squirrel")) {
-            achievements.get(2).increaseCount();
-            achievements.get(2).setAchieved(true);
+            achievements.get(1).increaseCount();
+            achievements.get(1).setAchieved(true);
         }
-        //check for the taxa driver achievement, 3
+        //check for the taxa driver achievement, 2
         this.taxaDriver(added);
-        //check for the a for effort achievement, 4
-        if(!achievements.get(4).isAchieved()){
-            achievements.get(4).increaseCount();
-            achievements.get(4).setAchieved(true);
+        //check for the a for effort achievement, 3
+        if(!achievements.get(3).isAchieved()){
+            achievements.get(3).increaseCount();
+            achievements.get(3).setAchieved(true);
         }
-        //check for the hey come back achievement, 5
-        //check for the fun guy achievement, 6
+        //hey come back achievement is already checked for in Map Fragment, 4
+        //check for the fun guy achievement, 5
         if(added.getTaxon() == "Fungi") {
-            achievements.get(6).increaseCount();
-            achievements.get(6).setAchieved(true);
+            achievements.get(5).increaseCount();
+            achievements.get(5).setAchieved(true);
         }
     }
-
+    public void traveller(Wildlife added) {
+        //campus traveller achievement order
+        //0 collected a wildife in top left, 1 top right, 2 bottom right, 3 bottom left
+        Achievement travel = achievements.get(0);
+        if(added.getLatitude() >= 33.776 && added.getLongitude() <= -84.3995){
+            if(!travel.getNeeded().get(0)){
+                ArrayList<Boolean> temp = travel.getNeeded();
+                temp.set(0, true);
+                travel.setNeeded(temp);
+                travel.increaseCount();
+            }
+        } else if(added.getLatitude() >= 33.776 && added.getLongitude() >= -84.3995){
+            if(!travel.getNeeded().get(1)){
+                ArrayList<Boolean> temp = travel.getNeeded();
+                temp.set(1, true);
+                travel.setNeeded(temp);
+                travel.increaseCount();
+            }
+        } else if(added.getLatitude() <= 33.776 && added.getLongitude() >= -84.3995){
+            if(!travel.getNeeded().get(2)){
+                ArrayList<Boolean> temp = travel.getNeeded();
+                temp.set(2, true);
+                travel.setNeeded(temp);
+                travel.increaseCount();
+            }
+        } else{
+            if(!travel.getNeeded().get(3)){
+                ArrayList<Boolean> temp = travel.getNeeded();
+                temp.set(3, true);
+                travel.setNeeded(temp);
+                travel.increaseCount();
+            }
+        }
+        if(travel.getCount() == travel.getNeeded().size()){
+            travel.setAchieved(true);
+        }
+    }
     public void taxaDriver(Wildlife added) {
         //taxa driver achievement order for the boolean array
         //0. insecta 1. aves 2. plantae 3. mammalia 4. arachnida 5. reptilia 6. animalia 7. fungi
-        Achievement taxa = achievements.get(3);
+        Achievement taxa = achievements.get(2);
         Log.d("achievement", ""+taxa.getNeeded().size());
         if(added.getTaxon().equals("Insecta") && !taxa.getNeeded().get(0) ) {
-            taxa.getNeeded().set(0, true);
+            ArrayList<Boolean> temp = taxa.getNeeded();
+            temp.set(0, true);
+            taxa.setNeeded(temp);
             taxa.increaseCount();
         }
         if(added.getTaxon().equals("Aves") && !taxa.getNeeded().get(1)) {
-            taxa.getNeeded().set(1, true);
+            ArrayList<Boolean> temp = taxa.getNeeded();
+            temp.set(1, true);
+            taxa.setNeeded(temp);
             taxa.increaseCount();
         }
         if(added.getTaxon().equals("Plantae") && !taxa.getNeeded().get(2)) {
-            taxa.getNeeded().set(2, true);
+            ArrayList<Boolean> temp = taxa.getNeeded();
+            temp.set(2, true);
+            taxa.setNeeded(temp);
             taxa.increaseCount();
         }
         if(added.getTaxon().equals("Mammalia") && !taxa.getNeeded().get(3)) {
-            taxa.getNeeded().set(3, true);
+            ArrayList<Boolean> temp = taxa.getNeeded();
+            temp.set(3, true);
+            taxa.setNeeded(temp);
             taxa.increaseCount();
         }
         if(added.getTaxon().equals("Arachnida") && !taxa.getNeeded().get(4)) {
-            taxa.getNeeded().set(4, true);
+            ArrayList<Boolean> temp = taxa.getNeeded();
+            temp.set(4, true);
+            taxa.setNeeded(temp);
             taxa.increaseCount();
         }
         if(added.getTaxon().equals("Reptilia") && !taxa.getNeeded().get(5)) {
-            taxa.getNeeded().set(5, true);
+            ArrayList<Boolean> temp = taxa.getNeeded();
+            temp.set(5, true);
+            taxa.setNeeded(temp);
             taxa.increaseCount();
         }
         if(added.getTaxon().equals("Animalia") && !taxa.getNeeded().get(6)) {
-            taxa.getNeeded().set(6, true);
+            ArrayList<Boolean> temp = taxa.getNeeded();
+            temp.set(6, true);
+            taxa.setNeeded(temp);
             taxa.increaseCount();
         }
         if(added.getTaxon().equals("Fungi") && !taxa.getNeeded().get(7)) {
-            taxa.getNeeded().set(7, true);
+            ArrayList<Boolean> temp = taxa.getNeeded();
+            temp.set(7, true);
+            taxa.setNeeded(temp);
             taxa.increaseCount();
         }
         if(taxa.getCount() == taxa.getNeeded().size()){
             taxa.setAchieved(true);
         }
+    }
+    public void comeBack() {
+        Log.d("achievement", "achieved come back achievement");
+        Achievement come = achievements.get(4);
+        come.setAchieved(true);
+        come.increaseCount();
+    }
+    public ArrayList<Achievement> toDisplayAchievements() {
+        int front = 0;
+        int back = achievements.size() - 1;
+        ArrayList<Achievement> toReturn = new ArrayList<Achievement>(achievements.size());
+        for(Achievement a : achievements){
+            if(a.isAchieved()) {
+                toReturn.set(front, a);
+                front++;
+            } else {
+                toReturn.set(back, a);
+                back--;
+            }
+        }
+        return toReturn;
     }
     public void addToObLog(Wildlife toAdd) {
         if(this.obLog == null) {

@@ -60,7 +60,7 @@ public class MapFragment extends Fragment {
      * */
     public void setUpMarkers() {
         UserData ud = (UserData) getActivity().getIntent().getSerializableExtra("USERDATA");
-        UserData userData = (UserData) (getActivity().getIntent().getSerializableExtra("USERDATA"));
+        //UserData userData = (UserData) (getActivity().getIntent().getSerializableExtra("USERDATA"));
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -206,7 +206,7 @@ public class MapFragment extends Fragment {
                                     Log.d("catching 3", "previously caught " + ((Wildlife) mapMarker.getTag()).getCaught() + "");
                                     addToObInit((Wildlife) mapMarker.getTag());
                                     Log.d("catching 5", ((Wildlife) mapMarker.getTag()).getCaught() + "");
-                                    Log.d("LeveL: ", ((Wildlife) mapMarker.getTag()).getLevel());
+                                    Log.d("Level: ", ((Wildlife) mapMarker.getTag()).getLevel());
                                     Log.d("User level: ", "" + userData.getLevel());
                                     mapMarker.setAlpha(.25f);
                                     catch_button.hide();
@@ -231,6 +231,9 @@ public class MapFragment extends Fragment {
                 @Override
                 public void onLocationChanged(Location location) {
                     Log.d("Location changed", location.toString());
+                    if((location.getLatitude() > 33.781) || (location.getLatitude() < 33.771) || (location.getLongitude() < -84.407) || (location.getLongitude() > -84.392)) {
+                        userData.comeBack();
+                    }
                     for (Marker m: markerList) {
                         if (Math.abs(m.getPosition().latitude - location.getLatitude()) < 0.001
                                 && Math.abs(m.getPosition().longitude - location.getLongitude()) < 0.001
@@ -294,7 +297,6 @@ public class MapFragment extends Fragment {
 
     //adds all wildlife to the observation log initially, then when they are actually logged their caught variable changes
     public void addToObInit(Wildlife toAdd) {
-        //UserData ud = (UserData) getActivity().getIntent().getSerializableExtra("USERDATA");
         UserData userData = (UserData) (getActivity().getIntent().getSerializableExtra("USERDATA"));
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
