@@ -63,4 +63,6 @@
     <string name="brd_header">Top Players</string>
     <string name="brd_member">Loading...</string>
 
+    <string name="log_button">Log</string>
+
 </resources>

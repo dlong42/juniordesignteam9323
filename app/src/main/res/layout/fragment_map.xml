@@ -13,13 +13,12 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/catch_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="36dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="188dp"
+        android:layout_marginBottom="32dp"
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="@+id/mapView"
-        app:layout_constraintEnd_toEndOf="@+id/mapView"
-        app:srcCompat="@drawable/ic_log" />
+        app:layout_constraintEnd_toEndOf="@+id/mapView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

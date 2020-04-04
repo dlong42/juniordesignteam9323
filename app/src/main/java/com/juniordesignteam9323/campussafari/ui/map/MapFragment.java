@@ -133,7 +133,6 @@ public class MapFragment extends Fragment {
     }
 
 
-
     @SuppressLint("MissingPermission")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
