@@ -92,6 +92,9 @@ public class WildlifeActivity extends AppCompatActivity implements View.OnClickL
         Button submitBtn = findViewById(R.id.wildlife_submit);
         submitBtn.setOnClickListener(this);
 
+        Button returnBtn = findViewById(R.id.wildlife_return);
+        returnBtn.setOnClickListener(this);
+
     }
 
     // Button handler
@@ -117,6 +120,11 @@ public class WildlifeActivity extends AppCompatActivity implements View.OnClickL
                 TextView error = findViewById(R.id.wildlife_error);
                 error.setText(e);
             }
+        } else if (v.getId() == R.id.wildlife_return) {
+            // Redirect page
+            Intent i = new Intent(this, MainActivity.class);
+            //i.putExtra("USERDATA", userData);
+            startActivity(i);
         }
     }
 
