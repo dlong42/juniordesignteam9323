@@ -58,6 +58,7 @@
     <string name="wildlife_ff">Fun Fact</string>
     <string name="wildlife_rename">Rename: </string>
     <string name="wildlife_submit">Submit</string>
+    <string name="wildlife_return">Return to Map</string>
 
     <!-- Strings used in LeaderBoard & xml-->
     <string name="brd_header">Top Players</string>
