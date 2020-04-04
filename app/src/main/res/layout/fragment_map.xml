@@ -9,15 +9,18 @@
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="-29dp"
+        tools:layout_editor_absoluteY="-36dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/catch_button"
-        android:layout_width="36dp"
-        android:layout_height="41dp"
-        android:layout_marginEnd="188dp"
-        android:layout_marginBottom="32dp"
+        android:layout_width="63dp"
+        android:layout_height="55dp"
+        android:layout_marginEnd="176dp"
+        android:layout_marginBottom="16dp"
         android:clickable="true"
+        android:src="@drawable/ic_log_button"
         app:layout_constraintBottom_toBottomOf="@+id/mapView"
         app:layout_constraintEnd_toEndOf="@+id/mapView" />
 
