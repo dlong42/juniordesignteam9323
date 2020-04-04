@@ -5,24 +5,27 @@ import java.io.Serializable;
 public class Achievement implements Serializable{
     private String name;
     private boolean achieved;
-    private boolean needed[];
+    private ArrayList<Boolean> needed;
     private int count;
 
     public Achievement() {
         this.name = null;
         this.achieved = false;
         this.count = 0;
+        this.needed = new ArrayList<Boolean>();
     }
     public Achievement(String name) {
         this.name = name;
         this.achieved = false;
-        this.needed = null;
+        this.needed = new ArrayList<Boolean>();
+        Collections.fill(needed, Boolean.FALSE);
         this.count = 0;
     }
-    public Achievement(String name, boolean achieved, boolean[] needed) {
+    public Achievement(String name, boolean achieved, ArrayList<Boolean> needed) {
         this.name = name;
         this.achieved = achieved;
         this.needed = needed;
+        Collections.fill(needed, Boolean.FALSE);
         this.count = 0;
     }
 
@@ -38,10 +41,10 @@ public class Achievement implements Serializable{
     public void setAchieved(boolean achieved) {
         this.achieved = achieved;
     }
-    public boolean[] getNeeded() {
+    public ArrayList<Boolean> getNeeded() {
         return needed;
     }
-    public void setNeeded(boolean[] needed) {
+    public void setNeeded(ArrayList<Boolean> needed) {
         this.needed = needed;
     }
     public int getCount(){

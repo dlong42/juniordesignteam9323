@@ -299,9 +299,6 @@ public class MapFragment extends Fragment {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-//      Wildlife wild = new Wildlife(name);
-//      wild.setScientificName(scientific);
-//      wild.setImage_url(image_url);
         boolean levelUpdate = false;
         if(toAdd.catchWildlife()) {
             userData.addToObLog(toAdd);
@@ -320,7 +317,7 @@ public class MapFragment extends Fragment {
         main.setLevelView(levelView);
         main.setPointsView(pointsView);
 
-        Log.d("catching 4b",  ud.getObLogString());
+        Log.d("catching 4b",  userData.getObLogString());
         db.collection("userData").document(user.getEmail()).set(userData);
         // Navigates to WildlifeActivity, passing in the index of the wildlife in Oblog
         Intent intent = new Intent(getActivity(), WildlifeActivity.class);

@@ -2,6 +2,7 @@ package com.juniordesignteam9323.campussafari;
 
 import java.io.Serializable;
 import java.util.*;
+import android.util.Log;
 
 
 public class UserData implements Serializable {
@@ -16,12 +17,16 @@ public class UserData implements Serializable {
 
     public UserData() {
         this.obLog = new ArrayList<Wildlife>();
+        this.level = 1;
+        this.achievements = setUpAchievements();
     }
 
     public UserData(boolean admin, String email) {
         this.admin = admin;
         this.email = email;
         this.obLog = new ArrayList<Wildlife>();
+        this.level = 1;
+        this.achievements = setUpAchievements();
     }
 
     public boolean getAdmin() {
@@ -42,14 +47,16 @@ public class UserData implements Serializable {
     public void setObLog(ArrayList<Wildlife> obLog) {this.obLog = obLog;}
     public void setAchievements(ArrayList<Achievement> achievements) {this.achievements = achievements;}
 
-    public void setUpAchievements(){
-        achievements.add(new Achievement("Campus Traveller", false, new boolean[4]));
-        achievements.add(new Achievement("Tree Hugger", false, new boolean[10]));
-        achievements.add(new Achievement("4.0 GPA", false, new boolean[1]));
-        achievements.add(new Achievement("Taxa Driver", false, new boolean[8]));
-        achievements.add(new Achievement("A for Effort", false, new boolean[1]));
-        achievements.add(new Achievement("Hey, Come Back!", false, new boolean[1]));
-        achievements.add(new Achievement("You're a Fun Guy (Ha Ha)", false, new boolean[1]));
+    public ArrayList<Achievement> setUpAchievements(){
+        ArrayList<Achievement> achievements = new ArrayList<Achievement>();
+        achievements.add(new Achievement("Campus Traveller", false, new ArrayList<Boolean>(4)));
+        achievements.add(new Achievement("Tree Hugger", false, new ArrayList<Boolean>(10)));
+        achievements.add(new Achievement("4.0 GPA", false, new ArrayList<Boolean>(1)));
+        achievements.add(new Achievement("Taxa Driver", false, new ArrayList<Boolean>(8)));
+        achievements.add(new Achievement("A for Effort", false, new ArrayList<Boolean>(1)));
+        achievements.add(new Achievement("Hey, Come Back!", false, new ArrayList<Boolean>(1)));
+        achievements.add(new Achievement("You're a Fun Guy (Ha Ha)", false, new ArrayList<Boolean>(1)));
+        return achievements;
     }
 
     public void achievementCheck(Wildlife added) {
@@ -79,39 +86,40 @@ public class UserData implements Serializable {
         //taxa driver achievement order for the boolean array
         //0. insecta 1. aves 2. plantae 3. mammalia 4. arachnida 5. reptilia 6. animalia 7. fungi
         Achievement taxa = achievements.get(3);
-        if(added.getTaxon().equals("Insecta") && !taxa.getNeeded()[0] ) {
-            taxa.getNeeded()[0] = true;
+        Log.d("achievement", ""+taxa.getNeeded().size());
+        if(added.getTaxon().equals("Insecta") && !taxa.getNeeded().get(0) ) {
+            taxa.getNeeded().set(0, true);
             taxa.increaseCount();
         }
-        if(added.getTaxon().equals("Aves") && !taxa.getNeeded()[1]) {
-            taxa.getNeeded()[1] = true;
+        if(added.getTaxon().equals("Aves") && !taxa.getNeeded().get(1)) {
+            taxa.getNeeded().set(1, true);
             taxa.increaseCount();
         }
-        if(added.getTaxon().equals("Plantae") && !taxa.getNeeded()[2]) {
-            taxa.getNeeded()[2] = true;
+        if(added.getTaxon().equals("Plantae") && !taxa.getNeeded().get(2)) {
+            taxa.getNeeded().set(2, true);
             taxa.increaseCount();
         }
-        if(added.getTaxon().equals("Mammalia") && !taxa.getNeeded()[3]) {
-            taxa.getNeeded()[3] = true;
+        if(added.getTaxon().equals("Mammalia") && !taxa.getNeeded().get(3)) {
+            taxa.getNeeded().set(3, true);
             taxa.increaseCount();
         }
-        if(added.getTaxon().equals("Arachnida") && !taxa.getNeeded()[4]) {
-            taxa.getNeeded()[4] = true;
+        if(added.getTaxon().equals("Arachnida") && !taxa.getNeeded().get(4)) {
+            taxa.getNeeded().set(4, true);
             taxa.increaseCount();
         }
-        if(added.getTaxon().equals("Reptilia") && !taxa.getNeeded()[5]) {
-            taxa.getNeeded()[5] = true;
+        if(added.getTaxon().equals("Reptilia") && !taxa.getNeeded().get(5)) {
+            taxa.getNeeded().set(5, true);
             taxa.increaseCount();
         }
-        if(added.getTaxon().equals("Animalia") && !taxa.getNeeded()[6]) {
-            taxa.getNeeded()[6] = true;
+        if(added.getTaxon().equals("Animalia") && !taxa.getNeeded().get(6)) {
+            taxa.getNeeded().set(6, true);
             taxa.increaseCount();
         }
-        if(added.getTaxon().equals("Fungi") && !taxa.getNeeded()[7]) {
-            taxa.getNeeded()[7] = true;
+        if(added.getTaxon().equals("Fungi") && !taxa.getNeeded().get(7)) {
+            taxa.getNeeded().set(7, true);
             taxa.increaseCount();
         }
-        if(taxa.getCount() == taxa.getNeeded().length + 1){
+        if(taxa.getCount() == taxa.getNeeded().size()){
             taxa.setAchieved(true);
         }
     }
