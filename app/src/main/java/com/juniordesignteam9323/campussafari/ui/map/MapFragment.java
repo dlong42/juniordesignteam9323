@@ -206,7 +206,7 @@ public class MapFragment extends Fragment {
                                     Log.d("catching 3", "previously caught " + ((Wildlife) mapMarker.getTag()).getCaught() + "");
                                     addToObInit((Wildlife) mapMarker.getTag());
                                     Log.d("catching 5", ((Wildlife) mapMarker.getTag()).getCaught() + "");
-                                    Log.d("Level: ", ((Wildlife) mapMarker.getTag()).getLevel());
+                                    Log.d("LeveL: ", ((Wildlife) mapMarker.getTag()).getLevel());
                                     Log.d("User level: ", "" + userData.getLevel());
                                     mapMarker.setAlpha(.25f);
                                     catch_button.hide();
@@ -302,16 +302,15 @@ public class MapFragment extends Fragment {
 //      Wildlife wild = new Wildlife(name);
 //      wild.setScientificName(scientific);
 //      wild.setImage_url(image_url);
+        boolean levelUpdate = false;
         if(toAdd.catchWildlife()) {
             userData.addToObLog(toAdd);
-            userData.updatePoints(Integer.parseInt(toAdd.getPoints()));
+            levelUpdate = userData.updatePoints(Integer.parseInt(toAdd.getPoints()));
             userData.achievementCheck(toAdd);
         } else {
             Log.d("catching 4a",  "already caught");
         }
-        Log.d("null debug", "before main activity");
         MainActivity main = ((MainActivity) getActivity());
-        Log.d("null debug", "after main activity");
 
         TextView levelView = main.getLevelView();
         TextView pointsView = main.getPointsView();
@@ -321,7 +320,7 @@ public class MapFragment extends Fragment {
         main.setLevelView(levelView);
         main.setPointsView(pointsView);
 
-        Log.d("catching 4b",  userData.getObLogString());
+        Log.d("catching 4b",  ud.getObLogString());
         db.collection("userData").document(user.getEmail()).set(userData);
         // Navigates to WildlifeActivity, passing in the index of the wildlife in Oblog
         Intent intent = new Intent(getActivity(), WildlifeActivity.class);

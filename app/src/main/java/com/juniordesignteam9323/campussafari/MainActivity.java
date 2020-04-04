@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private UserData userData;
     private TextView levelView;
     private TextView pointsView;
+    private ProgressBar xpBar;
 
 
     @Override
@@ -81,10 +83,14 @@ public class MainActivity extends AppCompatActivity {
         TextView nicknameView = hView.findViewById(R.id.nickname);
         levelView = hView.findViewById(R.id.level);
         pointsView = hView.findViewById(R.id.points);
+        xpBar = hView.findViewById(R.id.xpBar);
 
         nicknameView.setText(userData.getNickname());
         levelView.setText("Level: " + userData.getLevel());
-        pointsView.setText("Points: " + userData.getPoints());
+        pointsView.setText("Points: " + userData.getPoints() + "/" + UserData.levelThreshold(userData.getLevel()));
+        xpBar.setMax(UserData.levelThreshold(userData.getLevel()));
+        xpBar.setProgress(userData.getPoints());
+
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -157,5 +163,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void setPointsView(TextView pointsView) {
         this.pointsView = pointsView;
+    }
+
+    public ProgressBar getXpBar() {
+        return xpBar;
+    }
+
+    public void setXpBar(ProgressBar xpBar) {
+        this.xpBar = xpBar;
     }
 }

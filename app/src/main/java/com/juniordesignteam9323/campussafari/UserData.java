@@ -16,14 +16,12 @@ public class UserData implements Serializable {
 
     public UserData() {
         this.obLog = new ArrayList<Wildlife>();
-        this.level = 1;
     }
 
     public UserData(boolean admin, String email) {
         this.admin = admin;
         this.email = email;
         this.obLog = new ArrayList<Wildlife>();
-        this.level = 1;
     }
 
     public boolean getAdmin() {
@@ -155,17 +153,42 @@ public class UserData implements Serializable {
         return false;
     }
 
-    public void updatePoints(int newPoints) {
+    public boolean updatePoints(int newPoints) {
         this.points += newPoints;
 
         if (this.points >= 300 && this.level < 2) {
             this.level = 2;
+            return true;
         } else if (this.points >= 900 && this.level < 3) {
             this.level = 3;
+            return true;
         } else if (this.points >= 1800 && this.level < 4) {
             this.level = 4;
+            return true;
         } else if (this.points >= 3600 && this.level == 5) {
             this.level = 5;
+            return true;
         }
+
+        return false;
+    }
+
+    public static int levelThreshold(int level) {
+        switch(level) {
+            case 1:
+                return 300;
+            case 2:
+                return 900;
+            case 3:
+                return 1800;
+            case 4:
+                return 3600;
+            case 5:
+                return 8000;
+            default:
+                return 0;
+        }
+
+
     }
 }

@@ -1,24 +1,34 @@
 package com.juniordesignteam9323.campussafari.ui.oblog;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.juniordesignteam9323.campussafari.MainActivity;
 import com.juniordesignteam9323.campussafari.R;
 import com.juniordesignteam9323.campussafari.Wildlife;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
-public class WildlifeActivity extends AppCompatActivity {
+public class WildlifeActivity extends AppCompatActivity implements View.OnClickListener{
     String image_url;
     String common_name;
     String scientific_name;
@@ -27,6 +37,8 @@ public class WildlifeActivity extends AppCompatActivity {
     String fun_fact;
     String level;
     String points_worth;
+    String newName;
+    Wildlife wildlife;
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -34,7 +46,7 @@ public class WildlifeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_wildlife);
 
         // Get wildlife object passed from MapFragment through the intent
-        Wildlife wildlife = (Wildlife) getIntent().getSerializableExtra("WILDLIFE");
+        wildlife = (Wildlife) getIntent().getSerializableExtra("WILDLIFE");
 
         this.image_url = wildlife.getImage_url();
         this.common_name = wildlife.getCommonName();
@@ -44,7 +56,7 @@ public class WildlifeActivity extends AppCompatActivity {
         this.points_worth = wildlife.getPoints();
 
         // Fields yet to be implemented within the app
-        this.wildlife_nickname = "Nicknames have yet to be implemented.";
+        this.wildlife_nickname = wildlife.getNickname();
         this.fun_fact = "Fun facts have yet to be implemented.";
 
         // Set the image
@@ -74,8 +86,40 @@ public class WildlifeActivity extends AppCompatActivity {
         TextView ff = findViewById(R.id.wildlife_ff);
         ff.setText(getTextF(this.fun_fact));
 
+        TextView rename = findViewById(R.id.wildlife_rename);
+        rename.setText("Rename: ");
+
+        Button submitBtn = findViewById(R.id.wildlife_submit);
+        submitBtn.setOnClickListener(this);
 
     }
+
+    // Button handler
+    public void onClick(View v) {
+        if (v.getId() == R.id.wildlife_submit) {
+            EditText editText = findViewById(R.id.wildlife_input);
+            newName = editText.getText().toString();
+            if (!newName.equals("") && newName.length() < 16) {
+                // Updates the wildlife's nickname
+                wildlife.setNickname(newName);
+                this.wildlife_nickname = newName;
+                TextView nn = findViewById(R.id.wildlife_nname);
+                nn.setText(getTextN(newName));
+                String e = "";
+                TextView error = findViewById(R.id.wildlife_error);
+                error.setText(e);
+            } else if (newName.length() > 15) {
+                String e = "Must be less than 16 characters.";
+                TextView error = findViewById(R.id.wildlife_error);
+                error.setText(e);
+            } else {
+                String e = "Error: Invalid Nickname";
+                TextView error = findViewById(R.id.wildlife_error);
+                error.setText(e);
+            }
+        }
+    }
+
 
     // Getters that return text Strings
     public String getTextC(String text) {return "Common Name: " + text;}

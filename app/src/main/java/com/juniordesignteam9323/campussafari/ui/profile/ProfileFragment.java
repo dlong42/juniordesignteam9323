@@ -6,25 +6,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
+
+import com.juniordesignteam9323.campussafari.MainActivity;
+import com.juniordesignteam9323.campussafari.R;
+import com.juniordesignteam9323.campussafari.UserData;
+import com.juniordesignteam9323.campussafari.ui.NicknameActivity;
+import com.juniordesignteam9323.campussafari.ui.PasswordActivity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-import android.view.View;
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.juniordesignteam9323.campussafari.MainActivity;
-import com.juniordesignteam9323.campussafari.R;
-import com.juniordesignteam9323.campussafari.UserData;
-import com.juniordesignteam9323.campussafari.ui.LoginActivity;
-import com.juniordesignteam9323.campussafari.ui.NicknameActivity;
-import com.juniordesignteam9323.campussafari.ui.PasswordActivity;
 
 public class ProfileFragment extends Fragment implements View.OnClickListener {
 
@@ -49,6 +45,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             }
         });
 
+
+        Switch notifications = root.findViewById(R.id.notificationSwitch);
+        Switch music = root.findViewById(R.id.musicSwitch);
 
         Button change_nicknameBtn = root.findViewById(R.id.change_nickname);
         Button change_psswrdBtn = root.findViewById(R.id.change_password);
