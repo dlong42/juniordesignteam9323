@@ -325,7 +325,7 @@ public class MapFragment extends Fragment {
         if(toAdd.catchWildlife()) {
             userData.addToObLog(toAdd);
             levelUpdate = userData.updatePoints(Integer.parseInt(toAdd.getPoints()));
-            userData.achievementCheck(toAdd);
+            //userData.achievementCheck(toAdd);
         } else {
             Log.d("catching 4a",  "already caught");
         }
