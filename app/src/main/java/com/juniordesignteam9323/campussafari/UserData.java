@@ -49,6 +49,9 @@ public class UserData implements Serializable {
     public void setObLog(ArrayList<Wildlife> obLog) {this.obLog = obLog;}
     public void setAchievements(ArrayList<Achievement> achievements) {this.achievements = achievements;}
 
+    public boolean isAchieved(int i ) {
+        return achievements.get(i).isAchieved();
+    }
     public ArrayList<Achievement> setUpAchievements(){
         ArrayList<Achievement> achievements = new ArrayList<Achievement>();
         achievements.add(new Achievement("Campus Traveller", false, new ArrayList<Check>(4), 4) );

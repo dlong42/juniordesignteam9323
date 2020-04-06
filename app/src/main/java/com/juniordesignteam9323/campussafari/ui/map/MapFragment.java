@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -322,12 +323,41 @@ public class MapFragment extends Fragment {
 //      wild.setScientificName(scientific);
 //      wild.setImage_url(image_url);
         boolean levelUpdate = false;
+        boolean campus = userData.isAchieved(0);
+        boolean fourPoint = userData.isAchieved(1);
+        boolean taxa = userData.isAchieved(2);
+        boolean aFor = userData.isAchieved(3);
+        boolean come = userData.isAchieved(4);
+        boolean funGuy = userData.isAchieved(5);
         if(toAdd.catchWildlife()) {
             userData.addToObLog(toAdd);
             levelUpdate = userData.updatePoints(Integer.parseInt(toAdd.getPoints()));
             //userData.achievementCheck(toAdd);
         } else {
             Log.d("catching 4a",  "already caught");
+        }
+        Toast toast;
+        Context context = getContext();
+        CharSequence frontText = "Congratulations! You have gained the ";
+        CharSequence backText = " achievement.";
+        int duration = Toast.LENGTH_LONG;
+        if(!campus && userData.isAchieved(0)) {
+            Toast.makeText(getContext(), frontText+ userData.getAchievements().get(0).getName() + backText, duration).show();
+        }
+        if(!fourPoint && userData.isAchieved(1)) {
+            Toast.makeText(getContext(), frontText+ userData.getAchievements().get(1).getName() + backText, duration).show();
+        }
+        if(!taxa && userData.isAchieved(2)) {
+            Toast.makeText(getContext(), frontText+ userData.getAchievements().get(2).getName() + backText, duration).show();
+        }
+        if(!aFor && userData.isAchieved(3)) {
+            Toast.makeText(getContext(), frontText+ userData.getAchievements().get(3).getName() + backText, duration).show();
+        }
+        if(!campus && userData.isAchieved(4)) {
+            Toast.makeText(getContext(), frontText+ userData.getAchievements().get(4).getName() + backText, duration).show();
+        }
+        if(!campus && userData.isAchieved(5)) {
+            Toast.makeText(getContext(), frontText+ userData.getAchievements().get(5).getName() + backText, duration).show();
         }
         MainActivity main = ((MainActivity) getActivity());
 
