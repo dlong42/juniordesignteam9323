@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.juniordesignteam9323.campussafari.MainActivity;
 import com.juniordesignteam9323.campussafari.R;
+import com.juniordesignteam9323.campussafari.UserData;
 import com.juniordesignteam9323.campussafari.Wildlife;
 
 import java.io.IOException;
@@ -33,6 +34,7 @@ public class WildlifeActivity extends AppCompatActivity implements View.OnClickL
     String points_worth;
     String newName;
     Wildlife wildlife;
+    UserData userData;
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,7 @@ public class WildlifeActivity extends AppCompatActivity implements View.OnClickL
 
         // Get wildlife object passed from MapFragment through the intent
         wildlife = (Wildlife) getIntent().getSerializableExtra("WILDLIFE");
+        userData = (UserData) (getIntent().getSerializableExtra("USERDATA"));
 
         this.image_url = wildlife.getImage_url();
         this.common_name = wildlife.getCommonName();
@@ -117,7 +120,7 @@ public class WildlifeActivity extends AppCompatActivity implements View.OnClickL
         } else if (v.getId() == R.id.wildlife_return) {
             // Redirect page
             Intent i = new Intent(this, MainActivity.class);
-            //i.putExtra("USERDATA", userData);
+            i.putExtra("USERDATA", userData);
             startActivity(i);
         }
     }

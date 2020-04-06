@@ -382,6 +382,7 @@ public class MapFragment extends Fragment {
         // Navigates to WildlifeActivity, passing in the index of the wildlife in Oblog
         Intent intent = new Intent(getActivity(), WildlifeActivity.class);
         intent.putExtra("WILDLIFE", toAdd);
+        intent.putExtra("USERDATA", userData);
         if (!levelUpdate) {
             startActivity(intent);
         } else {
