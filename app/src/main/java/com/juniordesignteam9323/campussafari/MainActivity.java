@@ -9,14 +9,19 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
+import com.juniordesignteam9323.campussafari.ui.map.LogWildlifeDialog;
+import com.juniordesignteam9323.campussafari.ui.map.MapFragment;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 

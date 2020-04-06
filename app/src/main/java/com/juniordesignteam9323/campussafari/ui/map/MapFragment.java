@@ -2,6 +2,7 @@ package com.juniordesignteam9323.campussafari.ui.map;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -58,6 +59,8 @@ public class MapFragment extends Fragment {
     private ArrayList<Marker> markerList;
     private LocationManager locationManager;
     private LocationListener locationListener;
+    private Wildlife wildlifeToBeAdded;
+    private static final int DIALOG_FRAGMENT_REQUEST_CODE = 1;
 
     /**
      * This is a helper method created to add all the markers to the map.
@@ -209,7 +212,10 @@ public class MapFragment extends Fragment {
                                     String image_url = snippets[0];
 
                                     Log.d("catching 3", "previously caught " + ((Wildlife) mapMarker.getTag()).getCaught() + "");
-                                    addToObInit((Wildlife) mapMarker.getTag());
+
+                                    wildlifeToBeAdded = (Wildlife) mapMarker.getTag();
+                                    openLogWildlifeDialog();
+
                                     Log.d("catching 5", ((Wildlife) mapMarker.getTag()).getCaught() + "");
                                     Log.d("Level: ", ((Wildlife) mapMarker.getTag()).getLevel());
                                     Log.d("User level: ", "" + userData.getLevel());
@@ -310,6 +316,32 @@ public class MapFragment extends Fragment {
 //        intent.putExtra("WILDLIFE", toAdd);
 //        startActivity(intent);
 //    }
+
+    // Opens the log wildlife dialog, which appears when a user presses the "Log" button
+    public void openLogWildlifeDialog() {
+        LogWildlifeDialog logWildlifeDialog = new LogWildlifeDialog();
+        // Necessary to pass data from the dialog to the MapFragment
+        logWildlifeDialog.setTargetFragment(this, DIALOG_FRAGMENT_REQUEST_CODE);
+        logWildlifeDialog.show(getFragmentManager(), "log wildlife dialog");
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if( resultCode != Activity.RESULT_OK ) {
+            return;
+        }
+        // Gets the wildlife nickname data from the log wildlife dialog and sets it
+        if( requestCode == DIALOG_FRAGMENT_REQUEST_CODE ) {
+            String nickname = data.getStringExtra("nickname");
+            // If the user did not input a nickname, the wildlife's nickname is set to its common
+            // name by default
+            if (nickname.length() == 0) {
+                nickname = wildlifeToBeAdded.getCommonName();
+            }
+            wildlifeToBeAdded.setNickname(nickname);
+            addToObInit(wildlifeToBeAdded);
+        }
+    }
 
     //adds all wildlife to the observation log initially, then when they are actually logged their caught variable changes
     public void addToObInit(Wildlife toAdd) {
@@ -427,5 +459,9 @@ public class MapFragment extends Fragment {
                 == PackageManager.PERMISSION_GRANTED) {
             mMapView.onLowMemory();
         }
+    }
+
+    public Wildlife getWildlifeToBeAdded() {
+        return wildlifeToBeAdded;
     }
 }
