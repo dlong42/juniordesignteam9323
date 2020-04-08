@@ -124,27 +124,28 @@ public class AchievementsFragment extends Fragment implements AdapterView.OnItem
             } else {
                 d = res.getDrawable(R.drawable.ic_trophy_gray);
             }
-            data.add(new AchievementDataModel(
+            updatedData.add(new AchievementDataModel(
                     achievements.get(i).getName(),
                     achievements.get(i).isAchieved(),
                     achievements.get(i).getNeeded(),
                     achievements.get(i).getCount(),
                     d
             ));
-            System.out.println("Achievement Data Model:" + data.get(i).getName()+ data.get(i).isAchieved() + data.get(i).getNeeded().size());
+            System.out.println("Updated Achievement Data Model:" + data.get(i).getName()+ data.get(i).isAchieved() + data.get(i).getNeeded().size());
         }
         return updatedData;
     }
 
     @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) { }
-    /*
+    public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
         //System.out.println("Presort:" + observed.get(0).getCommonName() + observed.get(1).getCommonName());
         String text = adapterView.getItemAtPosition(position).toString();
         if (text.equals("Title")){
+            System.out.println("Title sort clicked");
             SortByTitle sortAlgoTitle  = new SortByTitle();
             Collections.sort(achievements, sortAlgoTitle);
-        }else if (text.equals("Most Progress")){
+        }
+        else if (text.equals("Most Progress")){
             System.out.println("Common name clicked");
             SortByMostProgress sortAlgoMProgress = new SortByMostProgress();
             Collections.sort(achievements, sortAlgoMProgress);
@@ -154,7 +155,6 @@ public class AchievementsFragment extends Fragment implements AdapterView.OnItem
             Collections.sort(achievements, sortAlgoLProgress);
         }
 
-
         //System.out.println("Resorted by " + text + ":" + achievements.get(0).getCommonName() + observed.get(1).getCommonName());
 
         data = updateData();
@@ -162,21 +162,25 @@ public class AchievementsFragment extends Fragment implements AdapterView.OnItem
         recyclerView.invalidate();
         recyclerView.setAdapter(new AchievementAdapter(data));
         Toast.makeText(adapterView.getContext(), "Sorted by " + text, Toast.LENGTH_SHORT).show();
-    } */
+    }
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
-/*
+
     // Sorts achievements by title
     public class SortByTitle implements Comparator<Achievement> {
         public int compare(Achievement a1, Achievement a2) {
+            System.out.println("Title sort started");
             if (a1.getName().compareTo(a2.getName()) > 0) {
+                System.out.println("Title sort as 1");
                 return 1;
             } else if (a1.getName().compareTo(a2.getName()) < 0) {
+                System.out.println("Title sort as -1");
                 return -1;
             } else {
+                System.out.println("Title sort as 0");
                 return 0;
             }
         }
@@ -186,9 +190,9 @@ public class AchievementsFragment extends Fragment implements AdapterView.OnItem
     public class SortByMostProgress implements Comparator<Achievement> {
         public int compare(Achievement a1, Achievement a2) {
             if (((float) a1.getCount() / (float) a1.getNeeded().size()) > ((float) a2.getCount() / (float)a2.getNeeded().size())) {
-                return 1;
-            } else if (((float) a1.getCount() / (float) a1.getNeeded().size()) < ((float) a2.getCount() / (float)a2.getNeeded().size())) {
                 return -1;
+            } else if (((float) a1.getCount() / (float) a1.getNeeded().size()) < ((float) a2.getCount() / (float)a2.getNeeded().size())) {
+                return 1;
             } else {
                 return 0;
             }
@@ -199,12 +203,12 @@ public class AchievementsFragment extends Fragment implements AdapterView.OnItem
     public class SortByLeastProgress implements Comparator<Achievement> {
         public int compare(Achievement a1, Achievement a2) {
             if (((float) a1.getCount() / a1.getNeeded().size()) > ((float) a2.getCount() / a2.getNeeded().size())) {
-                return -1;
-            } else if (((float) a1.getCount() / a1.getNeeded().size()) < ((float) a2.getCount() / a2.getNeeded().size())) {
                 return 1;
+            } else if (((float) a1.getCount() / a1.getNeeded().size()) < ((float) a2.getCount() / a2.getNeeded().size())) {
+                return -1;
             } else {
                 return 0;
             }
         }
-    }*/
+    }
 }
