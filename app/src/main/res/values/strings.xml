@@ -65,5 +65,19 @@
     <string name="brd_member">Loading...</string>
 
     <string name="log_button">Log</string>
+    
+    <string-array name="sortby">
+        <item>Common Name</item>
+        <item>Scientific Name</item>
+        <item>Taxon</item>
+        <item>Level</item>
+        <item>Points</item>
+    </string-array>
+
+    <string-array name="achievement_sortby">
+        <item>Title</item>
+        <item>Most Progress</item>
+        <item>Least Progress</item>
+    </string-array>
 
 </resources>

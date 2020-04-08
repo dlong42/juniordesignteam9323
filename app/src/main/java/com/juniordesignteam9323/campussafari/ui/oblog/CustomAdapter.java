@@ -9,7 +9,6 @@ import android.widget.TextView;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.juniordesignteam9323.campussafari.DataModel;
 import com.juniordesignteam9323.campussafari.R;
 
 
@@ -31,12 +30,15 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             this.textViewNickname = (TextView) itemView.findViewById(R.id.textViewNickname);
             this.textViewTaxon = (TextView) itemView.findViewById(R.id.textViewTaxon);
             this.imageViewIcon = (ImageView) itemView.findViewById(R.id.imageView);
+
         }
     }
 
     public CustomAdapter(ArrayList<DataModel> data) {
         this.dataSet = data;
     }
+
+
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent,
@@ -53,15 +55,26 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int listPosition) {
-        //CardView cardview = holder.cardView;
+    public void onBindViewHolder(MyViewHolder holder, final int listPosition) {
         TextView textViewNickname = holder.textViewNickname;
         TextView textViewTaxon = holder.textViewTaxon;
         ImageView imageView = holder.imageViewIcon;
+        //Wildlife type = dataSet.get(listPosition).getType();
 
         textViewNickname.setText(dataSet.get(listPosition).getNickname());
         textViewTaxon.setText(dataSet.get(listPosition).getTaxon());
         imageView.setImageDrawable(dataSet.get(listPosition).getImage());
+        //holder.cardView.setOnClickListener(new View.OnClickListener() {
+            /*@Override
+            public void onClick(final View view) {
+                Intent intent = new Intent(view.getContext(), PasswordActivity.class);
+                ////itemView.getContext().startActivity(new Intent(itemView.getContext(), WildlifeActivity.class));
+                //Wildlife toSee = dataSet.get(listPosition).getType();
+                //intent.putExtra("WILDLIFE", toSee);
+                view.getContext().startActivity(intent);
+                //Intent intent = new Intent(getActivity(), WildlifeActivity.class);
+            }*/
+        //});
     }
 
     @Override

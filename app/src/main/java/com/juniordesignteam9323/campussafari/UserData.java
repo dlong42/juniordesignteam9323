@@ -98,7 +98,7 @@ public class UserData implements Serializable {
 
     public void traveller(Wildlife added) {
         //campus traveller achievement order
-        //0 collected a wildife in top left, 1 top right, 2 bottom right, 3 bottom left
+        //0 collected a wildlife in top left, 1 top right, 2 bottom right, 3 bottom left
         Achievement travel = achievements.get(0);
         double lat = added.getLatitude();
         double lon = added.getLongitude();

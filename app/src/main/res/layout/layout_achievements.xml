@@ -6,9 +6,9 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/card_view"
+        android:id="@+id/achievement_card_view"
         android:layout_width="match_parent"
-        android:layout_height="128dp"
+        android:layout_height="wrap_content"
         android:layout_margin="3dp"
         android:layout_marginBottom="4dp"
 
@@ -19,12 +19,12 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="116dp"
+            android:layout_height="180dp"
             android:layout_marginTop="8dp">
 
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/trophyView"
                 android:layout_width="126dp"
                 android:layout_height="98dp"
                 android:layout_marginStart="5dp"
@@ -36,15 +36,15 @@
 
             <LinearLayout
                 android:layout_width="221dp"
-                android:layout_height="98dp"
+                android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="14dp"
                 android:layout_marginTop="10dp"
-                android:layout_toEndOf="@+id/imageView"
+                android:layout_toEndOf="@+id/trophyView"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textViewNickname"
+                    android:id="@+id/textAchievementName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -52,7 +52,23 @@
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <TextView
-                    android:id="@+id/textViewTaxon"
+                    android:id="@+id/textAchieved"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/textNeeded"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/textCount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
