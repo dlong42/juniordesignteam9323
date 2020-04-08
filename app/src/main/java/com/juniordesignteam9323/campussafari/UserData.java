@@ -175,7 +175,7 @@ public class UserData implements Serializable {
     }
     public void comeBack() {
         Achievement come = achievements.get(4);
-        if(come.isAchieved() && come.checkCriteria(0) == 0) {
+        if(come.isAchieved() && come.checkCriteria(0) == 0 && come.getCount() == 0) {
             come.setACheck(0, 1);
             come.increaseCount();
             Log.d("achievement", "increment come back "  + come.getCount() + " " + come.checkCriteria(0));

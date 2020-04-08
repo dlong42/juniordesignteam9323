@@ -385,10 +385,10 @@ public class MapFragment extends Fragment {
         if(!aFor && userData.isAchieved(3)) {
             Toast.makeText(getContext(), frontText+ userData.getAchievements().get(3).getName() + backText, duration).show();
         }
-        if(!campus && userData.isAchieved(4)) {
+        if(!come && userData.isAchieved(4)) {
             Toast.makeText(getContext(), frontText+ userData.getAchievements().get(4).getName() + backText, duration).show();
         }
-        if(!campus && userData.isAchieved(5)) {
+        if(!funGuy && userData.isAchieved(5)) {
             Toast.makeText(getContext(), frontText+ userData.getAchievements().get(5).getName() + backText, duration).show();
         }
         MainActivity main = ((MainActivity) getActivity());
