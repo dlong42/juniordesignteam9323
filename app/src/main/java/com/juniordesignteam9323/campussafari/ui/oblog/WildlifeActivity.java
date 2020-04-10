@@ -99,7 +99,7 @@ public class WildlifeActivity extends AppCompatActivity implements View.OnClickL
         if (v.getId() == R.id.wildlife_submit) {
             EditText editText = findViewById(R.id.wildlife_input);
             newName = editText.getText().toString();
-            if (!newName.equals("") && newName.length() < 13) {
+            if (!newName.equals("") && newName.length() <= 30) {
                 // Updates the wildlife's nickname
                 wildlife.setNickname(newName);
                 this.wildlife_nickname = newName;
@@ -108,8 +108,13 @@ public class WildlifeActivity extends AppCompatActivity implements View.OnClickL
                 String e = "";
                 TextView error = findViewById(R.id.wildlife_error);
                 error.setText(e);
-            } else if (newName.length() > 12) {
-                String e = "Must be less than 13 characters.";
+            } else if (newName.equals("")) {
+                wildlife.setNickname(common_name);
+                this.wildlife_nickname = common_name;
+                TextView nn = findViewById(R.id.wildlife_nname);
+                nn.setText(getTextN(common_name));
+            } else if (newName.length() > 30) {
+                String e = "Cannot be more than 30 characters.";
                 TextView error = findViewById(R.id.wildlife_error);
                 error.setText(e);
             } else {
