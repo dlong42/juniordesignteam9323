@@ -93,6 +93,7 @@ public class OblogFragment extends Fragment implements AdapterView.OnItemSelecte
         //ArrayList<Wildlife> observed = userData.getObLog();
         for (int i = 0; i < observed.size(); i++) {
             if (observed.get(i).getCaught()) {
+
                 if (observed.get(i).getCommonName() == null) {
                     System.out.println("Common Name Null");
                 }
@@ -174,63 +175,73 @@ public class OblogFragment extends Fragment implements AdapterView.OnItemSelecte
         }
     }
 
+    private boolean moreThanTwo(){
+        int count = 0;
+        for (int i = 0; i < observed.size(); i++){
+            if (observed.get(i).getCaught()){
+                count++;
+            }
+        }
+        return (count >= 2);
+    }
+
     //oblog spinner stuff. depending on entry selected, it sorts the list, updates data and data
     // models, then calls for the adapter to refresh.
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-        System.out.println("Presort:" + observed.get(0).getCommonName() + observed.get(1).getCommonName());
-        String text = adapterView.getItemAtPosition(position).toString();
-        //Todo: uncomment this code when nicknames are put in, and make sure Nickname string is
-        // put into spinner string array(as first one) in resources
-        /*if (text.equals("Nickname")){
-            SortByNickname sortAlgoNickname = new SortByNickname();
-            Collections.sort(observed, sortAlgoNickname);
-        }*/
-        if (text.equals("Common Name")){
-            System.out.println("Common name clicked");
-            SortByCommonName sortAlgoCommon = new SortByCommonName();
-            Collections.sort(observed, sortAlgoCommon);
-        }
-        else if (text.equals("Scientific Name")){
-            SortByScientificName sortAlgoSci = new SortByScientificName();
-            Collections.sort(observed, sortAlgoSci);
-        }
-        else if (text.equals("Taxon")){
-            SortByTaxon sortAlgoTaxon  = new SortByTaxon();
-            Collections.sort(observed, sortAlgoTaxon);
-        }
-        else if (text.equals("Level")){
-            SortByLevel sortAlgoLevel = new SortByLevel();
-            Collections.sort(observed, sortAlgoLevel);
-        }
-        else if (text.equals("Points")){
-            SortByPoints sortAlgoPoints = new SortByPoints();
-            Collections.sort(observed, sortAlgoPoints);
-        }
-        System.out.println("Resorted by " + text + ":" + observed.get(0).getCommonName() + observed.get(1).getCommonName());
-        /*boolean sorted = false;
-        while (!sorted) {
-            for (int i = 0; i < observed.size() - 1; i++) {
-                int compareValue;
-                Wildlife w1 = observed.get(i);
-                Wildlife w2 = observed.get(i+1);
-                if (text == "Common Name"){
-                    SortByCommonName sortAlgo = new SortByCommonName();
-                   Collections.sort(observed, sortAlgo);
-                }
-                if (observed.get(i).)
+        if (moreThanTwo()){
+            System.out.println("Presort:" + observed.get(0).getCommonName() + observed.get(1).getCommonName());
+            String text = adapterView.getItemAtPosition(position).toString();
+            //Todo: uncomment this code when nicknames are put in, and make sure Nickname string is
+            // put into spinner string array(as first one) in resources
+            /*if (text.equals("Nickname")){
+                SortByNickname sortAlgoNickname = new SortByNickname();
+                Collections.sort(observed, sortAlgoNickname);
+            }*/
+            if (text.equals("Common Name")) {
+                System.out.println("Common name clicked");
+                SortByCommonName sortAlgoCommon = new SortByCommonName();
+                Collections.sort(observed, sortAlgoCommon);
+            } else if (text.equals("Scientific Name")) {
+                SortByScientificName sortAlgoSci = new SortByScientificName();
+                Collections.sort(observed, sortAlgoSci);
+            } else if (text.equals("Taxon")) {
+                SortByTaxon sortAlgoTaxon = new SortByTaxon();
+                Collections.sort(observed, sortAlgoTaxon);
+            } else if (text.equals("Level")) {
+                SortByLevel sortAlgoLevel = new SortByLevel();
+                Collections.sort(observed, sortAlgoLevel);
+            } else if (text.equals("Points")) {
+                SortByPoints sortAlgoPoints = new SortByPoints();
+                Collections.sort(observed, sortAlgoPoints);
             }
+            System.out.println("Resorted by " + text + ":" + observed.get(0).getCommonName() + observed.get(1).getCommonName());
+            /*boolean sorted = false;
+            while (!sorted) {
+                for (int i = 0; i < observed.size() - 1; i++) {
+                    int compareValue;
+                    Wildlife w1 = observed.get(i);
+                    Wildlife w2 = observed.get(i+1);
+                    if (text == "Common Name"){
+                        SortByCommonName sortAlgo = new SortByCommonName();
+                       Collections.sort(observed, sortAlgo);
+                    }
+                    if (observed.get(i).)
+                }
+            }
+            if (text == "Common Name"){
+                SortbyCommonName();
+            }*/
+            data = updateData();
+            adapter.notifyDataSetChanged();
+            recyclerView.invalidate();
+            recyclerView.setAdapter(new CustomAdapter(data));
+            //adapter = new CustomAdapter(data);
+            //recyclerView.setAdapter(adapter);
+            Toast.makeText(adapterView.getContext(), "Sorted by " + text, Toast.LENGTH_SHORT).show();
+        } else {
+            return;
         }
-        if (text == "Common Name"){
-            SortbyCommonName();
-        }*/
-        data = updateData();
-        adapter.notifyDataSetChanged();
-        recyclerView.invalidate();
-        recyclerView.setAdapter(new CustomAdapter(data));
-        //adapter = new CustomAdapter(data);
-        //recyclerView.setAdapter(adapter);
-        Toast.makeText(adapterView.getContext(), "Sorted by " + text, Toast.LENGTH_SHORT).show();
     }
 
     @Override
