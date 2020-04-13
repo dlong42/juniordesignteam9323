@@ -64,6 +64,13 @@
     <string name="brd_header">Top Players</string>
     <string name="brd_member">Loading...</string>
 
+    <!-- Strings used in Admin & xml-->
+    <string name="admin_login">Log into Database</string>
+    <string name="admin_user">See user data</string>
+    <string name="admin_time">Locate Timestamps</string>
+    <string name="admin_addpin">Add pin</string>
+    <string name="admin_removepin">Remove pin</string>
+
     <string name="log_button">Log</string>
     
     <string-array name="sortby">

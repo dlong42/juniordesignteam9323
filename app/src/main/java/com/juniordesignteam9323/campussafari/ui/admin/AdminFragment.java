@@ -25,6 +25,11 @@ public class AdminFragment extends Fragment {
     private AdminViewModel adminViewModel;
     public String adminEmail;
     public final FirebaseFirestore db = FirebaseFirestore.getInstance();;
+    String login_d;
+    String users_d;
+    String time_d;
+    String add_d;
+    String remove_d;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -39,17 +44,32 @@ public class AdminFragment extends Fragment {
             }
         });
 
-
+        // Buttons and text only viewable by Dr. Weigel
         final TextView emailLabel = (TextView) root.findViewById(R.id.emailLabel);
         final EditText emailBox = (EditText) root.findViewById(R.id.enterEmail);
         final Button submit = (Button) root.findViewById(R.id.submitAdmin);
 
+        // Buttons visible to all admin
+        final Button login = (Button) root.findViewById(R.id.admin_login);
+        final Button admin_users = (Button) root.findViewById(R.id.admin_user);
+        final Button admin_time = (Button) root.findViewById(R.id.admin_time);
+        final Button admin_addpin = (Button) root.findViewById(R.id.admin_addpin);
+        final Button admin_removepin = (Button) root.findViewById(R.id.admin_removepin);
+        final TextView admin_directions = (TextView) root.findViewById(R.id.admin_directions);
+
+        // Sets direction text base on button clicked
+        login.setOnClickListener(new View.OnClickListener() {public void onClick(View v) {admin_directions.setText(login_d);}});
+        admin_users.setOnClickListener(new View.OnClickListener() {public void onClick(View v) {admin_directions.setText(users_d);}});
+        admin_time.setOnClickListener(new View.OnClickListener() {public void onClick(View v) {admin_directions.setText(time_d);}});
+        admin_addpin.setOnClickListener(new View.OnClickListener() {public void onClick(View v) {admin_directions.setText(add_d);}});
+        admin_removepin.setOnClickListener(new View.OnClickListener() {public void onClick(View v) {admin_directions.setText(remove_d);}});
+
+        // Hide buttons only meant for Dr. Wiegel if the user does not have her email
         if (!((MainActivity) getActivity()).getUserData().getEmail().equals("weigel@gmail.com")) {
             emailBox.setVisibility(View.GONE);
             submit.setVisibility(View.GONE);
             emailLabel.setVisibility(View.GONE);
         }
-
 
         submit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -58,10 +78,26 @@ public class AdminFragment extends Fragment {
                 UserData userData = new UserData(true, adminEmail);
                 db.collection("userData").document(adminEmail).set(userData);
                 Toast.makeText(getActivity().getApplicationContext(),adminEmail + " is now an admin.",Toast.LENGTH_SHORT).show();
+
+
             }
         });
 
-
+        // Texts settings for directions
+        login_d = "How to: Log into the database\n" +
+                "\n1. Navigate to console.firebase.google.com under your email that was approved. If you have not gotten your email added as an editor of the database, contact Dr. Weigel before moving forward.\n" +
+                "2. Select the database named Campus-Safari-Database. You have now reached the database.\n" +
+                "3. The sidebar on the left hand side contains different elements of the database you can explore.\n";
+        users_d = "How to: See User data\n" +
+                "\n1. Once logged into the database, select the Database option from the left hand side bar.\n" +
+                "2. Select Cloud Firestore.\n" +
+                "3. Here under the Data tab, you can see the documents “users” and “userData.” “users” consists of each user’s general data, located by a user’s email. “userData” consists of gameplay data from the app, also located by a user’s email.\n";
+        time_d = "How to: Locate Timestamps\n" +
+                "\n1. Once logged into the database,select the Authentication tab from the left hand side bar.\n" +
+                "2. Here you may find the date a user created their account and when they last accessed that account. \n" +
+                "3. Note that the “timestamp” field under a given user in the document “users” contains more information down to the exact seconds of access, but this number must be first converted to date format.\n";
+        add_d = "Not implemented";
+        remove_d = "Not implemented";
 
         return root;
     }
