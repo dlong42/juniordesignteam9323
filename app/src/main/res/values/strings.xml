@@ -70,10 +70,12 @@
     <string name="admin_time">Locate Timestamps</string>
     <string name="admin_addpin">Add pin</string>
     <string name="admin_removepin">Remove pin</string>
+    <string name="admin_howto">How To:</string>
 
     <string name="log_button">Log</string>
     
     <string-array name="sortby">
+        <item>Nickname</item>
         <item>Common Name</item>
         <item>Scientific Name</item>
         <item>Taxon</item>

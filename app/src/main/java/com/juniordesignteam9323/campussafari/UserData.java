@@ -49,6 +49,15 @@ public class UserData implements Serializable {
     public void setObLog(ArrayList<Wildlife> obLog) {this.obLog = obLog;}
     public void setAchievements(ArrayList<Achievement> achievements) {this.achievements = achievements;}
 
+    public void updateOblogElement(Wildlife wildlife) {
+        for (int i = 0; i < obLog.size(); i++) {
+            if (obLog.get(i).getLatitude() == wildlife.getLatitude()) {
+                obLog.set(i, wildlife);
+
+            }
+        }
+    }
+
     public boolean isAchieved(int i ) {
         return achievements.get(i).isAchieved();
     }

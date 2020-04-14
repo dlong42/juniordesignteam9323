@@ -6,6 +6,23 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/admin_howto"
+        android:layout_width="178dp"
+        android:layout_height="59dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="173dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="60dp"
+        android:text="@string/admin_howto"
+        android:textColor="#4465B3"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/text_admin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,15 +32,16 @@
         android:textAlignment="center"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/admin_directions" />
 
     <EditText
         android:id="@+id/enterEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="99dp"
-        android:layout_marginTop="9dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="99dp"
         android:ems="10"
         android:inputType="textEmailAddress"
@@ -35,8 +53,8 @@
         android:id="@+id/emailLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="145dp"
-        android:layout_marginTop="26dp"
+        android:layout_marginStart="146dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="146dp"
         android:text="Enter Admin Email:"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,8 +65,8 @@
         android:id="@+id/submitAdmin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="169dp"
-        android:layout_marginEnd="154dp"
+        android:layout_marginStart="162dp"
+        android:layout_marginEnd="162dp"
         android:text="Submit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,40 +76,32 @@
         android:id="@+id/admin_directions"
         android:layout_width="254dp"
         android:layout_height="427dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="9dp"
-        android:layout_marginBottom="7dp"
-        android:textColor="@color/colorPrimaryDark"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="21dp"
+        android:textColor="@color/common_google_signin_btn_text_dark_focused"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/admin_time"
-        app:layout_constraintTop_toBottomOf="@+id/submitAdmin"
-        app:layout_constraintVertical_bias="0.655" />
+        app:layout_constraintTop_toBottomOf="@+id/admin_howto" />
 
     <Button
         android:id="@+id/admin_login"
         android:layout_width="126dp"
         android:layout_height="58dp"
-        android:layout_marginTop="140dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginTop="82dp"
+        android:layout_marginEnd="10dp"
         android:text="@string/admin_login"
-        app:layout_constraintBottom_toTopOf="@+id/admin_user"
         app:layout_constraintEnd_toStartOf="@+id/admin_directions"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/enterEmail" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/admin_user"
         android:layout_width="126dp"
         android:layout_height="58dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="27dp"
         android:layout_marginEnd="10dp"
         android:text="@string/admin_user"
         app:layout_constraintEnd_toStartOf="@+id/admin_directions"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/admin_login" />
 
@@ -99,8 +109,8 @@
         android:id="@+id/admin_time"
         android:layout_width="126dp"
         android:layout_height="58dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginEnd="10dp"
         android:text="@string/admin_time"
         app:layout_constraintEnd_toStartOf="@+id/admin_directions"
         app:layout_constraintStart_toStartOf="parent"
@@ -110,11 +120,10 @@
         android:id="@+id/admin_addpin"
         android:layout_width="126dp"
         android:layout_height="58dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginEnd="10dp"
         android:text="@string/admin_addpin"
         app:layout_constraintEnd_toStartOf="@+id/admin_directions"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/admin_time" />
 
@@ -122,11 +131,10 @@
         android:id="@+id/admin_removepin"
         android:layout_width="126dp"
         android:layout_height="58dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="27dp"
         android:layout_marginEnd="10dp"
         android:text="@string/admin_removepin"
         app:layout_constraintEnd_toStartOf="@+id/admin_directions"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/admin_addpin" />
 </androidx.constraintlayout.widget.ConstraintLayout>

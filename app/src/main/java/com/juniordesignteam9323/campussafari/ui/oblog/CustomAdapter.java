@@ -1,5 +1,6 @@
 package com.juniordesignteam9323.campussafari.ui.oblog;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,14 +10,20 @@ import android.widget.TextView;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.firebase.ui.auth.data.model.User;
+import com.juniordesignteam9323.campussafari.MainActivity;
 import com.juniordesignteam9323.campussafari.R;
+import com.juniordesignteam9323.campussafari.UserData;
+import com.juniordesignteam9323.campussafari.Wildlife;
+import com.juniordesignteam9323.campussafari.ui.PasswordActivity;
 
 
 import java.util.ArrayList;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
 
-    private ArrayList<DataModel> dataSet;
+    private static ArrayList<DataModel> dataSet;
+    private static UserData userData;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -24,6 +31,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         TextView textViewNickname;
         TextView textViewTaxon;
         ImageView imageViewIcon;
+        Wildlife type;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -31,13 +39,28 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             this.textViewTaxon = (TextView) itemView.findViewById(R.id.textViewTaxon);
             this.imageViewIcon = (ImageView) itemView.findViewById(R.id.imageView);
 
+            // Navigate to corresponding wildlife page when view is clicked
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v)
+                {
+                    //  perform your action here
+                    Intent i = new Intent(v.getContext(), WildlifeActivity.class);
+                    int pos = getAdapterPosition();
+                    Wildlife w = dataSet.get(pos).getType();
+                    i.putExtra("WILDLIFE", w);
+                    i.putExtra("USERDATA", userData);
+                    v.getContext().startActivity(i);
+                }
+            });
+
         }
     }
 
-    public CustomAdapter(ArrayList<DataModel> data) {
+    public CustomAdapter(ArrayList<DataModel> data, UserData userData) {
         this.dataSet = data;
+        this.userData = userData;
     }
-
 
 
     @Override
@@ -45,8 +68,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                                            int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.layout_oblog, parent, false);
-
-        //view.setOnClickListener(OblogFragment.myOnClickListener);
 
         MyViewHolder myViewHolder = new MyViewHolder(view);
         return myViewHolder;
@@ -59,22 +80,11 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         TextView textViewNickname = holder.textViewNickname;
         TextView textViewTaxon = holder.textViewTaxon;
         ImageView imageView = holder.imageViewIcon;
-        //Wildlife type = dataSet.get(listPosition).getType();
+//        Wildlife type = dataSet.get(listPosition).getType();
 
         textViewNickname.setText(dataSet.get(listPosition).getNickname());
         textViewTaxon.setText(dataSet.get(listPosition).getTaxon());
         imageView.setImageDrawable(dataSet.get(listPosition).getImage());
-        //holder.cardView.setOnClickListener(new View.OnClickListener() {
-            /*@Override
-            public void onClick(final View view) {
-                Intent intent = new Intent(view.getContext(), PasswordActivity.class);
-                ////itemView.getContext().startActivity(new Intent(itemView.getContext(), WildlifeActivity.class));
-                //Wildlife toSee = dataSet.get(listPosition).getType();
-                //intent.putExtra("WILDLIFE", toSee);
-                view.getContext().startActivity(intent);
-                //Intent intent = new Intent(getActivity(), WildlifeActivity.class);
-            }*/
-        //});
     }
 
     @Override

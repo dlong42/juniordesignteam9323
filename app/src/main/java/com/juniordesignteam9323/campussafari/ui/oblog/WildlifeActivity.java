@@ -12,6 +12,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.juniordesignteam9323.campussafari.MainActivity;
 import com.juniordesignteam9323.campussafari.R;
 import com.juniordesignteam9323.campussafari.UserData;
@@ -20,6 +24,8 @@ import com.juniordesignteam9323.campussafari.Wildlife;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -55,6 +61,12 @@ public class WildlifeActivity extends AppCompatActivity implements View.OnClickL
         // Fields yet to be implemented within the app
         this.wildlife_nickname = wildlife.getNickname();
         this.fun_fact = "Fun facts have yet to be implemented.";
+
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser user = auth.getCurrentUser();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        userData.updateOblogElement(wildlife);
+        db.collection("userData").document(user.getEmail()).set(userData);
 
         // Set the image
         ImageView imgView =(ImageView)findViewById(R.id.wildlife_pic);
@@ -104,7 +116,12 @@ public class WildlifeActivity extends AppCompatActivity implements View.OnClickL
                 wildlife.setNickname(newName);
                 this.wildlife_nickname = newName;
                 TextView nn = findViewById(R.id.wildlife_nname);
-                nn.setText(getTextN(newName));
+                nn.setText(getTextN(wildlife.getNickname()));
+                FirebaseAuth auth = FirebaseAuth.getInstance();
+                FirebaseUser user = auth.getCurrentUser();
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                userData.updateOblogElement(wildlife);
+                db.collection("userData").document(user.getEmail()).set(userData);
                 String e = "";
                 TextView error = findViewById(R.id.wildlife_error);
                 error.setText(e);

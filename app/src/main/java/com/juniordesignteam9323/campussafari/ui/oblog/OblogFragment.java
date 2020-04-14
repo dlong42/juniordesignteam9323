@@ -74,8 +74,6 @@ public class OblogFragment extends Fragment implements AdapterView.OnItemSelecte
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        //setContentView(R.layout.activity_oblog);
-        //myOnClickListener = new MyOnClickListener(this);
         recyclerView = (RecyclerView) getView().findViewById(R.id.rvWildlife);
 
         recyclerView.setHasFixedSize(true);
@@ -108,11 +106,10 @@ public class OblogFragment extends Fragment implements AdapterView.OnItemSelecte
                 }
                 Drawable d = urlConverter(observed.get(i).getImage_url());
                 data.add(new DataModel(
-                        //Todo: Change below line to .getNickname() once nicknames are implemented
                         observed.get(i).getCommonName(),
                         observed.get(i).getTaxon(),
                         observed.get(i).getScientificName(),
-                        observed.get(i).getCommonName(),
+                        observed.get(i).getNickname(),
                         i,
                         d,
                         observed.get(i)
@@ -120,7 +117,7 @@ public class OblogFragment extends Fragment implements AdapterView.OnItemSelecte
                 System.out.println("Data Model:" + data.get(i).getCommonName()+ data.get(i).getTaxon() + data.get(i).getScientificName());
             }
         }
-        adapter = new CustomAdapter(data);
+        adapter = new CustomAdapter(data, userData);
         recyclerView.setAdapter(adapter);
     }
 
@@ -149,8 +146,7 @@ public class OblogFragment extends Fragment implements AdapterView.OnItemSelecte
                 //making data models of observed wildlife and loading into an arraylist
                 Drawable d = urlConverter(observed.get(i).getImage_url());
                 updatedData.add(new DataModel(
-                        //Todo: Change below line to .getNickname() once nicknames are implemented
-                        observed.get(i).getCommonName(),
+                        observed.get(i).getNickname(),
                         observed.get(i).getTaxon(),
                         observed.get(i).getScientificName(),
                         observed.get(i).getCommonName(),
@@ -192,12 +188,10 @@ public class OblogFragment extends Fragment implements AdapterView.OnItemSelecte
         if (moreThanTwo()){
             System.out.println("Presort:" + observed.get(0).getCommonName() + observed.get(1).getCommonName());
             String text = adapterView.getItemAtPosition(position).toString();
-            //Todo: uncomment this code when nicknames are put in, and make sure Nickname string is
-            // put into spinner string array(as first one) in resources
-            /*if (text.equals("Nickname")){
+            if (text.equals("Nickname")){
                 SortByNickname sortAlgoNickname = new SortByNickname();
                 Collections.sort(observed, sortAlgoNickname);
-            }*/
+            }
             if (text.equals("Common Name")) {
                 System.out.println("Common name clicked");
                 SortByCommonName sortAlgoCommon = new SortByCommonName();
@@ -235,7 +229,7 @@ public class OblogFragment extends Fragment implements AdapterView.OnItemSelecte
             data = updateData();
             adapter.notifyDataSetChanged();
             recyclerView.invalidate();
-            recyclerView.setAdapter(new CustomAdapter(data));
+            recyclerView.setAdapter(new CustomAdapter(data, userData));
             //adapter = new CustomAdapter(data);
             //recyclerView.setAdapter(adapter);
             Toast.makeText(adapterView.getContext(), "Sorted by " + text, Toast.LENGTH_SHORT).show();
@@ -249,8 +243,7 @@ public class OblogFragment extends Fragment implements AdapterView.OnItemSelecte
 
     }
 
-    /* todo: uncomment the following code when nicknames are implemented
-    /*
+
     // Sorts wildlife alphabetically by nickname
     public class SortByNickname implements Comparator<Wildlife> {
         public int compare(Wildlife w1, Wildlife w2) {
@@ -263,7 +256,7 @@ public class OblogFragment extends Fragment implements AdapterView.OnItemSelecte
             }
         }
     }
-    */
+
 
     // Sorts wildlife alphabetically by common name
     public class SortByCommonName implements Comparator<Wildlife> {
@@ -333,33 +326,4 @@ public class OblogFragment extends Fragment implements AdapterView.OnItemSelecte
             }
         }
     }
-
-    /*public static class MyOnClickListener implements View.OnClickListener {
-
-        private final Context context;
-
-        private MyOnClickListener(Context context) {
-            this.context = context;
-        }
-
-        @Override
-        public void onClick(View v) {
-            openItem(v);
-        }
-
-        private void openItem(View v) {
-            int selectedItemPosition = recyclerView.getChildPosition(v);
-            RecyclerView.ViewHolder viewHolder
-                    = recyclerView.findViewHolderForPosition(selectedItemPosition);
-            TextView textViewName
-                    = (TextView) viewHolder.itemView.findViewById(R.id.textViewName);
-            String selectedNickname = (String) textViewName.getText();
-            int selectedItemId = -1;
-            for (int i = 0; i < MyData.nicknameArray.length; i++) {
-                if (selectedNickname.equals(MyData.nicknameArray[i])) {
-                    selectedItemId = MyData.id_[i];
-                }
-            }
-        }
-    } */
 }
