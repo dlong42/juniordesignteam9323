@@ -63,12 +63,12 @@ public class UserData implements Serializable {
     }
     public ArrayList<Achievement> setUpAchievements(){
         ArrayList<Achievement> achievements = new ArrayList<Achievement>();
-        achievements.add(new Achievement("Campus Traveller", false, new ArrayList<Check>(4), 4) );
-        achievements.add(new Achievement("4.0 GPA", false, new ArrayList<Check>(1), 1));
-        achievements.add(new Achievement("Taxa Driver", false, new ArrayList<Check>(8), 8 ));
-        achievements.add(new Achievement("A for Effort", false, new ArrayList<Check>(1), 1));
-        achievements.add(new Achievement("Hey, Come Back!", false, new ArrayList<Check>(1), 1));
-        achievements.add(new Achievement("You're a Fun Guy (Ha Ha)", false, new ArrayList<Check>(1), 1));
+        achievements.add(new Achievement("Campus Traveller", false, new ArrayList<Check>(4), 4, "Collect this achievement by observing a wildlife in all four regions of campus.") );
+        achievements.add(new Achievement("4.0 GPA", false, new ArrayList<Check>(1), 1, "Collect this achievement by observing the Albino Squirrel."));
+        achievements.add(new Achievement("Taxa Driver", false, new ArrayList<Check>(8), 8 , "Collect his achievement by observing a wildlife in each of the 8 taxa."));
+        achievements.add(new Achievement("A for Effort", false, new ArrayList<Check>(1), 1, "Collect this achievement by observing your first wildlife."));
+        achievements.add(new Achievement("Hey, Come Back!", false, new ArrayList<Check>(1), 1, "Collect this achievement by going off campus and then returning."));
+        achievements.add(new Achievement("You're a Fun Guy (Ha Ha)", false, new ArrayList<Check>(1), 1, "Collect this achievement by observing the only fungi on campus."));
         return achievements;
     }
 

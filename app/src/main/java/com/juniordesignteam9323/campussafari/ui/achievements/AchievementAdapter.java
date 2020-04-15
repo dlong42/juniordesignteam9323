@@ -24,6 +24,7 @@ public class AchievementAdapter extends RecyclerView.Adapter<AchievementAdapter.
         TextView textAchieved;
         TextView textNeeded;
         TextView textCount;
+        TextView textDescription;
         ImageView trophyView;
 
 
@@ -33,6 +34,7 @@ public class AchievementAdapter extends RecyclerView.Adapter<AchievementAdapter.
             this.textAchieved = (TextView) itemView.findViewById(R.id.textAchieved);
             this.textNeeded = (TextView) itemView.findViewById(R.id.textNeeded);
             this.textCount = (TextView) itemView.findViewById(R.id.textCount);
+            this.textDescription = (TextView) itemView.findViewById(R.id.textDescription);
             this.trophyView = (ImageView) itemView.findViewById(R.id.trophyView);
 
         }
@@ -59,6 +61,7 @@ public class AchievementAdapter extends RecyclerView.Adapter<AchievementAdapter.
         TextView textAchieved = holder.textAchieved;
         TextView textNeeded = holder.textNeeded;
         TextView textCount = holder.textCount;
+        TextView textDescription = holder.textDescription;
         ImageView trophyView = holder.trophyView;
 
         textAchievementName.setText(dataSet.get(listPosition).getName());
@@ -70,9 +73,10 @@ public class AchievementAdapter extends RecyclerView.Adapter<AchievementAdapter.
 
         //Todo: add better descriptions of the tasks each achievement requires.
         // Maybe have them colored when completed for feedback
-        textNeeded.setText(Integer.toString(dataSet.get(listPosition).getNeeded().size()) + " tasks");
+        textNeeded.setText(Integer.toString(dataSet.get(listPosition).getNeeded().size()) + " task(s)");
         textCount.setText("Progress: " + Integer.toString(dataSet.get(listPosition).getCount())
                 + "/" + Integer.toString(dataSet.get(listPosition).getNeeded().size()) + " completed");
+        textDescription.setText(dataSet.get(listPosition).getDescription());
         trophyView.setImageDrawable(dataSet.get(listPosition).getTrophy());
 
     }

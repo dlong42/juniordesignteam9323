@@ -45,8 +45,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             }
         });
 
-
-        Switch notifications = root.findViewById(R.id.notificationSwitch);
         Switch music = root.findViewById(R.id.musicSwitch);
 
         Button change_nicknameBtn = root.findViewById(R.id.change_nickname);
