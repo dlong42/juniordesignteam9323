@@ -15,6 +15,7 @@ public class Wildlife implements Serializable {
     private double longitude;
     private int id;
     private boolean caught;
+    String funFact;
 
     public Wildlife() {
         this.commonName = null;
@@ -38,6 +39,20 @@ public class Wildlife implements Serializable {
         this.caught = false;
     }
 
+    public Wildlife(String commonName, String scientificName, String taxon, String level, String points, String image_url, double latitude, double longitude, int id, String funFact){
+        this.commonName = commonName;
+        this.scientificName = scientificName;
+        this.taxon = taxon;
+        this.level = level;
+        this.points = points;
+        this.image_url = image_url;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.id = id;
+        this.caught = false;
+        this.funFact = funFact;
+    }
+
     public String getTaxon() {return taxon;}
     public String getScientificName() {return scientificName;}
     public String getCommonName() {return commonName;}
@@ -49,6 +64,7 @@ public class Wildlife implements Serializable {
     public int getId() {return id;}
     public boolean getCaught() {return caught;}
     public String getNickname() { return nickname; }
+    public String getFunFact() {return funFact;}
 
     public void setTaxon(String taxon) {this.taxon = taxon;}
     public void setScientificName(String scientificName) {this.scientificName = scientificName;}
@@ -61,6 +77,7 @@ public class Wildlife implements Serializable {
     public void setId(int id) {this.id = id;}
     public void setCaught(boolean caught) {this.caught = caught;}
     public void setNickname(String nickname) { this.nickname = nickname; }
+    public void setFunFact(String funFact) {this.funFact = funFact;}
 
     //changes the caught variable to true, and returns true indicating a successful catch
     //return false if the wildlife has been caught before

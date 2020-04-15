@@ -99,9 +99,10 @@ public class AchievementsFragment extends Fragment implements AdapterView.OnItem
                     achievements.get(i).isAchieved(),
                     achievements.get(i).getNeeded(),
                     achievements.get(i).getCount(),
+                    achievements.get(i).getDescription(),
                     d
             ));
-            System.out.println("Achievement Data Model:" + data.get(i).getName()+ data.get(i).isAchieved() + data.get(i).getNeeded().size());
+            System.out.println("Achievement Data Model:" + data.get(i).getName()+ data.get(i).isAchieved() + data.get(i).getNeeded().size() + data.get(i).getDescription());
         }
         adapter = new AchievementAdapter(data);
         recyclerView.setAdapter(adapter);
@@ -129,9 +130,10 @@ public class AchievementsFragment extends Fragment implements AdapterView.OnItem
                     achievements.get(i).isAchieved(),
                     achievements.get(i).getNeeded(),
                     achievements.get(i).getCount(),
+                    achievements.get(i).getDescription(),
                     d
             ));
-            System.out.println("Updated Achievement Data Model:" + data.get(i).getName()+ data.get(i).isAchieved() + data.get(i).getNeeded().size());
+            System.out.println("Updated Achievement Data Model:" + data.get(i).getName()+ data.get(i).isAchieved() + data.get(i).getNeeded().size() + data.get(i).getDescription());
         }
         return updatedData;
     }
