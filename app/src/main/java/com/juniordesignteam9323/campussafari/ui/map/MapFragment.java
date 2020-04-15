@@ -245,6 +245,7 @@ public class MapFragment extends Fragment {
                 public void onLocationChanged(Location location) {
                     Log.d("Location changed", location.toString());
                     if((location.getLatitude() > 33.781) || (location.getLatitude() < 33.771) || (location.getLongitude() < -84.407) || (location.getLongitude() > -84.392)) {
+                        Log.d("achievement", "lat: "+location.getLatitude() + " long: "+ location.getLongitude());
                         userData.comeBack();
                     }
                     for (Marker m: markerList) {
@@ -355,12 +356,12 @@ public class MapFragment extends Fragment {
 //      wild.setScientificName(scientific);
 //      wild.setImage_url(image_url);
         boolean levelUpdate = false;
-        boolean campus = userData.isAchieved(0);
-        boolean fourPoint = userData.isAchieved(1);
-        boolean taxa = userData.isAchieved(2);
-        boolean aFor = userData.isAchieved(3);
-        boolean come = userData.isAchieved(4);
-        boolean funGuy = userData.isAchieved(5);
+        boolean campus = userData.achievementBeenDisplayed(0);
+        boolean fourPoint =userData.achievementBeenDisplayed(1);
+        boolean taxa = userData.achievementBeenDisplayed(2);
+        boolean aFor = userData.achievementBeenDisplayed(3);
+        boolean come = userData.achievementBeenDisplayed(4);
+        boolean funGuy = userData.achievementBeenDisplayed(5);
         if(toAdd.catchWildlife()) {
             userData.addToObLog(toAdd);
             levelUpdate = userData.updatePoints(Integer.parseInt(toAdd.getPoints()));
@@ -368,6 +369,7 @@ public class MapFragment extends Fragment {
         } else {
             Log.d("catching 4a",  "already caught");
         }
+        int comeCurrCount = userData.getAchievement(4).getCount();
         Toast toast;
         Context context = getContext();
         CharSequence frontText = "Congratulations! You have gained the ";
@@ -375,21 +377,27 @@ public class MapFragment extends Fragment {
         int duration = Toast.LENGTH_LONG;
         if(!campus && userData.isAchieved(0)) {
             Toast.makeText(getContext(), frontText+ userData.getAchievements().get(0).getName() + backText, duration).show();
+            userData.setDisplayed(0, true);
         }
         if(!fourPoint && userData.isAchieved(1)) {
             Toast.makeText(getContext(), frontText+ userData.getAchievements().get(1).getName() + backText, duration).show();
+            userData.setDisplayed(1, true);
         }
         if(!taxa && userData.isAchieved(2)) {
             Toast.makeText(getContext(), frontText+ userData.getAchievements().get(2).getName() + backText, duration).show();
+            userData.setDisplayed(2, true);
         }
         if(!aFor && userData.isAchieved(3)) {
             Toast.makeText(getContext(), frontText+ userData.getAchievements().get(3).getName() + backText, duration).show();
+            userData.setDisplayed(3, true);
         }
-        if(!come && userData.isAchieved(4)) {
+        if(!come && userData.isAchieved(4) && (comeCurrCount == 1)) {
             Toast.makeText(getContext(), frontText+ userData.getAchievements().get(4).getName() + backText, duration).show();
+            userData.setDisplayed(4, true);
         }
         if(!funGuy && userData.isAchieved(5)) {
             Toast.makeText(getContext(), frontText+ userData.getAchievements().get(5).getName() + backText, duration).show();
+            userData.setDisplayed(5, true);
         }
         MainActivity main = ((MainActivity) getActivity());
 

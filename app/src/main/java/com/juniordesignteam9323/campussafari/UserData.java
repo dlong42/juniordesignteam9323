@@ -61,6 +61,10 @@ public class UserData implements Serializable {
     public boolean isAchieved(int i ) {
         return achievements.get(i).isAchieved();
     }
+    public Achievement getAchievement(int i) {return achievements.get(i);}
+    public boolean achievementBeenDisplayed(int i ) {return achievements.get(i).isDisplayed();}
+    public void setDisplayed(int i, boolean displayed) {achievements.get(i).setDisplayed(displayed);}
+
     public ArrayList<Achievement> setUpAchievements(){
         ArrayList<Achievement> achievements = new ArrayList<Achievement>();
         achievements.add(new Achievement("Campus Traveller", false, new ArrayList<Check>(4), 4, "Collect this achievement by observing a wildlife in all four regions of campus.") );
@@ -184,7 +188,7 @@ public class UserData implements Serializable {
     }
     public void comeBack() {
         Achievement come = achievements.get(4);
-        if(come.isAchieved() && come.checkCriteria(0) == 0 && come.getCount() == 0) {
+        if(come.isAchieved() && come.checkCriteria(0) == 0) {
             come.setACheck(0, 1);
             come.increaseCount();
             Log.d("achievement", "increment come back "  + come.getCount() + " " + come.checkCriteria(0));

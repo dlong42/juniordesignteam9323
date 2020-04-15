@@ -8,17 +8,20 @@ public class Achievement implements Serializable{
     private ArrayList<Check> needed;
     private int count;
     private String description;
+    private boolean displayed;
     public Achievement() {
         this.name = null;
         this.achieved = false;
         this.count = 0;
         this.needed = new ArrayList<Check>();
+        this.displayed = false;
     }
     public Achievement(String name) {
         this.name = name;
         this.achieved = false;
         this.needed = new ArrayList<Check>();
         this.count = 0;
+        this.displayed = false;
     }
     public Achievement(String name, boolean achieved, ArrayList<Check> needed, String description) {
         this.name = name;
@@ -27,6 +30,7 @@ public class Achievement implements Serializable{
         Collections.fill(needed, new Check());
         this.count = 0;
         this.description = description;
+        this.displayed = false;
     }
     public Achievement(String name, boolean achieved, ArrayList<Check> needed, int sz, String description) {
         this.name = name;
@@ -37,6 +41,7 @@ public class Achievement implements Serializable{
         }
         this.count = 0;
         this.description = description;
+        this.displayed = false;
     }
     public String getName() {
         return name;
@@ -49,6 +54,12 @@ public class Achievement implements Serializable{
     }
     public void setAchieved(boolean achieved) {
         this.achieved = achieved;
+    }
+    public boolean isDisplayed(){
+        return displayed;
+    }
+    public void setDisplayed(boolean displayed){
+        this.displayed = displayed;
     }
     public ArrayList<Check> getNeeded() {return needed;}
     public void setNeeded(ArrayList<Check> needed) {
