@@ -4,15 +4,22 @@
 
 ### New Features
 -Added a tutorial to teach new players how to add wildlife to their Observation Log and view them later.
+
 -Achievements now have descriptions.
+
 -Wildlife pages now include fun facts.
+
 -When creating an account, there is visual feedback when selecting an avatar.
+
 -Data for wildlife pins is now stored externally to the app.
+
 -Beautified the UI.
 
 ### Bug Fixes
 -Fixed an issue where users were being awarded achievements they should not get.
+
 -Fixed a graphical bug where the change nickname on the wildlife page was not always visible.
+
 -Fixed an issue where the app crashed if you reopened the app after closing it without logging out.
 
 ### Known Bugs/Issues
