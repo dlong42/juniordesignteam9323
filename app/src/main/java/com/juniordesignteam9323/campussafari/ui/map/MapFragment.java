@@ -190,8 +190,11 @@ public class MapFragment extends Fragment {
                     //set up markers with custom info windows
                     CustomInfoWindowAdapter customInfoWindow = new CustomInfoWindowAdapter(getContext());
                     googleMap.setInfoWindowAdapter(customInfoWindow);
-                    setUpMarkers();
-
+                    try {
+                        setUpMarkers();
+                    } catch (NullPointerException e) {
+                        Log.d("Exception", "whoops");
+                    }
 
 
                     // For zooming automatically to the location of the marker
