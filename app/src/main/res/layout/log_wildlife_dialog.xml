@@ -15,6 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/log_wildlife_dialog_text"
         android:layout_marginTop="10dp"
-        android:hint="Nickname" />
+        android:hint="Nickname"
+        android:maxLength="30"/>
 
 </android.widget.RelativeLayout>
