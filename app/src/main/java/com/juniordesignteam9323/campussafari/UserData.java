@@ -100,7 +100,7 @@ public class UserData implements Serializable {
             achievements.get(3).setACheck(0, 1);
         }
         //hey come back achievement is already checked for in Map Fragment, 4
-        comeBack();
+        //comeBack();
         //check for the fun guy achievement, 5
         if(added.getTaxon() == "Fungi") {
             achievements.get(5).increaseCount();
