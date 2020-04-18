@@ -207,7 +207,11 @@ public class MapFragment extends Fragment {
                         @Override
                         public boolean onMarkerClick(Marker marker) {
                             final Marker mapMarker = marker;
-                            catch_button.show();
+                            wildlifeToBeAdded = (Wildlife) mapMarker.getTag();
+                            if (!wildlifeToBeAdded.getCaught()){
+                                catch_button.show();
+                            }
+
                             catch_button.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
@@ -218,7 +222,7 @@ public class MapFragment extends Fragment {
 
                                     Log.d("catching 3", "previously caught " + ((Wildlife) mapMarker.getTag()).getCaught() + "");
 
-                                    wildlifeToBeAdded = (Wildlife) mapMarker.getTag();
+                                    //wildlifeToBeAdded = (Wildlife) mapMarker.getTag();
                                     openLogWildlifeDialog();
 
                                     Log.d("catching 5", ((Wildlife) mapMarker.getTag()).getCaught() + "");
