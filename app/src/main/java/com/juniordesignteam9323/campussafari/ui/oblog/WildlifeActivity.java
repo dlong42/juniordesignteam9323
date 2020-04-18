@@ -39,6 +39,8 @@ public class WildlifeActivity extends AppCompatActivity implements View.OnClickL
     String level;
     String points_worth;
     String newName;
+    String funFact;
+    String citation;
     Wildlife wildlife;
     UserData userData;
 
@@ -57,10 +59,11 @@ public class WildlifeActivity extends AppCompatActivity implements View.OnClickL
         this.taxon = wildlife.getTaxon();
         this.level = wildlife.getLevel();
         this.points_worth = wildlife.getPoints();
+        this.fun_fact = wildlife.getFunFact();
+        this.citation = wildlife.getCitation();
 
         // Fields yet to be implemented within the app
         this.wildlife_nickname = wildlife.getNickname();
-        this.fun_fact = "Fun facts have yet to be implemented.";
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
@@ -94,6 +97,9 @@ public class WildlifeActivity extends AppCompatActivity implements View.OnClickL
 
         TextView ff = findViewById(R.id.wildlife_ff);
         ff.setText(getTextF(this.fun_fact));
+
+        //TextView cit = findViewById(R.id.wildlife_citation);
+        //cit.setText(getTextCit(this.citation));
 
         TextView rename = findViewById(R.id.wildlife_rename);
         rename.setText("Rename: ");
@@ -156,7 +162,7 @@ public class WildlifeActivity extends AppCompatActivity implements View.OnClickL
     public String getTextP(String points) {return "Points worth: " + points;}
     public String getTextN(String text) {return "Nickname: " + text;}
     public String getTextF(String text) {return "Fun Fact: " + text;}
-
+    public String getTextCit(String text) {return "Citation: " + text;}
 
     // Convert an image url into a bitmap -- necessary to set an ImageView
     private Bitmap convertPicture(String url_given) {

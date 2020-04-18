@@ -87,7 +87,7 @@ public class MapFragment extends Fragment {
 
         CSVParse parser = new CSVParse("wildlifeDB.csv", getActivity().getApplicationContext());
 
-        ArrayList<ArrayList<String>> data = parser.getList(new int[]{0, 3, 4, 5, 6, 7, 9, 10, 8});
+        ArrayList<ArrayList<String>> data = parser.getList(new int[]{0, 3, 4, 5, 6, 7, 9, 10, 8, 11, 12});
         ArrayList<String> commonNames = data.get(5);
         ArrayList<String> scientificNames = data.get(4);
         ArrayList<String> taxons = data.get(8);
@@ -97,6 +97,8 @@ public class MapFragment extends Fragment {
         ArrayList<String> longitudes = data.get(3);
         ArrayList<String> urls = data.get(1);
         ArrayList<String> ids = data.get(0);
+        ArrayList<String> funFacts = data.get(9);
+        ArrayList<String> citations = data.get(10);
 
         // Shows the InfoWindow or hides it if it is already opened.
 
@@ -108,7 +110,7 @@ public class MapFragment extends Fragment {
                 double lat = Double.parseDouble(latitudes.get(i));
                 double lon = Double.parseDouble(longitudes.get(i));
                 int id = Integer.parseInt(ids.get(i));
-                Wildlife tempWildlife = new Wildlife(commonNames.get(i), scientificNames.get(i), taxons.get(i), levels.get(i), points.get(i), urls.get(i), lat, lon, id);
+                Wildlife tempWildlife = new Wildlife(commonNames.get(i), scientificNames.get(i), taxons.get(i), levels.get(i), points.get(i), urls.get(i), lat, lon, id, funFacts.get(i), citations.get(i));
                 tempWildlife.setCaught(ud.isCaught(tempWildlife));
                 MarkerOptions tempMark = new MarkerOptions().position(new LatLng(lat, lon));
 

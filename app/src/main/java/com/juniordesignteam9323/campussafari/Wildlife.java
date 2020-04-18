@@ -15,7 +15,8 @@ public class Wildlife implements Serializable {
     private double longitude;
     private int id;
     private boolean caught;
-    String funFact;
+    private String funFact;
+    private String citation;
 
     public Wildlife() {
         this.commonName = null;
@@ -39,7 +40,7 @@ public class Wildlife implements Serializable {
         this.caught = false;
     }
 
-    public Wildlife(String commonName, String scientificName, String taxon, String level, String points, String image_url, double latitude, double longitude, int id, String funFact){
+    public Wildlife(String commonName, String scientificName, String taxon, String level, String points, String image_url, double latitude, double longitude, int id, String funFact, String citation){
         this.commonName = commonName;
         this.scientificName = scientificName;
         this.taxon = taxon;
@@ -51,6 +52,7 @@ public class Wildlife implements Serializable {
         this.id = id;
         this.caught = false;
         this.funFact = funFact;
+        this.citation = citation;
     }
 
     public String getTaxon() {return taxon;}
@@ -65,6 +67,7 @@ public class Wildlife implements Serializable {
     public boolean getCaught() {return caught;}
     public String getNickname() { return nickname; }
     public String getFunFact() {return funFact;}
+    public String getCitation() {return citation;}
 
     public void setTaxon(String taxon) {this.taxon = taxon;}
     public void setScientificName(String scientificName) {this.scientificName = scientificName;}
@@ -78,7 +81,7 @@ public class Wildlife implements Serializable {
     public void setCaught(boolean caught) {this.caught = caught;}
     public void setNickname(String nickname) { this.nickname = nickname; }
     public void setFunFact(String funFact) {this.funFact = funFact;}
-
+    public void setCitation(String citation) {this.citation = citation;}
     //changes the caught variable to true, and returns true indicating a successful catch
     //return false if the wildlife has been caught before
     public boolean catchWildlife(){
