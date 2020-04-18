@@ -5,15 +5,19 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -72,19 +76,44 @@ public class ProfileCreationActivity extends AppCompatActivity implements View.O
             }
         });
 
-        RadioGroup radioGroup = findViewById(R.id.avatarButtons);
+
+        final RadioGroup radioGroup = findViewById(R.id.avatarButtons);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.owl) {
                     userData.setAvatar("owl");
+                    Snackbar owlSnack = Snackbar.make(radioGroup, "Selected the owl!", Snackbar.LENGTH_LONG);
+                    View owlSnackView = owlSnack.getView();
+                    FrameLayout.LayoutParams owlSnackParams = (FrameLayout.LayoutParams) owlSnackView.getLayoutParams();
+                    owlSnackParams.gravity = Gravity.TOP;
+                    owlSnackView.setLayoutParams(owlSnackParams);
+                    owlSnack.show();
                 } else if (checkedId == R.id.bear) {
                     userData.setAvatar("bear");
+                    Snackbar bearSnack = Snackbar.make(radioGroup, "Selected the bear!", Snackbar.LENGTH_LONG);
+                    View bearSnackView = bearSnack.getView();
+                    FrameLayout.LayoutParams bearSnackParams = (FrameLayout.LayoutParams) bearSnackView.getLayoutParams();
+                    bearSnackParams.gravity = Gravity.TOP;
+                    bearSnackView.setLayoutParams(bearSnackParams);
+                    bearSnack.show();
                 } else if (checkedId == R.id.chameleon) {
                     userData.setAvatar("chameleon");
+                    Snackbar chamSnack = Snackbar.make(radioGroup, "Selected the chameleon!", Snackbar.LENGTH_LONG);
+                    View chamSnackView = chamSnack.getView();
+                    FrameLayout.LayoutParams chamSnackParams = (FrameLayout.LayoutParams) chamSnackView.getLayoutParams();
+                    chamSnackParams.gravity = Gravity.TOP;
+                    chamSnackView.setLayoutParams(chamSnackParams);
+                    chamSnack.show();
                 } else if (checkedId == R.id.raccoon) {
                     userData.setAvatar("raccoon");
+                    Snackbar racSnack = Snackbar.make(radioGroup, "Selected the raccoon!", Snackbar.LENGTH_LONG);
+                    View racSnackView = racSnack.getView();
+                    FrameLayout.LayoutParams racSnackParams = (FrameLayout.LayoutParams) racSnackView.getLayoutParams();
+                    racSnackParams.gravity = Gravity.TOP;
+                    racSnackView.setLayoutParams(racSnackParams);
+                    racSnack.show();
                 }
             }
         });
