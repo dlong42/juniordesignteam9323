@@ -1,11 +1,13 @@
 package com.juniordesignteam9323.campussafari.ui.profile;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -21,6 +23,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+
+import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 
 public class ProfileFragment extends Fragment implements View.OnClickListener {
 
@@ -45,7 +49,19 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             }
         });
 
-        Switch music = root.findViewById(R.id.musicSwitch);
+        Switch musicToggle = root.findViewById(R.id.musicSwitch);
+        musicToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                MainActivity mainActivity = (MainActivity) getActivity();
+                if (mainActivity != null) {
+                    if (isChecked) {
+                        mainActivity.startMusic();
+                    } else {
+                        mainActivity.stopMusic();
+                    }
+                }
+            }
+        });
 
         Button change_nicknameBtn = root.findViewById(R.id.change_nickname);
         Button change_psswrdBtn = root.findViewById(R.id.change_password);
@@ -66,7 +82,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         } else if (avatarId.equals("raccoon")) {
             avatar.setImageResource(R.drawable.avatar_raccoon);
         }
-
 
         return root;
     }
