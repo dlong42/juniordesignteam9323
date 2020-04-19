@@ -8,221 +8,222 @@
     android:contentDescription="@string/wildlife_level"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/wildlife_return"
-        android:layout_width="wrap_content"
-        android:layout_height="38dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="134dp"
-        android:layout_marginTop="54dp"
-        android:layout_marginEnd="135dp"
-        android:layout_marginBottom="72dp"
-        android:background="@color/colorPrimary"
-        android:text="@string/wildlife_return"
-        android:textColor="#FFFFFF"
-        android:textColorLink="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/wildlife_error" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-    <TextView
-        android:id="@+id/wildlife_error"
-        android:layout_width="205dp"
-        android:layout_height="75dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="23dp"
-        android:layout_marginEnd="25dp"
-        android:textColor="@color/colorError"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@+id/wildlife_submit"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/wildlife_input" />
-
-    <TextView
-        android:id="@+id/wildlife_nname"
-        android:layout_width="334dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="38dp"
-        android:layout_marginTop="38dp"
-        android:layout_marginEnd="39dp"
-        android:text="@string/wildlife_nname"
-        android:textAlignment="center"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/wildlife_points"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/wildlife_pic"
-        android:layout_width="233dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/wildlife_level"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="89dp"
-        android:layout_marginTop="35dp"
-        android:layout_marginEnd="89dp"
-        android:layout_marginBottom="48dp"
-        android:contentDescription="@string/wildlife_pic"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/wildlife_points"
-        app:srcCompat="@drawable/avatar_bear" />
-
-    <TextView
-        android:id="@+id/wildlife_points"
-        android:layout_width="160dp"
-        android:layout_height="41dp"
-        android:layout_below="@+id/wildlife_nname"
-        android:layout_marginStart="93dp"
-        android:layout_marginEnd="36dp"
-        android:layout_toEndOf="@+id/wildlife_level"
-        android:text="@string/wildlife_points"
-        android:textAlignment="center"
-        android:textColor="@color/colorAccent"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/wildlife_level"
-        app:layout_constraintTop_toBottomOf="@+id/wildlife_nname" />
-
-    <TextView
-        android:id="@+id/wildlife_level"
-        android:layout_width="78dp"
-        android:layout_height="38dp"
-        android:layout_below="@+id/wildlife_nname"
-        android:layout_marginStart="44dp"
-        android:layout_marginBottom="22dp"
-        android:text="@string/wildlife_level"
-        android:textAlignment="center"
-        android:textColor="@color/colorAccent"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/wildlife_pic"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/wildlife_nname"
-        app:layout_constraintVertical_bias="0.103" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="364dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/wildlife_pic"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="27dp"
-        android:background="#4A53AF4C"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/wildlife_pic">
-
-
-        <TextView
-            android:id="@+id/wildlife_common"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="7dp"
-            android:text="@string/wildlife_cname"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/wildlife_scientific"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/wildlife_common"
-            android:layout_alignParentStart="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="12dp"
-            android:text="@string/wildlife_sname"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="20sp"
-            android:textStyle="italic" />
-
-        <TextView
-            android:id="@+id/wildlife_taxon"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/wildlife_scientific"
-            android:layout_alignParentStart="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="12dp"
-            android:text="@string/wildlife_taxon"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/wildlife_ff"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="0dp"
-            android:text="@string/wildlife_ff"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="20dp" />
+            android:orientation="vertical">
 
 
+            <TextView
+                android:id="@+id/wildlife_nname"
+                android:layout_width="334dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="38dp"
+                android:layout_marginTop="38dp"
+                android:layout_marginEnd="39dp"
+                android:text="@string/wildlife_nname"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="30sp"
+                app:layout_constraintBottom_toTopOf="@+id/wildlife_points"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/wildlife_pic"
+                android:layout_width="233dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="89dp"
+                android:layout_marginTop="35dp"
+                android:layout_marginEnd="89dp"
+                android:layout_marginBottom="48dp"
+                android:contentDescription="@string/wildlife_pic"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/wildlife_points"
+                app:srcCompat="@drawable/avatar_bear" />
 
-    <TextView
-        android:id="@+id/wildlife_rename"
-        android:layout_width="102dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="23dp"
-        android:layout_marginTop="23dp"
-        android:layout_marginBottom="23dp"
-        android:text="@string/wildlife_rename"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/wildlife_error"
-        app:layout_constraintEnd_toStartOf="@+id/wildlife_input"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/wildlife_input"
-        android:layout_width="194dp"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/wildlife_points"
-        android:layout_alignBottom="@id/wildlife_rename"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="92dp"
-        android:ems="10"
-        android:inputType="textUri|textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/wildlife_error"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/wildlife_rename"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        android:maxLength="30"/>
+                <TextView
+                    android:id="@+id/wildlife_level"
+                    android:layout_width="78dp"
+                    android:layout_height="38dp"
+                    android:layout_marginStart="44dp"
+                    android:layout_marginBottom="22dp"
+                    android:text="@string/wildlife_level"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toTopOf="@+id/wildlife_pic"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/wildlife_nname"
+                    app:layout_constraintVertical_bias="0.103" />
 
-    <Button
-        android:id="@+id/wildlife_submit"
-        android:layout_width="wrap_content"
-        android:layout_height="38dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="71dp"
-        android:background="#FF7A5E"
-        android:text="@string/wildlife_submit"
-        android:textColor="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/wildlife_input" />
+                <TextView
+                    android:id="@+id/wildlife_points"
+                    android:layout_width="160dp"
+                    android:layout_height="41dp"
+                    android:layout_marginStart="93dp"
+                    android:layout_marginEnd="36dp"
+                    android:text="@string/wildlife_points"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/wildlife_level"
+                    app:layout_constraintTop_toBottomOf="@+id/wildlife_nname" />
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="364dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="27dp"
+                android:background="#4A53AF4C"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/wildlife_pic">
+
+
+                <TextView
+                    android:id="@+id/wildlife_common"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="7dp"
+                    android:text="@string/wildlife_cname"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/wildlife_scientific"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/wildlife_sname"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="20sp"
+                    android:textStyle="italic" />
+
+                <TextView
+                    android:id="@+id/wildlife_taxon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/wildlife_taxon"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/wildlife_ff"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="0dp"
+                    android:text="@string/wildlife_ff"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="20sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/wildlife_rename"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="23dp"
+                    android:layout_marginTop="23dp"
+                    android:layout_marginBottom="23dp"
+                    android:text="@string/wildlife_rename"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toTopOf="@+id/wildlife_error"
+                    app:layout_constraintEnd_toStartOf="@+id/wildlife_input"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+                <EditText
+                    android:id="@+id/wildlife_input"
+                    android:layout_width="189dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_marginEnd="10dp"
+                    android:ems="10"
+                    android:inputType="textUri|textPersonName"
+                    android:maxLength="30"
+                    app:layout_constraintBottom_toTopOf="@+id/wildlife_error"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/wildlife_rename"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+                <Button
+                    android:id="@+id/wildlife_submit"
+                    android:layout_width="95dp"
+                    android:layout_height="38dp"
+                    android:layout_marginTop="23dp"
+                    android:layout_marginEnd="30dp"
+                    android:background="#FF7A5E"
+                    android:text="@string/wildlife_submit"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/wildlife_input" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/wildlife_error"
+                android:layout_width="205dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="23dp"
+                android:layout_marginEnd="25dp"
+                android:textColor="@color/colorError"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toStartOf="@+id/wildlife_submit"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/wildlife_input" />
+
+            <Button
+                android:id="@+id/wildlife_return"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="134dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="135dp"
+                android:layout_marginBottom="72dp"
+                android:background="@color/colorPrimary"
+                android:text="@string/wildlife_return"
+                android:textColor="#FFFFFF"
+                android:textColorLink="@color/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/wildlife_error" />
+
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
