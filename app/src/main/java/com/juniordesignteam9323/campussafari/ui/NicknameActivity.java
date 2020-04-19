@@ -76,6 +76,8 @@ public class NicknameActivity extends AppCompatActivity implements View.OnClickL
                     // Update new user document in database with correct displayName
                     Map<String, Object> updates = new HashMap<>();
                     updates.put("displayName", newName);
+                    userData.setNickname(newName);
+                    db.collection("userData").document(user.getEmail()).set(userData);
                     db.collection("users").document(user.getEmail()).update(updates);
                     // Redirect page
                     Intent i2 = new Intent(this, MainActivity.class);
