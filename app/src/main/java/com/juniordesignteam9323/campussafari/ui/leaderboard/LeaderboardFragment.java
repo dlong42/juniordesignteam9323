@@ -76,18 +76,10 @@ public class LeaderboardFragment extends Fragment {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        //TODO: FIX THIS! Nicknames are resulting in null for some reason? Are new accounts even making a nickname?
-                        String nickname;
-                        if (document.getData().get("nickname") == null){
-                            nickname = "Filler";
-                        } else {
-                            nickname = document.getData().get("nickname").toString();
+                        if (document.getData().get("nickname") != null) {
+                            leaderBoard.add(new LeaderboardDataModel(document.getData().get("nickname").toString(),
+                                    Integer.valueOf(document.getData().get("points").toString())));
                         }
-                        System.out.println(nickname);
-                        String points = document.getData().get("points").toString();
-                        System.out.println(points);
-                        leaderBoard.add(new LeaderboardDataModel(nickname,
-                                Integer.valueOf(document.getData().get("points").toString())));
                     }
                     Log.d("LeaderBoard: ", leaderBoard.toString());
                 } else {
