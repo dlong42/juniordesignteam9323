@@ -13,6 +13,8 @@
 
 -Data for wildlife pins is now stored externally to the app.
 
+-Wildife names now have a 30 character limit.
+
 -Beautified the UI.
 
 ### Bug Fixes
@@ -21,6 +23,13 @@
 -Fixed a graphical bug where the change nickname on the wildlife page was not always visible.
 
 -Fixed an issue where the app crashed if you reopened the app after closing it without logging out.
+
+-Fixed an issue where using Android's back button in our app would cause a crash.
+
+-Fixed a crash that occured when a user tried to sort an Observation Log with only one wildlife.
+
+-Fixed a bug where nicknaming the wildlife did not save between session of gameplay.
+
 
 ### Known Bugs/Issues
 -When reopening the app, photos in the Observation Log do not appear until another wildlife is logged.

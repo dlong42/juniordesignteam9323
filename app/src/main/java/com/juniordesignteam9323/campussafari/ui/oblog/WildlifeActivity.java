@@ -3,6 +3,7 @@ package com.juniordesignteam9323.campussafari.ui.oblog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
@@ -180,5 +181,4 @@ public class WildlifeActivity extends AppCompatActivity implements View.OnClickL
         return bitmap;
 
     }
-
 }

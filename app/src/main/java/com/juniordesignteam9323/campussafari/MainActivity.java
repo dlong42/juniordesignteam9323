@@ -1,6 +1,8 @@
 package com.juniordesignteam9323.campussafari;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView levelView;
     private TextView pointsView;
     private ProgressBar xpBar;
+    private MediaPlayer music;
 
 
     @Override
@@ -99,6 +102,10 @@ public class MainActivity extends AppCompatActivity {
 
             CSVParse parsey = new CSVParse("observations-75146.csv", getApplicationContext());
         }
+
+        music = MediaPlayer.create(getApplicationContext(), R.raw.music);
+        music.setLooping(true);
+        music.start();
     }
 
     public UserData getUserData() {
@@ -148,6 +155,21 @@ public class MainActivity extends AppCompatActivity {
         return;
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        music.stop();
+        music.release();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        music = MediaPlayer.create(getApplicationContext(), R.raw.music);
+        music.setLooping(true);
+        music.start();
+    }
+
     public TextView getLevelView() {
         return levelView;
     }
@@ -170,5 +192,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void setXpBar(ProgressBar xpBar) {
         this.xpBar = xpBar;
+    }
+
+    public void startMusic() {
+        music = MediaPlayer.create(getApplicationContext(), R.raw.music);
+        music.setLooping(true);
+        music.start();
+    }
+
+    public void stopMusic() {
+        music.stop();
+        music.release();
     }
 }
