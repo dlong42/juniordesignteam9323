@@ -18,7 +18,7 @@ public class AchievementDataModel {
     private Drawable trophy;
 
 
-    //standardizes the information from Achievements for the Custom Adapter, used in OblogFragment
+    //standardizes the information from Achievements for the Custom Adapter, used in AchievementsFragment
     public AchievementDataModel(String name, Boolean achieved, ArrayList<Check> needed, int count, String description, Drawable trophy) {
         this.name = name;
         this.achieved = achieved;

@@ -140,7 +140,6 @@ public class AchievementsFragment extends Fragment implements AdapterView.OnItem
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-        //System.out.println("Presort:" + observed.get(0).getCommonName() + observed.get(1).getCommonName());
         String text = adapterView.getItemAtPosition(position).toString();
         if (text.equals("Title")){
             System.out.println("Title sort clicked");
@@ -156,9 +155,6 @@ public class AchievementsFragment extends Fragment implements AdapterView.OnItem
             SortByLeastProgress sortAlgoLProgress = new SortByLeastProgress();
             Collections.sort(achievements, sortAlgoLProgress);
         }
-
-        //System.out.println("Resorted by " + text + ":" + achievements.get(0).getCommonName() + observed.get(1).getCommonName());
-
         data = updateData();
         adapter.notifyDataSetChanged();
         recyclerView.invalidate();

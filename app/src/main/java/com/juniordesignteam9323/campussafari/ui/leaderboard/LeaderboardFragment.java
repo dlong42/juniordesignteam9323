@@ -2,6 +2,7 @@ package com.juniordesignteam9323.campussafari.ui.leaderboard;
 
 import android.annotation.SuppressLint;
 import android.content.ClipData;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,7 +24,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.juniordesignteam9323.campussafari.MainActivity;
 import com.juniordesignteam9323.campussafari.R;
+import com.juniordesignteam9323.campussafari.UserData;
+import com.juniordesignteam9323.campussafari.ui.oblog.OblogViewModel;
+
 import androidx.lifecycle.Observer;
 import androidx.annotation.Nullable;
 
@@ -37,25 +43,49 @@ public class LeaderboardFragment extends Fragment {
 
     private LeaderboardViewModel leaderboardViewModel;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    public List<BoardMember> leaderBoard = new ArrayList<>();
+    public List<LeaderboardDataModel> leaderBoard = new ArrayList<LeaderboardDataModel>();
+    private static RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
+    private UserData userData;
+    private static RecyclerView recyclerView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+        userData = ((MainActivity) getActivity()).getUserData();
         leaderboardViewModel =
-                ViewModelProviders.of(this).get(LeaderboardViewModel.class);
-        final View root = inflater.inflate(R.layout.fragment_leaderboard, container, false);
-        final LifecycleOwner lf = this;
+                ViewModelProviders.of(this, new LeaderboardViewModel(userData))
+                        .get(LeaderboardViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_leaderboard, container, false);
+        return root;
+    }
 
-        //create list of all players in the format of BoardMember objects
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        recyclerView = (RecyclerView) getView().findViewById(R.id.rvLeaders);
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        //create list of all players as leaderboard datamodels
         db.collection("userData").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            private Class<LeaderboardViewModel> leaderboardViewModelClass;
-
             @SuppressLint("RestrictedApi")
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        leaderBoard.add(new BoardMember(document.getData().get("nickname").toString(),
+                        //TODO: FIX THIS! Nicknames are resulting in null for some reason? Are new accounts even making a nickname?
+                        String nickname;
+                        if (document.getData().get("nickname") == null){
+                            nickname = "Filler";
+                        } else {
+                            nickname = document.getData().get("nickname").toString();
+                        }
+                        System.out.println(nickname);
+                        String points = document.getData().get("points").toString();
+                        System.out.println(points);
+                        leaderBoard.add(new LeaderboardDataModel(nickname,
                                 Integer.valueOf(document.getData().get("points").toString())));
                     }
                     Log.d("LeaderBoard: ", leaderBoard.toString());
@@ -63,50 +93,28 @@ public class LeaderboardFragment extends Fragment {
                     Log.d(TAG, "Error getting docs: ", task.getException());
                 }
                 Collections.sort(leaderBoard, new SortByPoints());
-                if (leaderBoard.size() > 10) {
-                    leaderBoard = leaderBoard.subList(0,11);
-                }
                 Log.d("LeaderBoard sorted : ", leaderBoard.get(0).getName());
-                final TextView textView = root.findViewById(R.id.brd);
-                leaderboardViewModel.getText().observe(lf, new Observer<String>() {
-                    @Override
-                    public void onChanged(@Nullable String s) {
-                        for (BoardMember b : leaderBoard) {
-                          s += b.getDisplay();
-                        }
-                        textView.setText(s);
+                ArrayList<LeaderboardDataModel> data = new ArrayList<LeaderboardDataModel>();
+                if (leaderBoard.size() > 10) {
+                    for (int i = 0; i < 10; i++){
+                        data.add(leaderBoard.get(i));
                     }
-                });
+                } else {
+                    data = (ArrayList<LeaderboardDataModel>) leaderBoard;
+                }
+                adapter = new LeaderboardAdapter(data);
+                recyclerView.setAdapter(adapter);
             }
         });
-        return root;
     }
 
     public List getLeaderBoard() {return leaderBoard;}
 
-    // Object that represent members of the board - enables convenience of sorting
-    public class BoardMember {
-        private String name;
-        private int points;
-        private BoardMember(String name, int points) {
-            this.name = name;
-            this.points = points;
-        }
-        // Only getters are necessary for this class' purpose
-        public int getPoints() { return points; }
-        public String getName() { return name;}
-        public String getDisplay() {
-            String s = " " + name + " : " + points + "\n" +
-                    "-------------------------------------------------------------" + "\n";
-            return s;
-        }
-    }
-
     // Sorts leaderBoard from highest to lowest points
     public class SortByPoints implements Comparator {
         public int compare(Object o1, Object o2) {
-            BoardMember m1 = (BoardMember) o1;
-            BoardMember m2 = (BoardMember) o2;
+            LeaderboardDataModel m1 = (LeaderboardDataModel) o1;
+            LeaderboardDataModel m2 = (LeaderboardDataModel) o2;
             return Integer.compare(m2.getPoints(), m1.getPoints());
         }
     }

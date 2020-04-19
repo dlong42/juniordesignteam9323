@@ -54,6 +54,8 @@ public class OblogFragment extends Fragment implements AdapterView.OnItemSelecte
                 .get(OblogViewModel.class);
 
         View root = inflater.inflate(R.layout.fragment_oblog, container, false);
+
+        //textview setup for "no observations" statement
         final TextView textView = root.findViewById(R.id.text_oblog);
         oblogViewModel.getText().observe(this, new Observer<String>() {
             @Override
@@ -62,12 +64,15 @@ public class OblogFragment extends Fragment implements AdapterView.OnItemSelecte
             }
         });
 
+        //sorting spinner setup
         Spinner oblogSpinner = (Spinner) root.findViewById(R.id.oblog_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getContext(),
                 R.array.sortby, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         oblogSpinner.setAdapter(adapter);
         oblogSpinner.setOnItemSelectedListener(this);
+
+
         return root;
     }
 
@@ -210,22 +215,7 @@ public class OblogFragment extends Fragment implements AdapterView.OnItemSelecte
                 Collections.sort(observed, sortAlgoPoints);
             }
             System.out.println("Resorted by " + text + ":" + observed.get(0).getCommonName() + observed.get(1).getCommonName());
-            /*boolean sorted = false;
-            while (!sorted) {
-                for (int i = 0; i < observed.size() - 1; i++) {
-                    int compareValue;
-                    Wildlife w1 = observed.get(i);
-                    Wildlife w2 = observed.get(i+1);
-                    if (text == "Common Name"){
-                        SortByCommonName sortAlgo = new SortByCommonName();
-                       Collections.sort(observed, sortAlgo);
-                    }
-                    if (observed.get(i).)
-                }
-            }
-            if (text == "Common Name"){
-                SortbyCommonName();
-            }*/
+
             data = updateData();
             adapter.notifyDataSetChanged();
             recyclerView.invalidate();
