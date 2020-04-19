@@ -23,10 +23,6 @@
             android:icon="@drawable/ic_leaderboard"
             android:title="@string/menu_leaderboard" />
         <item
-            android:id="@+id/nav_friends"
-            android:icon="@drawable/ic_friends"
-            android:title="@string/menu_friends" />
-        <item
         android:id="@+id/nav_admin"
         android:icon="@drawable/ic_reports"
         android:title="@string/menu_admin" />
