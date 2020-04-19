@@ -385,23 +385,23 @@ public class MapFragment extends Fragment {
         int duration = Toast.LENGTH_LONG;
         if(!fourPoint && userData.isAchieved(0)) {
             Toast.makeText(getContext(), frontText+ userData.getAchievements().get(1).getName() + backText, duration).show();
-            userData.setDisplayed(1, true);
+            userData.setDisplayed(0, true);
         }
         if(!taxa && userData.isAchieved(1)) {
             Toast.makeText(getContext(), frontText+ userData.getAchievements().get(2).getName() + backText, duration).show();
-            userData.setDisplayed(2, true);
+            userData.setDisplayed(1, true);
         }
         if(!aFor && userData.isAchieved(2)) {
             Toast.makeText(getContext(), frontText+ userData.getAchievements().get(3).getName() + backText, duration).show();
-            userData.setDisplayed(3, true);
+            userData.setDisplayed(2, true);
         }
         if(!come && userData.isAchieved(3) && (comeCurrCount == 1)) {
             Toast.makeText(getContext(), frontText+ userData.getAchievements().get(4).getName() + backText, duration).show();
-            userData.setDisplayed(4, true);
+            userData.setDisplayed(3, true);
         }
         if(!funGuy && userData.isAchieved(4)) {
             Toast.makeText(getContext(), frontText+ userData.getAchievements().get(5).getName() + backText, duration).show();
-            userData.setDisplayed(5, true);
+            userData.setDisplayed(4, true);
         }
         MainActivity main = ((MainActivity) getActivity());
 
