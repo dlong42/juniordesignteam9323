@@ -3,19 +3,20 @@
 ## Release Notes v1.0
 
 ### New Features
--Added a tutorial to teach new players how to add wildlife to their Observation Log and view them later.
 
 -Achievements now have descriptions.
 
 -Wildlife pages now include fun facts.
 
+-Wildlife pages are now scrollable.
+
+-Selecting wildlife in the Observation Log will bring you back to the wildlife page.
+
+-Wildlife names now have a 30 character limit.
+
 -When creating an account, there is visual feedback when selecting an avatar.
 
--Data for wildlife pins is now stored externally to the app.
-
--Wildife names now have a 30 character limit.
-
--Beautified the UI.
+-Beautified the UI for the leaderboard.
 
 ### Bug Fixes
 -Fixed an issue where users were being awarded achievements they should not get.
@@ -26,13 +27,14 @@
 
 -Fixed an issue where using Android's back button in our app would cause a crash.
 
--Fixed a crash that occured when a user tried to sort an Observation Log with only one wildlife.
+-Fixed a crash that occurred when a user tried to sort an Observation Log with only one wildlife.
 
--Fixed a bug where nicknaming the wildlife did not save between session of gameplay.
-
+-Fixed a bug where nicknaming the wildlife did not save between sessions of gameplay.
 
 ### Known Bugs/Issues
 -When reopening the app, photos in the Observation Log do not appear until another wildlife is logged.
+
+-Admins cannot yet add/remove pins easily.
 
 ## Install Guide
 
