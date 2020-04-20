@@ -67,7 +67,7 @@ public class AdminFragment extends Fragment {
         admin_removepin.setOnClickListener(new View.OnClickListener() {public void onClick(View v) {admin_directions.setText(remove_d);}});
 
         // Hide buttons only meant for Dr. Wiegel if the user does not have her email
-        if (!((MainActivity) getActivity()).getUserData().getEmail().equals("weigel@gmail.com")) {
+        if (!((MainActivity) getActivity()).getUserData().getEmail().equals("emily.weigel@biosci.gatech.edu")) {
             emailBox.setVisibility(View.GONE);
             submit.setVisibility(View.GONE);
             emailLabel.setVisibility(View.GONE);
