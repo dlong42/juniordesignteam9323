@@ -8,6 +8,10 @@ import com.opencsv.CSVReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+
+/**
+ * A tool to parse the CSV and read wildlife data into the app.
+ */
 public class CSVParse {
     CSVReader reader;
 

@@ -18,6 +18,9 @@ import com.juniordesignteam9323.campussafari.UserData;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * The user is brought here if they want to change their password.
+ */
 public class PasswordActivity extends AppCompatActivity implements View.OnClickListener {
     FirebaseAuth auth;
     FirebaseUser user;
@@ -27,6 +30,7 @@ public class PasswordActivity extends AppCompatActivity implements View.OnClickL
     FirebaseFirestore db;
     UserData userData;
 
+    //Set up all the buttons
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

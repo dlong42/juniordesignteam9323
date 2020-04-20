@@ -12,16 +12,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.juniordesignteam9323.campussafari.Achievement;
-import com.juniordesignteam9323.campussafari.Wildlife;
-import com.juniordesignteam9323.campussafari.ui.achievements.AchievementDataModel;
 import com.juniordesignteam9323.campussafari.MainActivity;
 import com.juniordesignteam9323.campussafari.R;
 import com.juniordesignteam9323.campussafari.UserData;
@@ -30,6 +21,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+/**
+ * This fragment displays achievements and progress towards them.
+ */
 public class AchievementsFragment extends Fragment implements AdapterView.OnItemSelectedListener{
 
     private AchievementsViewModel achievementsViewModel;
@@ -138,6 +139,7 @@ public class AchievementsFragment extends Fragment implements AdapterView.OnItem
         return updatedData;
     }
 
+    //Updates the selection of sorting method for achievements.
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
         String text = adapterView.getItemAtPosition(position).toString();

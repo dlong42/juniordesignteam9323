@@ -1,8 +1,10 @@
 package com.juniordesignteam9323.campussafari;
 import java.io.Serializable;
 
-import java.util.*;
-
+/**
+ * A Wildlife class to represent wildlife within the app.
+ * Serializeable so it can be stored in Firebase.
+ */
 public class Wildlife implements Serializable {
     private String commonName;
     private String scientificName;
@@ -82,6 +84,7 @@ public class Wildlife implements Serializable {
     public void setNickname(String nickname) { this.nickname = nickname; }
     public void setFunFact(String funFact) {this.funFact = funFact;}
     public void setCitation(String citation) {this.citation = citation;}
+
     //changes the caught variable to true, and returns true indicating a successful catch
     //return false if the wildlife has been caught before
     public boolean catchWildlife(){

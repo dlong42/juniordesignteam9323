@@ -6,15 +6,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.juniordesignteam9323.campussafari.R;
 import com.juniordesignteam9323.campussafari.ui.LoginActivity;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
+/**
+ * Logs the user out when they get here.
+ */
 public class LogoutFragment extends Fragment{
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {

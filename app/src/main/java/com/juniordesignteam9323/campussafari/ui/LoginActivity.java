@@ -26,6 +26,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+/**
+ * This activity handles User Logins
+ */
 public class LoginActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 123;
@@ -62,6 +65,11 @@ public class LoginActivity extends AppCompatActivity {
         //}
     }
 
+    /**
+     * This writes userData to the Firebase
+     * @param db the database to write to
+     * @return true if written successfully
+     */
     private boolean writeUserData(FirebaseFirestore db) {
 
                 if (userData == null) {

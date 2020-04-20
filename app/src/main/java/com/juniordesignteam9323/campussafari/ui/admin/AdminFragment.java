@@ -20,6 +20,9 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+/**
+ * This fragment contains information for admins to access our app.
+ */
 public class AdminFragment extends Fragment {
 
     private AdminViewModel adminViewModel;

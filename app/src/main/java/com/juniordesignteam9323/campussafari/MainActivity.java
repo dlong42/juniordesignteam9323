@@ -2,7 +2,6 @@ package com.juniordesignteam9323.campussafari;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -20,6 +19,9 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+/**
+ * This is where the userData is stored while the app is running.
+ */
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
@@ -30,12 +32,16 @@ public class MainActivity extends AppCompatActivity {
     private MediaPlayer music;
 
 
+    /**
+     * This runs as soon as the user is logged in.
+     * @param savedInstanceState holds data if the phone closes the app
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        //Recieve userdata from log in, log back out if it is null.
         userData = (UserData) (getIntent().getSerializableExtra("USERDATA"));
         if (userData == null){
             Log.d("Userdata", "null");
@@ -117,24 +123,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-//    public void printCSV() {
-//        try {
-//            //String csvfileString = "/Users/BrianZhu/Desktop/Georgia Tech/Courses/Spring 2020/Junior Design/juniordesignteam9323/app/src/main/assets/"  + "observations-75146.csv";
-//            //Log.d("myTag", csvfileString);
-//            //File csvfile = new File(csvfileString);
-//            CSVReader reader = new CSVReader(new InputStreamReader(getAssets().open("observations-75146.csv")));
-//            String[] nextLine;
-//            while ((nextLine = reader.readNext()) != null) {
-//                // nextLine[] is an array of values from the line
-//                Pin p = new Pin(nextLine[20], nextLine[21]);
-//                Log.d("myTag", nextLine[36]);
-//            }
-//        }
-//        catch (IOException ex) {
-//            // handle exception
-//            Log.d("myTag", ex.toString());
-//        }
-//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

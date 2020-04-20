@@ -2,6 +2,9 @@ package com.juniordesignteam9323.campussafari;
 import java.util.*;
 import java.io.Serializable;
 
+/**
+ * Holds information about the achievements.
+ */
 public class Achievement implements Serializable{
     private String name;
     private boolean achieved;

@@ -1,6 +1,10 @@
 package com.juniordesignteam9323.campussafari;
 import java.io.Serializable;
 
+
+/**
+ * A special boolean used for Achievement criteria.
+ */
 public class Check implements Serializable{
     private int check;
     public Check(){

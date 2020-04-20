@@ -1,12 +1,14 @@
 package com.juniordesignteam9323.campussafari;
 
-import java.io.Serializable;
-import java.util.*;
 import android.util.Log;
 
-import com.google.common.util.concurrent.AbstractCheckedFuture;
+import java.io.Serializable;
+import java.util.ArrayList;
 
-
+/**
+ * This class holds important information about the User.
+ * Serializable to be held in Firebase.
+ */
 public class UserData implements Serializable {
     private boolean admin;
     private String email;
@@ -65,6 +67,10 @@ public class UserData implements Serializable {
     public boolean achievementBeenDisplayed(int i ) {return achievements.get(i).isDisplayed();}
     public void setDisplayed(int i, boolean displayed) {achievements.get(i).setDisplayed(displayed);}
 
+    /**
+     * Sets up the achievements ArrayList for a new user.
+     * @return ArrayList of the possible achievements.
+     */
     public ArrayList<Achievement> setUpAchievements(){
         ArrayList<Achievement> achievements = new ArrayList<Achievement>();
 //        achievements.add(new Achievement("Campus Traveller", false, new ArrayList<Check>(4), 4, "Collect this achievement by observing a wildlife in all four regions of campus.") );
@@ -76,23 +82,20 @@ public class UserData implements Serializable {
         return achievements;
     }
 
+    /**
+     * When any wildlife is logged, this is called to check if that helps the user with any achievements.
+     * @param added Wildlife being logged
+     */
     public void achievementCheck(Wildlife added) {
-        //check for the campus traveller achievement, 0
-        //Log.d("achievement", "before campus traveller");
-        //this.traveller(added);
-        //Log.d("achievement", "after campus traveller");
         //check for the 4.0 achievement, 1
-        //Log.d("achievement", "before albino squirrel");
         if(added.getCommonName().equals("Albino Squirrel")) {
             achievements.get(0).increaseCount();
             achievements.get(0).setAchieved(true);
             achievements.get(0).setACheck(0, 1);
         }
-        //Log.d("achievement", "after albino squirrel");
         //check for the taxa driver achievement, 2
-        //Log.d("achievement", "before taxa driver");
         this.taxaDriver(added);
-        //Log.d("achievement", "after taxa driver");
+
         //check for the a for effort achievement, 3
         if(!achievements.get(2).isAchieved()){
             achievements.get(2).increaseCount();
@@ -100,7 +103,7 @@ public class UserData implements Serializable {
             achievements.get(2).setACheck(0, 1);
         }
         //hey come back achievement is already checked for in Map Fragment, 4
-        //comeBack();
+
         //check for the fun guy achievement, 5
         if(added.getTaxon() == "Fungi") {
             achievements.get(4).increaseCount();
@@ -146,6 +149,10 @@ public class UserData implements Serializable {
 //        Log.d("achievement", "IN CAMPUS TRAVELLER " + travel.getCount());
 //    }
 
+    /**
+     * Checks for the taxaDriver achievement.
+     * @param added wildlife that was added to the log
+     */
     public void taxaDriver(Wildlife added) {
         //taxa driver achievement order for the boolean array
         //0. insecta 1. aves 2. plantae 3. mammalia 4. arachnida 5. reptilia 6. animalia 7. fungi
@@ -187,6 +194,10 @@ public class UserData implements Serializable {
             taxa.setAchieved(true);
         }
     }
+
+    /**
+     * This checks for the comeBack achievement.
+     */
     public void comeBack() {
         Achievement come = achievements.get(3);
         if(come.isAchieved() && come.checkCriteria(0) == 0) {
@@ -214,6 +225,11 @@ public class UserData implements Serializable {
         }
         return toReturn;
     }
+
+    /**
+     * This adds wildlife to the observation log
+     * @param toAdd The wildlife to be added.
+     */
     public void addToObLog(Wildlife toAdd) {
         if(this.obLog == null) {
             this.obLog = new ArrayList<Wildlife>();
@@ -253,6 +269,11 @@ public class UserData implements Serializable {
         return false;
     }
 
+    /**
+     * This updates the users points, and level if necessary
+     * @param newPoints How many points to add.
+     * @return true if the player levels up, false otherwise
+     */
     public boolean updatePoints(int newPoints) {
         this.points += newPoints;
 
@@ -273,6 +294,11 @@ public class UserData implements Serializable {
         return false;
     }
 
+    /**
+     * Holds values for when the user levels up
+     * @param level
+     * @return how many points it takes to reach the next level.
+     */
     public static int levelThreshold(int level) {
         switch(level) {
             case 1:

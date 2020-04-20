@@ -33,6 +33,9 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+/**
+ * Creates an observation log for players to view logged wildlife, using a CardView
+ */
 public class OblogFragment extends Fragment implements AdapterView.OnItemSelectedListener{
 
     private OblogViewModel oblogViewModel;

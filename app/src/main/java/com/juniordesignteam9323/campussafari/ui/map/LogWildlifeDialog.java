@@ -11,10 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
-import androidx.appcompat.app.AppCompatDialogFragment;
-
 import com.juniordesignteam9323.campussafari.R;
 
+import androidx.appcompat.app.AppCompatDialogFragment;
+
+/**
+ * This class creates a Dialog box for when users observe new wildlife.
+ */
 public class LogWildlifeDialog extends AppCompatDialogFragment {
     private EditText editTextNickname;
 

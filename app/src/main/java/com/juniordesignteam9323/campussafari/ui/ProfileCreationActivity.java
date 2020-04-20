@@ -4,18 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,6 +23,11 @@ import com.juniordesignteam9323.campussafari.UserData;
 import java.util.HashMap;
 import java.util.Map;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+/**
+ * The user is brought here when they log in for the first time.
+ */
 public class ProfileCreationActivity extends AppCompatActivity implements View.OnClickListener {
 
     FirebaseAuth auth;
@@ -76,7 +75,7 @@ public class ProfileCreationActivity extends AppCompatActivity implements View.O
             }
         });
 
-
+        //The user chooses a profile picture.
         final RadioGroup radioGroup = findViewById(R.id.avatarButtons);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {

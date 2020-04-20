@@ -49,6 +49,9 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
+/**
+ * This is the main fragment that displays the map and allows users to log wildlife.
+ */
 public class MapFragment extends Fragment {
 
 
@@ -64,7 +67,7 @@ public class MapFragment extends Fragment {
 
     /**
      * This is a helper method created to add all the markers to the map.
-     * Done by Davis Williams
+     *
      * */
     public void setUpMarkers() {
         UserData ud = (UserData) getActivity().getIntent().getSerializableExtra("USERDATA");
@@ -72,19 +75,9 @@ public class MapFragment extends Fragment {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        //CSVParse parser = new CSVParse("observations-64324.csv", getActivity().getApplicationContext());
-
-        //reads the CSV file to get scientific names, common names,
-        // latitudes, longitudes, observation level and image url
-        //ArrayList<ArrayList<String>> data = parser.getList(new int[]{36, 37, 23, 24, 10, 13});
-
-        //ArrayList<String> scientificNames = data.get(0);
-       // ArrayList<String> commonNames = data.get(1);
-        //ArrayList<String> latitudes = data.get(2);
-        //ArrayList<String> longitudes = data.get(3);
-        //ArrayList<String> urls = data.get(5);
 
 
+        //reads CSV to get all wildife
         CSVParse parser = new CSVParse("wildlifeDB.csv", getActivity().getApplicationContext());
 
         ArrayList<ArrayList<String>> data = parser.getList(new int[]{0, 3, 4, 5, 6, 7, 9, 10, 8, 11, 12});
@@ -132,10 +125,6 @@ public class MapFragment extends Fragment {
 
         }
 
-//        db.collection("userData").document(user.getEmail()).set(userData);
-//        // Navigates to WildlifeActivity, passing in the index of the wildlife in Oblog
-//        Intent intent = new Intent(getActivity(), WildlifeActivity.class);
-//        startActivity(intent);
     }
 
 
@@ -169,6 +158,7 @@ public class MapFragment extends Fragment {
                 e.printStackTrace();
             }
 
+            //Sets up the log button and hides it.
             final FloatingActionButton catch_button = rootView.findViewById(R.id.catch_button);
             catch_button.hide();
 
@@ -203,6 +193,7 @@ public class MapFragment extends Fragment {
                     CameraPosition cameraPosition = new CameraPosition.Builder().target(new LatLng(33.7766, -84.3982)).zoom(12).build();
                     googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
+                    //When a marker is clicked, the Log button is shown, unless the wildlife is caught.
                     googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                         @Override
                         public boolean onMarkerClick(Marker marker) {
@@ -212,22 +203,20 @@ public class MapFragment extends Fragment {
                                 catch_button.show();
                             }
 
+                            //Log wildlife when this is hit
                             catch_button.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    Log.d("catching 1", "trying to catch " + mapMarker.getTitle() + " " + ((Wildlife)mapMarker.getTag()).getId());
-                                    Log.d("catching 2", mapMarker.getSnippet());
+
                                     String[] snippets = mapMarker.getSnippet().split(",");
                                     String image_url = snippets[0];
 
-                                    Log.d("catching 3", "previously caught " + ((Wildlife) mapMarker.getTag()).getCaught() + "");
+
 
                                     //wildlifeToBeAdded = (Wildlife) mapMarker.getTag();
                                     openLogWildlifeDialog();
 
-                                    Log.d("catching 5", ((Wildlife) mapMarker.getTag()).getCaught() + "");
-                                    Log.d("Level: ", ((Wildlife) mapMarker.getTag()).getLevel());
-                                    Log.d("User level: ", "" + userData.getLevel());
+
                                     mapMarker.setAlpha(.25f);
                                     catch_button.hide();
                                 }
@@ -236,6 +225,7 @@ public class MapFragment extends Fragment {
                         }
                     });
 
+                    //Hide the log button
                     googleMap.setOnInfoWindowCloseListener(new GoogleMap.OnInfoWindowCloseListener() {
                         @Override
 
@@ -246,36 +236,24 @@ public class MapFragment extends Fragment {
                 }
             });
 
+            //Handles user location changes
             locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-            Log.d("Set up location manager", "success");
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5, 0, new LocationListener() {
                 @SuppressLint("MissingPermission")
                 @Override
                 public void onLocationChanged(Location location) {
-                    Log.d("Location changed", location.toString());
                     if((location.getLatitude() > 33.781) || (location.getLatitude() < 33.771) || (location.getLongitude() < -84.407) || (location.getLongitude() > -84.392)) {
-                        Log.d("achievement", "lat: "+location.getLatitude() + " long: "+ location.getLongitude());
                         userData.comeBack();
                     }
                     for (Marker m: markerList) {
+                        //Makes only nearby markers of the correct level visible
                         if (Math.abs(m.getPosition().latitude - location.getLatitude()) < 0.001
                                 && Math.abs(m.getPosition().longitude - location.getLongitude()) < 0.001
                                 && Integer.parseInt(((Wildlife) m.getTag()).getLevel()) <= userData.getLevel()) {
                             m.setVisible(true);
 
-                            /*for testing purposes, delete later
-                            if (i < 5) {
-                                String[] snippets = m.getSnippet().split(",");
-                                String scientific = snippets[2];
-                                String imageLink = snippets[0];
-                                addToOb(m.getTitle(), scientific, imageLink); //add this available wildlife to the observation log
-                                i++;
-                            }*/
-                            //addToOb(m.getTitle());
-                            //m.setAlpha(1);
                         } else {
                             m.setVisible(false);
-                            //m.setAlpha(.5f);
                         }
                     }
                 }
@@ -297,35 +275,12 @@ public class MapFragment extends Fragment {
                 }
             });
 
-
-
-
-            /**catch_button.setOnClickListener(new View.OnClickListener() {
-                 @Override
-                 public void onClick(View view) {
-                    Log.d("button", "button press");
-                 }
-            });*/
         }
 
 
         return rootView;
     }
-//    public void catchThis(Wildlife toAdd) {
-//        UserData ud = (UserData) getActivity().getIntent().getSerializableExtra("USERDATA");
-//        UserData userData = (UserData) (getActivity().getIntent().getSerializableExtra("USERDATA"));
-//        FirebaseAuth auth = FirebaseAuth.getInstance();
-//        FirebaseUser user = auth.getCurrentUser();
-//        FirebaseFirestore db = FirebaseFirestore.getInstance();
-//
-//        toAdd.catchWildlife();
-//
-//        db.collection("userData").document(user.getEmail()).set(userData);
-//        // Navigates to WildlifeActivity, passing in the index of the wildlife in Oblog
-//        Intent intent = new Intent(getActivity(), WildlifeActivity.class);
-//        intent.putExtra("WILDLIFE", toAdd);
-//        startActivity(intent);
-//    }
+
 
     // Opens the log wildlife dialog, which appears when a user presses the "Log" button
     public void openLogWildlifeDialog() {
@@ -361,9 +316,7 @@ public class MapFragment extends Fragment {
         FirebaseUser user = auth.getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-//      Wildlife wild = new Wildlife(name);
-//      wild.setScientificName(scientific);
-//      wild.setImage_url(image_url);
+
         boolean levelUpdate = false;
         boolean fourPoint =userData.achievementBeenDisplayed(0);
         boolean taxa = userData.achievementBeenDisplayed(1);
@@ -373,7 +326,6 @@ public class MapFragment extends Fragment {
         if(toAdd.catchWildlife()) {
             userData.addToObLog(toAdd);
             levelUpdate = userData.updatePoints(Integer.parseInt(toAdd.getPoints()));
-            //userData.achievementCheck(toAdd);
         } else {
             Log.d("catching 4a",  "already caught");
         }
@@ -419,7 +371,6 @@ public class MapFragment extends Fragment {
         main.setPointsView(pointsView);
         main.setXpBar(xpBar);
 
-        Log.d("catching 4b",  ud.getObLogString());
         db.collection("userData").document(user.getEmail()).set(userData);
         // Navigates to WildlifeActivity, passing in the index of the wildlife in Oblog
         Intent intent = new Intent(getActivity(), WildlifeActivity.class);

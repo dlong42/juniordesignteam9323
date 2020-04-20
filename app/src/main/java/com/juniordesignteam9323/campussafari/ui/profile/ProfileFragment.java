@@ -1,7 +1,6 @@
 package com.juniordesignteam9323.campussafari.ui.profile;
 
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,8 +23,9 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import static com.firebase.ui.auth.AuthUI.getApplicationContext;
-
+/**
+ * This fragment manages user settings and profile changes.
+ */
 public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     private ProfileViewModel profileViewModel;
@@ -49,6 +49,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             }
         });
 
+        //This code allows users to turn music on and off within the app.
         Switch musicToggle = root.findViewById(R.id.musicSwitch);
         musicToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -63,6 +64,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             }
         });
 
+        ///users can change username and password
         Button change_nicknameBtn = root.findViewById(R.id.change_nickname);
         Button change_psswrdBtn = root.findViewById(R.id.change_password);
         change_nicknameBtn.setOnClickListener(this);
@@ -87,6 +89,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     }
 
 
+    //Listener for nickname/password changes
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.change_nickname:

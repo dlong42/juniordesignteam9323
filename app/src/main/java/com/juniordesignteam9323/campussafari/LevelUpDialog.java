@@ -10,6 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
+/**
+ * Creates a dialog box to display when the user levels up.
+ */
 public class LevelUpDialog extends DialogFragment {
 
     private Intent intent;

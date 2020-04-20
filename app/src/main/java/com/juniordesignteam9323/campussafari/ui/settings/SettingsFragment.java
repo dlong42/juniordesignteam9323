@@ -6,14 +6,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
+import com.juniordesignteam9323.campussafari.R;
+
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.juniordesignteam9323.campussafari.R;
-
+//This is not actually used in the app at the moment. Settings are done on the profile page.
 public class SettingsFragment extends Fragment {
 
     private SettingsViewModel settingsViewModel;
